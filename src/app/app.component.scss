@@ -1,0 +1,29 @@
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+.link{
+  cursor: pointer;
+}
+.content {
+  padding: 0;
+  height: 100vh;
+}
+
+mat-card {
+  max-width: 400px;
+}
+:host{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100
+}

@@ -1,0 +1,16 @@
+mat-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+.link{
+  cursor: pointer;
+}
+
+.mat-sidenav-container {
+  height: calc(100% - 65px);
+}

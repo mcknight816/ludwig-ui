@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<div class="title"  fxFlex="100">Choose a plan to get started</div>
+<div class="pricing-table" >
+  <div class="pricing-option" *ngFor="let plan of plans">
+    <i class="material-icons">important_devices</i>
+    <h1>{{plan.name}}</h1>
+    <hr />
+    <p>{{plan.description}}</p>
+    <ul class="features">
+      <li *ngFor="let feature of plan.features">{{feature}}</li>
+    </ul>
+    <hr />
+    <div class="price">
+      <div class="front">
+        <span class="price">$ {{plan.monthly}} <b> /month</b></span>
+      </div>
+      <div class="back">
+        <a (click)="subscribe(plan)" class="button">{{plan.buttonTitle}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+

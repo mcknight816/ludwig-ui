@@ -1,0 +1,7 @@
+<div class="search-wrapper mx-32 mx-md-0">
+  <div class="search">
+     <mat-icon>search</mat-icon>
+     <input class="form-control form-control-sm ml-3 w-75" type="text" [placeholder]="placeholder" aria-label="Search"
+         #searchBox (keyup)="updateSearch(searchBox.value)"/>
+  </div>
+</div>

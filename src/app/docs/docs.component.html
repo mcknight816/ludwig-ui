@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1>Documentation</h1>
+</mat-toolbar>
+
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" opened="true" >
+    <mat-nav-list>
+      <doc-item *ngFor="let item of navItems" [item]="item" (selectNodeEvent)="selectDoc($event)"></doc-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class='mark-down' [innerHTML]="selectedDoc | marked"></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

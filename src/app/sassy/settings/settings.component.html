@@ -1,0 +1,30 @@
+<mat-toolbar  color="primary">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1>Settings</h1>
+</mat-toolbar>
+<mat-sidenav-container >
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list (click)="sideNavClick()">
+      <div *ngFor="let panel of panels; trackBy: trackByFn" >
+        <mat-list-item  (click)="selectPanel(panel)">
+          <mat-icon mat-list-icon [fontIcon]="panel.icon"></mat-icon>
+          <div>{{panel.title}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content  [ngSwitch]="selectedPanel" >
+      <!-- Profile -->
+        <app-profile *ngSwitchCase="'profile'"></app-profile>
+      <!-- Account -->
+        <settings-account *ngSwitchCase="'account'"></settings-account>
+      <!-- Plan & Billing -->
+        <settings-plan-billing [mobile]="mobile" *ngSwitchCase="'plan-billing'"></settings-plan-billing>
+      <!-- Team -->
+        <settings-team [mobile]="mobile" *ngSwitchCase="'team'"></settings-team>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

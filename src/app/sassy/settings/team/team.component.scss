@@ -1,0 +1,67 @@
+form{
+  margin: 5px 10px 0;
+}
+
+mat-form-field{
+  width:100%
+}
+
+.mat-toolbar {
+  min-height: 50px !important;
+  height: 50px !important;
+}
+
+.mat-toolbar-row {
+  min-height: 50px !important;
+  height: 50px !important;
+}
+
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+span {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.bottom-margin{
+  margin-bottom: 80px;
+}
+
+.link{
+  cursor: pointer;
+}
+
+.avatar{
+  vertical-align: middle;
+  border-radius: 50%;
+  width: 45px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.name-plate{
+  min-width: 35%;
+}
+.role-select{
+  max-width: 25%;
+}
+.bottom-margin{
+  margin-bottom: 80px;
+}
+
+.link{
+  cursor: pointer;
+}
+table {
+  width: 100%;
+  margin-bottom: 25px;
+}
+.input-row{
+  padding: 5px;
+}
+.add-button{
+  height: 52px;
+  margin-top: 5px;
+}

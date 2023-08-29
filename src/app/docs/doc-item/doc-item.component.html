@@ -1,0 +1,13 @@
+<a *ngIf="item && item.name" mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)"
+   [ngClass]="{'active': item.ref ? isActive(item.ref) : false, 'expanded': expanded}"
+   class="menu-list-item">
+  <div class="item-name">{{item.name}}</div>
+  <span fxFlex *ngIf="item && item.children && item.children.length">
+    <span fxFlex></span>
+    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">chevron_right</mat-icon>
+  </span>
+</a>
+<mat-divider></mat-divider>
+<div *ngIf="expanded && item && item.children">
+  <doc-item *ngFor="let child of item.children" [item]="child" (selectNodeEvent)="onItemSelected($event)" [depth]="depth+1"></doc-item>
+</div>
