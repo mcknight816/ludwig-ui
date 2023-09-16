@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConnectionDlgComponent} from "../connection-dlg/connection-dlg.component";
 import {FlowActivityDlgComponent} from "../flow-activity-dlg/flow-activity-dlg.component";
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
+import {CdkDragEnd} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-flow',
@@ -103,5 +104,13 @@ export class FlowComponent implements  AfterViewInit {
 
   onScroll($event: Event) {
     this.connectionMapper?.refresh();
+  }
+
+  dragEnd(event: CdkDragEnd) {
+    let flowActivity:FlowActivity = event.source.data;
+    event.source.reset();
+    flowActivity.x = event.dropPoint.x - 350;
+    flowActivity.y = event.dropPoint.y - 150;
+
   }
 }

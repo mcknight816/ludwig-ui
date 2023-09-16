@@ -6,19 +6,13 @@ export interface Flow {
   connections:Array<Connection> | null;
   connectionMaps:Array<ConnectionMap> | null;
 }
-export interface FlowActivity {
+export interface FlowActivity extends Omit<Activity,'schema' | 'fireAndForget'>{
   id:string | null;
   x:number | null;
   y:number | null;
-  icon:string | null;
-  name:string | null;
-  category:string | null;
   description:string | null;
-  activityClass:string | null;
   context:string | null;
   hasError:boolean | null;
-  input:any | null;
-  output:any | null;
 }
 export interface Connection {
   src:string | null;

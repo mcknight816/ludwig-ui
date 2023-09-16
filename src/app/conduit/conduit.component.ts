@@ -2,11 +2,11 @@ import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {ActivatedRoute} from "@angular/router";
-import {CdkDragDrop, CdkDragMove} from "@angular/cdk/drag-drop";
+import {  Point} from "@angular/cdk/drag-drop";
 import {FlowService} from "../services/flow.service";
-import {Flow} from "../services/app-model";
+import {Activity, Flow, FlowActivity} from "../services/app-model";
 import {FlowComponent} from "./flow/flow.component";
-
+import {v4 as uuidv4} from 'uuid';
 @Component({
   selector: 'app-conduit',
   templateUrl: './conduit.component.html',
@@ -46,16 +46,23 @@ export class ConduitComponent implements OnInit,AfterViewInit {
   showFlow(flow:any) {
     this.selectedFlow = flow;
   }
-
-  itemDropped($event: CdkDragDrop<any, any>) {
-    alert("dropped");
-  }
-
   save() {
     alert('save flow');
   }
-
   onScroll($event: Event) {
     //this.flowComponentView.onScroll($event);
+  }
+  addActivity(event: { activity: Activity; location: Point }) {
+    //alert("Add new Flow Activity " + event.activity.name + " @ coords " + event.location.x + "," + event.location.y);
+    let flowActivity:FlowActivity = {...event.activity,...{
+        id:uuidv4(),
+        x:event.location.x -350,
+        y:event.location.y -150,
+        description:'',
+        context:'',
+        hasError:false}
+    };
+    this.selectedFlow?.activities?.push(flowActivity);
+    this.flowComponentView.flow = this.selectedFlow;
   }
 }

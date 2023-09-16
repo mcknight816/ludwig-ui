@@ -15,7 +15,7 @@
     <mat-nav-list >
       <mat-list-item (click)="toggleFlows()">
         <mat-icon>account_tree</mat-icon>
-        <div class="item-name">Flows</div>
+        <div class="item-name">FLOWS</div>
         <span fxFlex>
           <mat-icon  [fontIcon]="flowsExpanded ? 'expand_more' : 'chevron_right'"></mat-icon>
         </span>
@@ -34,7 +34,7 @@
           <mat-divider></mat-divider>
         </div>
       </div>
-      <app-activities *ngIf="selectedFlow"></app-activities>
+      <app-activities (add-activity-event)="addActivity($event)" *ngIf="selectedFlow"></app-activities>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="flow-content" (scroll)="onScroll($event)">

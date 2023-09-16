@@ -1,8 +1,8 @@
 <div #flowContainer id='flow-container' class="flow-container" (scroll)="onScroll($event)">
   <connection-mapper (connection-event)="editConnection($event)"  container-id="flow-container" source-selector=".src-node" target-selector=".tgt-node" [connections]="flow?.connections"></connection-mapper>
   <div #activities *ngFor="let flowActivity of flow?.activities;" [id]=flowActivity.id  class="flow-activity"
-       (cdkDragMoved)="refresh()" [style.top.px]="flowActivity.y" [style.left.px]="flowActivity.x"
-       (dblclick)="showProperties($event,flowActivity)" cdkDrag>
+       [cdkDragData]="flowActivity" (cdkDragMoved)="refresh()" [style.top.px]="flowActivity.y" [style.left.px]="flowActivity.x"
+       (dblclick)="showProperties($event,flowActivity)" (cdkDragEnded)="dragEnd($event)" cdkDrag>
           <mat-icon>{{lookupIcon(flowActivity.icon)}}</mat-icon>
           <p class="flow-activity-name">{{flowActivity.name}}</p>
           <mat-icon class="src-node">radio_button_checked</mat-icon>
