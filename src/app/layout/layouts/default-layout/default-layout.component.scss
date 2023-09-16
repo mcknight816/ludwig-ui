@@ -1,0 +1,21 @@
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+.link{
+  cursor: pointer;
+}
+
+mat-card {
+  max-width: 400px;
+}
+
+.mat-sidenav-container {
+  height: calc(100% - 60px);
+}

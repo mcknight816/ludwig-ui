@@ -1,0 +1,14 @@
+<ngx-braintree
+    [getClientToken]="getMyClientToken"
+    [createPurchase]="createPurchaseFunction"
+    [chargeAmount]="plan.monthly"
+    (paymentStatus)="onPaymentStatus($event)"
+    [showCardholderName]="true"
+    (dropinLoaded)="onDropinLoaded()"
+    [buttonText]="'Subscribe'"
+    [enablePaypalCheckout] = "false"
+    [currency]="'USD'"
+    [allowChoose]="false">
+</ngx-braintree>
+
+

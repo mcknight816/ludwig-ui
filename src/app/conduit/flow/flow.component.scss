@@ -1,0 +1,58 @@
+
+.flow-container{
+  height:100%;
+  width:100%;
+  background-color: #627580;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.flow-activity {
+  width:25px;
+  height:25px;
+  position: absolute;
+  border-radius: 10px;
+  border: 2px solid #73AD21;
+  padding: 10px;
+  cursor: move;
+}
+.flow-activity:hover {
+  border: 2px solid #406013;
+}
+.flow-activity-name {
+  position: absolute;
+  left:-15px;
+  text-align:center;
+  width: 100%;
+  top:28px;
+  font-size: 80%;
+}
+.src-node:hover{
+  color: #a15713;
+}
+.tgt-node:hover{
+  color: #a15713;
+}
+
+
+.src-node {
+  position: absolute;
+  left:38px;
+  padding: 0;
+  margin: 0;
+  top:12px;
+  cursor: pointer;
+  color: #406013;
+}
+
+.tgt-node {
+  position: absolute;
+  left:-14px;
+  padding: 0;
+  margin: 0;
+  top:12px;
+  cursor: pointer;
+  color: #406013;
+}
+

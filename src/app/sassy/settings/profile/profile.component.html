@@ -1,0 +1,24 @@
+<mat-toolbar color="primary-dark">
+  <h1>User Profile</h1>
+  <div class="flex-stretch"></div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <button (click)="gotoKeycloak()"
+          class="ml-4"
+          mat-flat-button
+          type="button"
+          [color]="'primary'">Manage Account
+  </button>
+  <button (click)="save()" mat-button mat-stroked-button>Save</button>
+</mat-toolbar>
+<form [formGroup]="userForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Contact Name</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input formControlName="name" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Contact Email</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input  formControlName="email" matInput readonly>
+      </mat-form-field>
+</form>

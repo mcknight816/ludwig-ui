@@ -1,0 +1,203 @@
+
+  <mat-toolbar color="primary-dark">
+    <h1>Plan and Billing</h1>
+    <div class="flex-stretch"></div>
+
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="cancelSubscription()"
+            [color]="'warn'"
+            mat-stroked-button
+            type="button">
+      Cancel Your Subscription</button>
+  </mat-toolbar>
+  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <!-- Section -->
+            <div fxFlex="20" >
+                <div class="text-xl">Your plan</div>
+                <h1 class="plan-info"> {{subscription.planId.toUpperCase()}}</h1>
+            </div>
+            <div fxFlex="30">
+                <div class="text-xl">Status : {{getStatus()}}</div>
+                <div *ngIf="isActive()" class="text-secondary">Next billing date is {{subscription.nextBillingDate | date}} for {{subscription.nextBillingPeriodAmount | currency}}</div>
+            </div>
+          <div>
+            <div class="text-xl">Changing the plan will take effect immediately.</div>
+            <div class="text-xl">You will not be charged until the next billing cycle.</div>
+          </div>
+  </div>
+
+<!-- planColumns: string[] = ['id', 'name', 'description', 'monthly', 'active', 'action']; -->
+      <mat-toolbar color="primary" >
+        <mat-toolbar-row>
+          <mat-icon fxHide.xs>web</mat-icon>
+          <mat-divider [vertical]="true"></mat-divider>
+          <mat-label> Subscription Plans</mat-label>
+          <mat-divider [vertical]="true"></mat-divider>
+          <div class="flex-stretch"></div>
+
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <table title="Payment Methods" mat-table [dataSource]="app.plans" >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Plan Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.planId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Plan Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Plan Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monthly">
+          <th mat-header-cell *matHeaderCellDef> Monthly </th>
+          <td mat-cell *matCellDef="let element"> {{element.monthly | currency}} / Month</td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef> Active </th>
+          <td mat-cell *matCellDef="let element">
+
+            <div *ngIf="element.planId.toLowerCase() === subscription.planId.toLowerCase()" style="color: green" class="order-1 sm:order-2 sm:ml-3">
+              Active Plan
+            </div>
+            <div *ngIf="element.planId.toLowerCase() !== subscription.planId.toLowerCase()" style="color: darkorange" class="order-1 sm:order-2 sm:ml-3">
+              Not Active
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th id="plan_action" mat-header-cell *matHeaderCellDef>Action</th>
+          <td  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
+            <button  mat-icon-button [matMenuTriggerFor]="plan_action_menu" aria-label="Action menu selection">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu xPosition="before"  #plan_action_menu="matMenu">
+              <button  [disabled]="element.planId === subscription.planId" (click)="selectPlan(element)" mat-menu-item>
+                <mat-icon color="primary">edit</mat-icon>
+                Make Active
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="mobile ? mobilePlanColumns : planColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: mobile ? mobilePlanColumns : planColumns;"></tr>
+      </table>
+
+      <app-bt-payment *ngIf="showPayment" (submit)="pay($event)"  [plan]="getSelectPlan()"  ></app-bt-payment>
+
+      <!-- PAYMENT METHODS-->
+      <mat-toolbar color="primary" >
+        <mat-toolbar-row>
+          <mat-icon fxHide.xs>credit_card</mat-icon>
+          <mat-divider [vertical]="true"></mat-divider>
+          <mat-label > Payment Methods</mat-label>
+          <mat-divider [vertical]="true"></mat-divider>
+          <div class="flex-stretch"></div>
+          <div class="flex-stretch"></div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <button (click)="changeMethodOfPayment()" mat-button mat-stroked-button>New Payment Method</button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <table title="Payment Methods" mat-table [dataSource]="cards.sort(compare())" >
+
+        <ng-container matColumnDef="imageUrl">
+          <th mat-header-cell *matHeaderCellDef> Card Type  </th>
+          <td mat-cell *matCellDef="let element"><img class="w-12" src="{{element.imageUrl}}" /></td>
+        </ng-container>
+
+        <ng-container matColumnDef="cardholderName">
+          <th mat-header-cell *matHeaderCellDef> Card holder name </th>
+          <td mat-cell *matCellDef="let element"> {{element.cardholderName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="maskedNumber">
+          <th mat-header-cell *matHeaderCellDef> Credit Card </th>
+          <td mat-cell *matCellDef="let element"> {{element.maskedNumber}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expirationDate">
+          <th mat-header-cell *matHeaderCellDef> Expiration date </th>
+          <td mat-cell *matCellDef="let element"> {{element.expirationDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef> Active </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.default && isActive()" style="color: green" class="order-1 sm:order-2 sm:ml-3">
+              Active Payment Method
+            </div>
+            <div *ngIf="element.default && !isActive()" style="color: red" class="order-1 sm:order-2 sm:ml-3">
+              Subscription not found
+            </div>
+            <div *ngIf="!element.default && !isActive()" style="color: green" class="order-1 sm:order-2 sm:ml-3">
+              Not Active
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th id="action" mat-header-cell *matHeaderCellDef>Action</th>
+          <td  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
+            <button  mat-icon-button [matMenuTriggerFor]="pm_action_menu" aria-label="Action menu selection">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu xPosition="before"  #pm_action_menu="matMenu">
+              <button  [disabled]="element.default" (click)="setDefaultPaymentMethod(element.token)" mat-menu-item>
+                <mat-icon color="primary">edit</mat-icon>
+                Make Active
+              </button>
+              <button [disabled]="element.default" (click)="removePaymentMethod(element.token)" mat-menu-item>
+                <mat-icon [color]="'warn'" >delete</mat-icon>
+                Delete
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="mobile ? mobilePaymentMethodColumns : paymentMethodColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: mobile ? mobilePaymentMethodColumns : paymentMethodColumns;"></tr>
+      </table>
+      <!-- BILLING HISTORY -->
+      <mat-toolbar color="primary" >
+        <mat-toolbar-row>
+          <mat-icon fxHide.xs>history</mat-icon>
+          <mat-divider [vertical]="true"></mat-divider>
+          <mat-label> Billing History</mat-label>
+          <mat-divider [vertical]="true"></mat-divider>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <table title="Billing History" mat-table [dataSource]="transactionHistory" >
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="maskedNumber">
+          <th mat-header-cell *matHeaderCellDef> Credit Card </th>
+          <td mat-cell *matCellDef="let element"> {{element.creditCard.maskedNumber}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="processorResponseText">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.processorResponseText}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.amount | currency}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="mobile ? mobileDisplayedColumns : displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: mobile ? mobileDisplayedColumns : displayedColumns;"></tr>
+      </table>
+
+

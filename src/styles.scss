@@ -1,0 +1,93 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$mat-primary-scheme: (
+  100: rgba(134,144,167,0.58),
+  500: rgba(55,64,80,0.78),
+  700: #2b313f,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: #ffffff,
+    700: #ffffff
+  )
+);
+
+$mat-accent-scheme: (
+  100: #7e96a6,
+  500: #627580,
+  700: #3c474f,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: #ffffff,
+    700: #ffffff
+  )
+);
+
+$mat-warn-scheme: (
+  100: rgb(246,92,84),
+  500: rgb(241,66,55),
+  700: rgb(166,46,38),
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: #ffffff,
+    700: #ffffff
+  )
+);
+$mat-primary-palette: mat.define-palette($mat-primary-scheme);
+$mat-accent-palette: mat.define-palette($mat-accent-scheme);
+$mat-warn-palette: mat.define-palette($mat-warn-scheme);
+
+$app-light-theme: mat.define-light-theme($mat-primary-palette, $mat-accent-palette, $mat-warn-palette);
+$app-dark-theme: mat.define-dark-theme($mat-primary-palette, $mat-accent-palette, $mat-warn-palette);
+
+.light-mode {
+  @include mat.all-component-themes($app-light-theme);
+}
+.dark-mode {
+  @include mat.all-component-themes($app-dark-theme);
+}
+$palettes: ("primary": $mat-primary-palette, "accent": $mat-accent-palette, "warn": $mat-warn-palette);
+@each $name, $palette in $palettes {
+  .color-#{$name} {
+    background-color: mat.get-color-from-palette($palette, 'default');
+    color: mat.get-color-from-palette($palette, 'default-contrast');
+  }
+  .color-#{$name}-dark {
+    background-color: mat.get-color-from-palette($palette, 'darker');
+    color: mat.get-color-from-palette($palette, 'darker-contrast');
+  }
+  .color-#{$name}-light {
+    background-color: mat.get-color-from-palette($palette, 'lighter');
+    color: mat.get-color-from-palette($palette, 'lighter-contrast');
+  }
+}
+
+$mat-names: 'toolbar';
+@each $mat-name in $mat-names {
+  @each $name, $palette in $palettes {
+    .mat-#{$mat-name}.mat-#{$name}-dark {
+      background-color: mat.get-color-from-palette($palette, 'darker');
+      color: mat.get-color-from-palette($palette, 'darker-contrast');
+    }
+    .mat-#{$mat-name}.mat-#{$name}-light {
+      background-color: mat.get-color-from-palette($palette, 'lighter');
+      color: mat.get-color-from-palette($palette, 'lighter-contrast');
+    }
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h2, p {
+  padding: 16px;
+}
+.mr-8 {
+  margin-right: 8px;
+}
+.right-aligned-header > .mat-content {
+  justify-content: space-between;
+}
+
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}

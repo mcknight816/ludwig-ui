@@ -1,0 +1,25 @@
+
+ <mat-toolbar color="primary" >
+  <mat-toolbar-row>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-label> Flow Activity Connection</mat-label>
+    <div class="flex-stretch"></div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="delete()" mat-button mat-stroked-button>Delete</button>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="save()" mat-button mat-stroked-button>Save</button>
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+      <mat-icon class="close-icon" color="accent">close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div id="json-mapper" >
+  <connection-mapper  [connections]="data.connections" container-id="json-mapper" source-selector=".src-node" target-selector=".tgt-node"></connection-mapper>
+  <div  fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
+      <json-tree class="left" root-name="Source" node-class="src-node"  (jsonTreeEventEmitter)="handelEvent($event)" [json-object]="data.src" [key-labels]="data.labels" ></json-tree>
+      <mat-divider [vertical]="true"></mat-divider>
+      <json-tree  root-name="Target" node-class="tgt-node"  (jsonTreeEventEmitter)="handelEvent($event)" [json-object]="data.tgt" [key-labels]="data.labels" ></json-tree>
+  </div>
+</div>
+
+

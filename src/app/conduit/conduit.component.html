@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1>Conduit - {{selectedFlow?.name}}</h1>
+  <div class="flex-stretch"></div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <button (click)="save()" mat-button mat-stroked-button>Save</button>
+</mat-toolbar>
+<mat-sidenav-container autosize cdkDropListGroup>
+  <mat-sidenav #sidenav mode="side" opened="true" >
+    <mat-nav-list >
+      <mat-list-item (click)="toggleFlows()">
+        <mat-icon>account_tree</mat-icon>
+        <div class="item-name">Flows</div>
+        <span fxFlex>
+          <mat-icon  [fontIcon]="flowsExpanded ? 'expand_more' : 'chevron_right'"></mat-icon>
+        </span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <div *ngIf="flowsExpanded">
+        <div *ngFor="let flow of flows" >
+          <mat-list-item class="flow-item" (click)="showFlow(flow)">
+            <mat-icon>remove</mat-icon>
+            <div class="item-name">{{flow.name}}</div>
+            <span fxFlex>
+               <mat-icon>lock</mat-icon>
+            <mat-icon>settings</mat-icon>
+          </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <app-activities *ngIf="selectedFlow"></app-activities>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="flow-content" (scroll)="onScroll($event)">
+     <app-flow [flow]="selectedFlow"></app-flow>
+  </mat-sidenav-content>
+</mat-sidenav-container>

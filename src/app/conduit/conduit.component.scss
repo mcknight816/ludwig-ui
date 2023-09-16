@@ -1,0 +1,47 @@
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+}
+mat-nav-list{
+  padding-bottom: 35px;
+}
+.mat-sidenav-container {
+ // color: #3d3d3d !important;
+  //background-color: white !important;
+  height: 85vh;
+}
+:host {
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  width: 100%;
+}
+
+.item-name{
+  min-width: 200px;
+  padding-left: 5px;
+}
+.flow-item{
+  padding-left: 5px;
+}
+.mat-list-item {
+  padding: 8px 0;
+  display: flex;
+  width: auto;
+}
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+.drop-zone {
+  display: inline-block;
+  background-color: rgba(126, 110, 111, 0.47);
+  height:100%;
+  width:100%;
+  position:relative;
+}
+
+.flow-content{
+  padding: 0;
+  margin: 0;
+}

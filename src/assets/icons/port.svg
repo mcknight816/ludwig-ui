@@ -1,0 +1,7 @@
+<svg>
+  <g class="port">
+    <circle class="port-outer" cx="15" cy="10" r="7.5" />
+    <circle class="port-inner" cx="15" cy="10" r="5" />
+    <circle class="port-scrim" cx="15" cy="10" r="7.5" />
+  </g>
+</svg>

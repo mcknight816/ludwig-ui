@@ -1,0 +1,4 @@
+<mat-list-item cdkDrag *ngFor="let type of types" [cdkDragData]="type" (cdkDragMoved)="moved($event)">
+  <mat-icon>remove</mat-icon>
+  <div class="item-name"> {{type.text}}</div>
+</mat-list-item>
