@@ -1,8 +1,11 @@
+<div id='place-holder' class="activity-placeholder">
+
+</div>
 <mat-toolbar color="primary">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <h1>Conduit - {{selectedFlow?.name}}</h1>
+  <h1>Flow : {{selectedFlow?.name}}</h1>
   <div class="flex-stretch"></div>
   <mat-divider [vertical]="true"></mat-divider>
   <button (click)="save()" mat-button mat-stroked-button>Save</button>
@@ -38,3 +41,4 @@
      <app-flow [flow]="selectedFlow"></app-flow>
   </mat-sidenav-content>
 </mat-sidenav-container>
+

@@ -35,7 +35,6 @@
   color: #a15713;
 }
 
-
 .src-node {
   position: absolute;
   left:38px;
@@ -44,6 +43,7 @@
   top:12px;
   cursor: pointer;
   color: #406013;
+  transform: translate(0px, 0px) !important;
 }
 
 .tgt-node {
@@ -54,5 +54,6 @@
   top:12px;
   cursor: pointer;
   color: #406013;
+  transform: translate(0px, 0px) !important;
 }
 

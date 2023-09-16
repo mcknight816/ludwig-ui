@@ -1,0 +1,10 @@
+.drag-source{
+  transform: translate(0px, 0px) !important;
+}
+.drag-source:hover{
+  cursor: move;
+}
+.item-name{
+  min-width: 200px;
+  padding-left: 5px;
+}

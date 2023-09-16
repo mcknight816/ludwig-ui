@@ -11,6 +11,8 @@ import { ConnectionDlgComponent } from './connection-dlg/connection-dlg.componen
 import { FlowActivityDlgComponent } from './flow-activity-dlg/flow-activity-dlg.component';
 import {JsonTreeModule} from "../util/json-tree/json-tree.module";
 import {ConnectionMapperModule} from "../util/connection-mapper/connection-mapper.module";
+import {ActivityService} from "../services/activity.service";
+import {FlowService} from "../services/flow.service";
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import {ConnectionMapperModule} from "../util/connection-mapper/connection-mappe
     CommonModule,
     JsonTreeModule,
     ConnectionMapperModule
-  ]
+  ],
+  providers: [ActivityService,FlowService],
 })
 export class ConduitModule { }

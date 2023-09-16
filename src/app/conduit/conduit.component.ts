@@ -21,6 +21,7 @@ export class ConduitComponent implements OnInit,AfterViewInit {
   flows:Array<Flow> = [];
   selectedFlow: Flow | null = null;
   flowsExpanded:boolean = false;
+
   ngOnInit(): void {
     this.flowService.list().subscribe(flows => this.flows = flows);
   }

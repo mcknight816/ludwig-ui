@@ -1,4 +1,19 @@
-<mat-list-item cdkDrag *ngFor="let type of types" [cdkDragData]="type" (cdkDragMoved)="moved($event)">
-  <mat-icon>remove</mat-icon>
-  <div class="item-name"> {{type.text}}</div>
-</mat-list-item>
+<mat-accordion>
+  <h4 style="text-align: center;padding-top: 10px">Activities</h4>
+  <mat-divider></mat-divider>
+  <mat-expansion-panel *ngFor="let activity of activities | keyvalue">
+    <mat-expansion-panel-header>
+      <mat-icon>account_tree</mat-icon>
+      <div class="item-name">{{activity.key}}</div>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <mat-list-item  class="drag-source" *ngFor="let activity of activity.value" [cdkDragData]="activity" (cdkDragMoved)="dragMoved($event)"
+                      (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" cdkDrag>
+        <mat-icon>drag_handle</mat-icon>
+        <div class="item-name"> {{activity.name}}</div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-expansion-panel>
+</mat-accordion>
