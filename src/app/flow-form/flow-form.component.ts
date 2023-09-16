@@ -10,7 +10,7 @@ import {Flow} from "../services/app-model";
   styleUrls: ['./flow-form.component.scss']
 })
 export class FlowFormComponent implements OnInit {
-  item:Flow;
+  item:Flow | null;
   form:FormGroup;
 
   constructor(private fb: FormBuilder,private service:FlowService,private router: Router,private route: ActivatedRoute) {
@@ -38,16 +38,13 @@ export class FlowFormComponent implements OnInit {
      this.router.navigate(['/flows']).then();
   }
 
-  public emptyItem():Flow{
-    return {
-			id:null,
-			name:'',
-		};
+  public emptyItem():Flow | null{
+    return null;
   }
 
   public createForm():FormGroup{
      return this.fb.group({
-        "name": [this.item.name],
+        "name": [this.item?.name],
      });
   }
 }

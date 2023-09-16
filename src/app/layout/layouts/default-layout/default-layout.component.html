@@ -42,6 +42,10 @@
                 <div>Docs</div>
             </mat-list-item>
             <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-icon mat-list-icon>list</mat-icon>
+            <div (click)="sidenav.toggle()" [routerLink]="'/conduit'">Conduit</div>
+          </mat-list-item>
             <mat-list-item>
                 <mat-icon mat-list-icon>list</mat-icon>
                 <div (click)="sidenav.toggle()" [routerLink]="'/flows'">Flows</div>

@@ -1,0 +1,33 @@
+.mat-toolbar {
+  min-height: 50px !important;
+  height: 50px !important;
+  top:-24px;
+  right:-24px;
+}
+
+.dlg-content{
+  margin-left: 5px;
+  width:100%;
+}
+
+.mat-toolbar-row {
+  min-height: 50px !important;
+  height: 50px !important;
+}
+
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+.mat-dialog-container {
+
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0px !important;
+}
+
+.left{
+   width:50%;
+  overflow: hidden;
+}

@@ -26,6 +26,7 @@ import {FlowFormComponent} from "./flow-form/flow-form.component";
 import {FlowTableComponent} from "./flow-table/flow-table.component";
 
 
+
 @NgModule({
   declarations: [
     SearchInputComponent,
@@ -35,6 +36,7 @@ import {FlowTableComponent} from "./flow-table/flow-table.component";
     HomeComponent,
 		FlowFormComponent,
 		FlowTableComponent,
+
 
   ],
   imports: [

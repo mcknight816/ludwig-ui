@@ -10,7 +10,7 @@ export class FlowService {
     constructor(public http: HttpClient,public config:Config ) { }
 
     search(term:string = '',page:number = 0,limit:number = 50):Observable<Page<Flow>> {
-        let url:string = this.config.api + "/rest/flow/search";
+        let url:string = this.config.api + "/core/flow/search";
         const params = new HttpParams()
         .set('page', String(page))
         .set('term',term)
@@ -19,18 +19,18 @@ export class FlowService {
     }
 
     list():Observable<Array<Flow>> {
-        return this.http.get<Array<Flow>>(this.config.api + "/rest/flow");
+        return this.http.get<Array<Flow>>(this.config.api + "/core/flow");
     }
 
     save(model: Flow):Observable<Flow>{
-        return this.http.post<Flow>(this.config.api + "/rest/flow", model);
+        return this.http.post<Flow>(this.config.api + "/core/flow", model);
     }
 
     getById(id: string):Observable<Flow> {
-        return this.http.get<Flow>(this.config.api + "/rest/flow/" + id);
+        return this.http.get<Flow>(this.config.api + "/core/flow/" + id);
     }
 
     removeById(id: string | null):Observable<any>{
-        return this.http.delete<any>(this.config.api + "/rest/flow/" + id);
+        return this.http.delete<any>(this.config.api + "/core/flow/" + id);
     }
 }

@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   api:"http://localhost:9094",
   saasy:"https://saasy-service.bluntsoftware.com/api/v1",
-  appId:"6382622268f6bb28b8b8ade2"
+  appId:"64ebec74fb5e3453f79e65a3"
 };
 
 /*

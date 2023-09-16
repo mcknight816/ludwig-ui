@@ -16,15 +16,15 @@ const routes: Routes = [
             {path : 'home',        component: HomeComponent},
             {path : 'dashboard',   component: DashboardComponent},
             {path : 'callback',    component: CallbackComponent},
-            {path : 'docs',        loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule) }
+            {path : 'docs',        loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule) },
+            {path : 'conduit',     loadChildren: () => import('./conduit/conduit.module').then(m => m.ConduitModule),canActivate: [AuthGuard] }
     ]},
 
     {path : '',                component: LayoutComponent,
         children:[
-		{path : 'flow',     			component:FlowFormComponent},
-		{path : 'flow/:id',     			component:FlowFormComponent},
-		{path : 'flows',     			component:FlowTableComponent},
-
+          {path : 'flow',     			component:FlowFormComponent},
+          {path : 'flow/:id',     	component:FlowFormComponent},
+          {path : 'flows',     			component:FlowTableComponent},
     ]},
     {path : '',                component: LayoutComponent,
         children:[
