@@ -13,6 +13,7 @@ import {JsonTreeModule} from "../util/json-tree/json-tree.module";
 import {ConnectionMapperModule} from "../util/connection-mapper/connection-mapper.module";
 import {ActivityService} from "../services/activity.service";
 import {FlowService} from "../services/flow.service";
+import {FlowIcons} from "./flow-icons";
 
 
 @NgModule({

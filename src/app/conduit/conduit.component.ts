@@ -7,6 +7,7 @@ import {FlowService} from "../services/flow.service";
 import {Activity, Flow, FlowActivity} from "../services/app-model";
 import {FlowComponent} from "./flow/flow.component";
 import {v4 as uuidv4} from 'uuid';
+import {ConnectionMapperComponent} from "../util/connection-mapper/connection-mapper.component";
 @Component({
   selector: 'app-conduit',
   templateUrl: './conduit.component.html',
@@ -54,10 +55,11 @@ export class ConduitComponent implements OnInit,AfterViewInit {
   }
   addActivity(event: { activity: Activity; location: Point }) {
     //alert("Add new Flow Activity " + event.activity.name + " @ coords " + event.location.x + "," + event.location.y);
+
     let flowActivity:FlowActivity = {...event.activity,...{
         id:uuidv4(),
-        x:event.location.x -350,
-        y:event.location.y -150,
+        x:event.location.x -350,//todo: get offset
+        y:event.location.y -150,//todo: get offset
         description:'',
         context:'',
         hasError:false}

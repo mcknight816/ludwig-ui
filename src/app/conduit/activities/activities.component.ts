@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CdkDragEnd, CdkDragMove, CdkDragStart, Point} from "@angular/cdk/drag-drop";
 import {ActivityService} from "../../services/activity.service";
 import {Activity} from "../../services/app-model";
+import {FlowIcons} from "../flow-icons";
 
 @Component({
   selector: 'app-activities',
@@ -42,8 +43,8 @@ export class ActivitiesComponent implements OnInit {
   dragMoved(event: CdkDragMove<any>) {
       console.log(event.pointerPosition.x + "," + event.pointerPosition.y);
       if(this.placeHolder){
-        this.placeHolder.style.left = String(event.pointerPosition.x - 25) + 'px';
-        this.placeHolder.style.top = String(event.pointerPosition.y -85) + 'px';
+        this.placeHolder.style.left = String(event.pointerPosition.x - 25) + 'px';//todo: get offset
+        this.placeHolder.style.top = String(event.pointerPosition.y -85) + 'px';//todo: get offset
       }
   }
 
@@ -55,4 +56,7 @@ export class ActivitiesComponent implements OnInit {
     this.addActivityEvent.emit({activity:event.source.data,location:{x:event.dropPoint.x,y:event.dropPoint.y}});
     this.hidePlaceHolder();
   }
+
+  protected readonly FlowIcons = FlowIcons;
+
 }

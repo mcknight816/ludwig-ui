@@ -3,15 +3,16 @@
   <mat-divider></mat-divider>
   <mat-expansion-panel *ngFor="let activity of activities | keyvalue">
     <mat-expansion-panel-header>
-      <mat-icon>account_tree</mat-icon>
+      <mat-icon>{{FlowIcons.get(activity.key)}}</mat-icon>
       <div class="item-name">{{activity.key | uppercase}}</div>
     </mat-expansion-panel-header>
     <mat-nav-list>
       <mat-divider></mat-divider>
       <mat-list-item  class="drag-source" *ngFor="let activity of activity.value" [cdkDragData]="activity" (cdkDragMoved)="dragMoved($event)"
                       (cdkDragEnded)="dragEnd($event)" (cdkDragStarted)="dragStart($event)" cdkDrag>
-        <mat-icon>drag_handle</mat-icon>
+        <mat-icon>{{ FlowIcons.get(activity.name)}}</mat-icon>
         <div class="item-name"> {{activity.name}}</div>
+        <span fxFlex><mat-icon>drag_handle</mat-icon></span>
         <mat-divider></mat-divider>
       </mat-list-item>
     </mat-nav-list>

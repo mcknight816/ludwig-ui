@@ -151,10 +151,10 @@ export class ConnectionMapperComponent implements OnInit {
     return elm;
   }
   calculateOffset(): Point {
-    return this.getAbsoluteOffsetFromBody(document.getElementById(this.containerId));
+    return  ConnectionMapperComponent.getAbsoluteOffsetFromBody(document.getElementById(this.containerId));
   }
 
-  getAbsoluteOffsetFromBody( el: HTMLElement | null ): Point {
+  public static getAbsoluteOffsetFromBody( el: HTMLElement | null ): Point {
     let _x = 0;
     let _y = 0;
     while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {

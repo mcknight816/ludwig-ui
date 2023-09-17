@@ -3,7 +3,7 @@
   <div #activities *ngFor="let flowActivity of flow?.activities;" [id]=flowActivity.id  class="flow-activity"
        [cdkDragData]="flowActivity" (cdkDragMoved)="refresh()" [style.top.px]="flowActivity.y" [style.left.px]="flowActivity.x"
        (dblclick)="showProperties($event,flowActivity)" (cdkDragEnded)="dragEnd($event)" cdkDrag>
-          <mat-icon>{{lookupIcon(flowActivity.icon)}}</mat-icon>
+          <mat-icon>{{FlowIcons.get(flowActivity.name)}}</mat-icon>
           <p class="flow-activity-name">{{flowActivity.name}}</p>
           <mat-icon class="src-node">radio_button_checked</mat-icon>
           <mat-icon class="tgt-node">radio_button_checked</mat-icon>

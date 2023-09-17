@@ -5,6 +5,7 @@ import {ConnectionDlgComponent} from "../connection-dlg/connection-dlg.component
 import {FlowActivityDlgComponent} from "../flow-activity-dlg/flow-activity-dlg.component";
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
 import {CdkDragEnd} from "@angular/cdk/drag-drop";
+import {FlowIcons} from "../flow-icons";
 
 @Component({
   selector: 'app-flow',
@@ -17,7 +18,7 @@ export class FlowComponent implements  AfterViewInit {
   @ViewChild(ConnectionMapperComponent) connectionMapper:ConnectionMapperComponent | undefined;
   @ViewChildren('activities') activities: QueryList < any > | undefined;
   constructor(public dialog: MatDialog) {
-    this.initIconMap();
+
   }
   ngAfterViewInit(): void {
     this.activities?.changes.subscribe( () => {
@@ -94,23 +95,22 @@ export class FlowComponent implements  AfterViewInit {
   }
 
 
-  iconMap:any = {};
-  initIconMap(){
-    this.iconMap['fa-leaf'] = 'energy_savings_leaf';
-  }
-  lookupIcon(icon: string | null): string {
-   return   icon ? this.iconMap[icon] ? this.iconMap[icon] : icon : 'Settings';
-  }
+
 
   onScroll($event: Event) {
     this.connectionMapper?.refresh();
   }
 
   dragEnd(event: CdkDragEnd) {
+
     let flowActivity:FlowActivity = event.source.data;
     event.source.reset();
-    flowActivity.x = event.dropPoint.x - 350;
-    flowActivity.y = event.dropPoint.y - 150;
+
+
+    flowActivity.x = event.dropPoint.x - 350;//todo: get offset
+    flowActivity.y = event.dropPoint.y - 150;//todo: get offset
 
   }
+
+  protected readonly FlowIcons = FlowIcons;
 }
