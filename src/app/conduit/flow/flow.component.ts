@@ -122,7 +122,7 @@ export class FlowComponent implements  AfterViewInit {
           f.y += freePos.y;
         }
       })
-    }else{
+    } else {
       if(flowActivity.x && flowActivity.y){
         flowActivity.x += freePos.x;
         flowActivity.y += freePos.y;
@@ -133,16 +133,39 @@ export class FlowComponent implements  AfterViewInit {
 
   @HostListener('window:keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
-
     if(event.key === "Delete"){
-      alert('delete selected');
-      console.log("delete");
-      console.log(this.selectedFlowActivities);
+      this.deleteSelectedFlowActivities();
     }
   }
   @HostListener('window:keyup', ['$event'])
   onKeyup(event: KeyboardEvent) {
 
+  }
+  deleteSelectedFlowActivities(){
+    this.selectedFlowActivities.forEach(s=>{
+      this.deleteFlowActivity(s);
+    })
+  }
+  deleteFlowActivity(activity:FlowActivity){
+    this.flow?.connections?.forEach(c=>{
+      if(c.tgt === activity.id || c.src === activity.id){
+        this.deleteConnection(c);
+      }
+    });
+
+    const index = this.flow?.activities?.indexOf(activity, 0);
+    if (index != undefined && index > -1 ) {
+      console.log(activity);
+      console.log(index);
+      this.flow?.activities?.splice(index, 1);
+    }
+  }
+
+  deleteConnection(connection:Connection){
+    const index = this.flow?.connections?.indexOf(connection, 0);
+    if (index != undefined && index > -1) {
+      this.flow?.connections?.splice(index, 1);
+    }
   }
 
   mouseDown(event: MouseEvent) {
