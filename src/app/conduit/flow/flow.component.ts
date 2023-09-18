@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {Connection, Flow, FlowActivity} from "../../services/app-model";
 import {MatDialog} from "@angular/material/dialog";
 import {ConnectionDlgComponent} from "../connection-dlg/connection-dlg.component";
@@ -6,6 +15,7 @@ import {FlowActivityDlgComponent} from "../flow-activity-dlg/flow-activity-dlg.c
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
 import {CdkDragEnd, Point} from "@angular/cdk/drag-drop";
 import {FlowIcons} from "../flow-icons";
+import {SelectContainerComponent} from "ngx-drag-to-select";
 
 @Component({
   selector: 'app-flow',
@@ -17,8 +27,11 @@ export class FlowComponent implements  AfterViewInit {
   @ViewChild('flowContainer') private flowContainer?: ElementRef<HTMLDivElement>;
   @ViewChild(ConnectionMapperComponent) connectionMapper:ConnectionMapperComponent | undefined;
   @ViewChildren('activities') activities: QueryList < any > | undefined;
+  @ViewChild(SelectContainerComponent) selectContainer: SelectContainerComponent | undefined;
+
   protected readonly FlowIcons = FlowIcons;
   selectedFlowActivities:Array<FlowActivity> = [];
+  disableDrag:boolean = true;
   constructor(public dialog: MatDialog) {
 
   }
@@ -65,7 +78,6 @@ export class FlowComponent implements  AfterViewInit {
     })
     return activityIds;
   }
-
   getActivityKeyLabels():any{
     let keyLabels:any ={};
     this.flow?.activities?.forEach(a=>{
@@ -85,7 +97,6 @@ export class FlowComponent implements  AfterViewInit {
                 connections.push({src:c.src,tgt:c.tgt});
               }
         });
-        console.log(connections);
         const dialogRef = this.dialog.open(ConnectionDlgComponent, {
           panelClass: 'custom-dialog-container',
           data: {src:this.getSourceActivities($event.connection),tgt:tgtActivity,labels:this.getActivityKeyLabels(),connection:$event.connection,connections:connections},
@@ -103,14 +114,52 @@ export class FlowComponent implements  AfterViewInit {
   dragEnd(event: CdkDragEnd) {
     let flowActivity:FlowActivity = event.source.data;
     let freePos:Point = event.source.getFreeDragPosition();
-    if(flowActivity.x && flowActivity.y){
-      flowActivity.x += freePos.x;
-      flowActivity.y += freePos.y;
+
+    if(this.selectedFlowActivities.length > 0){
+      this.selectedFlowActivities.forEach(f=>{
+        if(f.x && f.y){
+          f.x += freePos.x;
+          f.y += freePos.y;
+        }
+      })
+    }else{
+      if(flowActivity.x && flowActivity.y){
+        flowActivity.x += freePos.x;
+        flowActivity.y += freePos.y;
+      }
     }
     event.source.reset();
   }
 
-  selectFlowActivity($event: MouseEvent, flowActivity: FlowActivity) {
-    this.selectedFlowActivities.push(flowActivity);
+  @HostListener('window:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+
+    if(event.key === "Delete"){
+      alert('delete selected');
+      console.log("delete");
+      console.log(this.selectedFlowActivities);
+    }
+  }
+  @HostListener('window:keyup', ['$event'])
+  onKeyup(event: KeyboardEvent) {
+
+  }
+
+  mouseDown(event: MouseEvent) {
+    if(event.ctrlKey){
+      this.selectContainer?.update();
+      this.disableDrag = false;
+    }
+  }
+  mouseUp(event: MouseEvent) {
+    if(event.ctrlKey){
+      this.selectContainer?.update();
+      this.disableDrag = true;
+
+    } else {
+      this.selectContainer?.deselectItems(()=> true);
+      this.selectContainer?.clearSelection();
+      Array.from(document.getElementsByClassName('dts-range-start')).forEach(i=> i.classList.remove('dts-range-start'));
+    }
   }
 }

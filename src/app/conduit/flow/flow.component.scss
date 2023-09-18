@@ -1,4 +1,4 @@
-
+@import './drag-select.css';
 .flow-container{
   height:100%;
   width:100%;
@@ -8,6 +8,9 @@
   position: relative;
 }
 
+.selected{
+  border: 2px solid #ce884c;
+}
 .flow-activity {
   width:25px;
   height:25px;

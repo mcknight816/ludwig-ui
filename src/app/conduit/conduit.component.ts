@@ -7,7 +7,7 @@ import {FlowService} from "../services/flow.service";
 import {Activity, Flow, FlowActivity} from "../services/app-model";
 import {FlowComponent} from "./flow/flow.component";
 import {v4 as uuidv4} from 'uuid';
-import {ConnectionMapperComponent} from "../util/connection-mapper/connection-mapper.component";
+
 @Component({
   selector: 'app-conduit',
   templateUrl: './conduit.component.html',
@@ -67,4 +67,5 @@ export class ConduitComponent implements OnInit,AfterViewInit {
     this.selectedFlow?.activities?.push(flowActivity);
     this.flowComponentView.flow = this.selectedFlow;
   }
+
 }

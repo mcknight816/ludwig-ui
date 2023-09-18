@@ -37,7 +37,7 @@
       <app-activities (add-activity-event)="addActivity($event)" *ngIf="selectedFlow"></app-activities>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="flow-content" (scroll)="onScroll($event)">
+  <mat-sidenav-content class="flow-content"  (scroll)="onScroll($event)" >
      <app-flow [flow]="selectedFlow"></app-flow>
   </mat-sidenav-content>
 </mat-sidenav-container>
