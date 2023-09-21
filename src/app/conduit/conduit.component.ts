@@ -7,7 +7,7 @@ import {FlowService} from "../services/flow.service";
 import {Activity, Flow, FlowActivity} from "../services/app-model";
 import {FlowComponent} from "./flow/flow.component";
 import {v4 as uuidv4} from 'uuid';
-import {MatDialog} from "@angular/material/dialog";
+import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import {FlowDlgComponent} from "./flow-dlg/flow-dlg.component";
 
 @Component({

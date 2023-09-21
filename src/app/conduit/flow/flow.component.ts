@@ -9,7 +9,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import {Connection, Flow, FlowActivity} from "../../services/app-model";
-import {MatDialog} from "@angular/material/dialog";
+import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
 import {ConnectionDlgComponent} from "../connection-dlg/connection-dlg.component";
 import {FlowActivityDlgComponent} from "../flow-activity-dlg/flow-activity-dlg.component";
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";

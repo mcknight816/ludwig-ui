@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatSelectChange} from '@angular/material/select';
+import {MatLegacySelectChange as MatSelectChange} from '@angular/material/legacy-select';
 import {SaasyUser, SaasyUserService} from "../../../auth/saasy-user.service";
 import {SaasyService} from "../../../auth/saasy-service";
 

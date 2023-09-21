@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { DefaultLayoutComponent } from './default-layout.component';
 import {RouterModule} from "@angular/router";
 import {MatDividerModule} from "@angular/material/divider";
-import {MatButtonModule} from "@angular/material/button";
+import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatListModule} from "@angular/material/list";
+import {MatLegacyListModule as MatListModule} from "@angular/material/legacy-list";
 import {MatIconModule} from "@angular/material/icon";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatLegacySlideToggleModule as MatSlideToggleModule} from "@angular/material/legacy-slide-toggle";
 import {FormsModule} from "@angular/forms";
 import {FlexLayoutModule} from "@angular/flex-layout";
 

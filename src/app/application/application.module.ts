@@ -7,7 +7,7 @@ import {ConduitModule} from "../conduit/conduit.module";
 
 import {MaterialModule} from "../material-module";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatInputModule} from "@angular/material/input";
+import {MatLegacyInputModule as MatInputModule} from "@angular/material/legacy-input";
 import {FlexModule} from "@angular/flex-layout";
 
 @NgModule({
