@@ -1,0 +1,15 @@
+
+<h2 mat-dialog-title>Flow</h2>
+<mat-dialog-content fxLayout="column" [formGroup]="form">
+  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+    <mat-form-field color="accent"  appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" formControlName="name" placeholder="Name"/>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="cancel()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</mat-dialog-actions>

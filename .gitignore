@@ -43,3 +43,4 @@ build/
 
 .mvn
 out
+package-lock.json
