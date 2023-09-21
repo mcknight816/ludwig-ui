@@ -30,7 +30,7 @@
     "gsap": "^3.12.2",
     "marked": "^4.2.3",
     "moment": "^2.29.4",
-    "ngx-braintree": "^8.0.0",
+
     "ngx-drag-to-select": "^5.0.1",
     "rxjs": "7.4.0",
     "tslib": "^2.3.1",
