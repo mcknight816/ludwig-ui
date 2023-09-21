@@ -7,6 +7,8 @@ import {FlowService} from "../services/flow.service";
 import {Activity, Flow, FlowActivity} from "../services/app-model";
 import {FlowComponent} from "./flow/flow.component";
 import {v4 as uuidv4} from 'uuid';
+import {MatDialog} from "@angular/material/dialog";
+import {FlowDlgComponent} from "./flow-dlg/flow-dlg.component";
 
 @Component({
   selector: 'app-conduit',
@@ -16,7 +18,7 @@ import {v4 as uuidv4} from 'uuid';
 export class ConduitComponent implements OnInit,AfterViewInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   @ViewChild(FlowComponent) flowComponentView!:FlowComponent;
-  constructor(private flowService: FlowService,private observer: BreakpointObserver,private route: ActivatedRoute) {
+  constructor(private flowService: FlowService,private observer: BreakpointObserver,private route: ActivatedRoute,public dialog: MatDialog) {
 
   }
   flows:Array<Flow> = [];
@@ -54,8 +56,6 @@ export class ConduitComponent implements OnInit,AfterViewInit {
     //this.flowComponentView.onScroll($event);
   }
   addActivity(event: { activity: Activity; location: Point }) {
-    //alert("Add new Flow Activity " + event.activity.name + " @ coords " + event.location.x + "," + event.location.y);
-
     let flowActivity:FlowActivity = {...event.activity,...{
         id:uuidv4(),
         x:event.location.x -350,//todo: get offset
@@ -67,5 +67,21 @@ export class ConduitComponent implements OnInit,AfterViewInit {
     this.selectedFlow?.activities?.push(flowActivity);
     this.flowComponentView.flow = this.selectedFlow;
   }
-
+  openFlowDialog(flow:Flow){
+    const dialogRef = this.dialog.open(FlowDlgComponent, {
+      panelClass: 'custom-dialog-container',
+      data: flow,
+      height: '40%',
+      width: '40%'
+    });
+    dialogRef.afterClosed().subscribe(d=>{
+      console.log(d);
+    })
+  }
+  toggleLock(flow: Flow) {
+    flow.locked = !flow.locked;
+  }
+  new() {
+    this.openFlowDialog( {id:null,locked:false,name:'',activities:[],connections:[],connectionMaps:[]});
+  }
 }

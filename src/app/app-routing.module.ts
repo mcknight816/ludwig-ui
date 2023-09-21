@@ -17,7 +17,8 @@ const routes: Routes = [
             {path : 'dashboard',   component: DashboardComponent},
             {path : 'callback',    component: CallbackComponent},
             {path : 'docs',        loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule) },
-            {path : 'conduit',     loadChildren: () => import('./conduit/conduit.module').then(m => m.ConduitModule),canActivate: [AuthGuard] }
+            {path : 'conduit',     loadChildren: () => import('./conduit/conduit.module').then(m => m.ConduitModule),canActivate: [AuthGuard] },
+            {path : '',            loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule),canActivate: [AuthGuard] }
     ]},
 
     {path : '',                component: LayoutComponent,

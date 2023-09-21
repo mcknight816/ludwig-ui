@@ -78,6 +78,9 @@ export class FlowComponent implements  AfterViewInit {
     })
     return activityIds;
   }
+
+
+
   getActivityKeyLabels():any{
     let keyLabels:any ={};
     this.flow?.activities?.forEach(a=>{
@@ -103,6 +106,12 @@ export class FlowComponent implements  AfterViewInit {
           height: '70%',
           width: '60%'
         });
+
+        dialogRef.componentInstance.onDelete.subscribe(c => {
+          this.deleteConnection(c);
+          dialogRef.close();
+        });
+
       }
     }
   }
@@ -166,6 +175,10 @@ export class FlowComponent implements  AfterViewInit {
     if (index != undefined && index > -1) {
       this.flow?.connections?.splice(index, 1);
     }
+  }
+
+  deleteConnectionMap(){
+
   }
 
   mouseDown(event: MouseEvent) {

@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, Inject, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
 import {JsonTreeEvent} from "../../util/json-tree/event.model";
@@ -11,7 +20,7 @@ import {Connection} from "../../util/connection-mapper/connection.model";
 })
 export class ConnectionDlgComponent implements AfterViewInit{
   @ViewChild(ConnectionMapperComponent) connectionMapper:ConnectionMapperComponent | null = null;
-
+  onDelete = new EventEmitter();
   constructor(@Inject(MAT_DIALOG_DATA) public data:{src:any,tgt:any,labels:any,connection:Connection,connections:Array<Connection>}) {
 
   }
@@ -21,7 +30,7 @@ export class ConnectionDlgComponent implements AfterViewInit{
     }
   }
   delete() {
-
+    this.onDelete.emit(this.data.connection);
   }
 
   save() {

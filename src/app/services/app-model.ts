@@ -1,3 +1,10 @@
+export interface Application {
+  id:string;
+  name:string;
+  description:string,
+  flows:Array<Flow>;
+}
+
 export interface Flow {
   id:string | null;
   name:string | null;

@@ -14,6 +14,8 @@ import {ConnectionMapperModule} from "../util/connection-mapper/connection-mappe
 import {ActivityService} from "../services/activity.service";
 import {FlowService} from "../services/flow.service";
 import {DragToSelectModule} from "ngx-drag-to-select";
+import { FlowDlgComponent } from './flow-dlg/flow-dlg.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import {DragToSelectModule} from "ngx-drag-to-select";
     ConduitComponent,
     ActivitiesComponent,
     ConnectionDlgComponent,
-    FlowActivityDlgComponent
+    FlowActivityDlgComponent,
+    FlowDlgComponent
   ],
   imports: [
     ConduitRoutingModule,
@@ -33,7 +36,12 @@ import {DragToSelectModule} from "ngx-drag-to-select";
     JsonTreeModule,
     ConnectionMapperModule,
     DragToSelectModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [ActivityService,FlowService],
+  providers: [ActivityService, FlowService],
+  exports: [
+    ConduitComponent
+  ]
 })
 export class ConduitModule { }
