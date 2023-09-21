@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NgxBraintreeModule} from "ngx-braintree";
+
 import {HttpClientModule} from "@angular/common/http";
 import {BtPaymentComponent} from "./bt-payment.component";
 
@@ -13,7 +13,7 @@ import {BtPaymentComponent} from "./bt-payment.component";
     ],
     imports: [
         CommonModule,
-        NgxBraintreeModule,
+
         HttpClientModule
     ]
 })
