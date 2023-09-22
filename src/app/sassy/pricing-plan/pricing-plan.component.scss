@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import "../../../styles.scss";
+//@import "../../../styles.scss";
 
 .title {
 
@@ -15,9 +15,9 @@
   text-align:left;
 }
 // variables
-$icon-size: 3rem;
-$icon-color: #D8D8D8;
-$main-color: mat.get-color-from-palette($mat-accent-palette,500);
+//$icon-size: 3rem;
+//$icon-color: #D8D8D8;
+//$main-color: mat.get-color-from-palette($mat-accent-palette,500);
 
 // Pricing table
 .pricing-table {
@@ -41,7 +41,7 @@ $main-color: mat.get-color-from-palette($mat-accent-palette,500);
       box-shadow: 0px 2px 30px rgba(0,0,0,0.3);
       transform: scale(1.04);
       i, h1, span, b {
-        color: $main-color;
+   //     color: $main-color;
       }
       .front {
         opacity: 0;
@@ -60,8 +60,8 @@ $main-color: mat.get-color-from-palette($mat-accent-palette,500);
       border-bottom: 1px solid #F0F0F0;
     }
     i {
-      font-size: $icon-size;
-      color: $icon-color;
+ //     font-size: $icon-size;
+  //    color: $icon-color;
       transition: all .3s ease-in-out;
     }
     h1 {
@@ -96,7 +96,7 @@ $main-color: mat.get-color-from-palette($mat-accent-palette,500);
         visibility: hidden;
         transition: all .3s ease-in-out;
         a.button {
-          background: $main-color;
+  //        background: $main-color;
           padding: 15px 20px;
           display: inline-block;
           text-decoration: none;
@@ -113,7 +113,7 @@ $main-color: mat.get-color-from-palette($mat-accent-palette,500);
           transform: translateY(20px);
           transition: all .3s ease-in-out;
           &:hover {
-            background: darken($main-color, 10%);
+    //        background: darken($main-color, 10%);
           }
         }
       }

@@ -9,50 +9,69 @@
         <mat-divider [vertical]=true></mat-divider>
         <a mat-button (click)="login($event)">Sign In</a>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="isLoggedIn()">
-        <button mat-icon-button>
-            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-        </button>
-        <h1 class="link"  routerLink="/home" >{{ title | uppercase }}</h1>
-        <div class="flex-stretch"></div>
-        <mat-icon class="mr-8">brightness_5</mat-icon>
-        <mat-slide-toggle [(ngModel)]="isDarkMode" (click)="toggleDarkMode()" class="mr-8"></mat-slide-toggle>
-        <mat-icon>bedtime</mat-icon>
-        <user></user>
+  <ng-container  *ngIf="isLoggedIn()">
+    <mat-toolbar-row>
+      <mat-icon (click)="toggleSideNav(sidenav)">menu</mat-icon>
+      <h1 class="link"  routerLink="/home" >{{ title | uppercase }}</h1>
+      <div class="flex-stretch"></div>
+      <mat-icon class="mr-8">brightness_5</mat-icon>
+      <mat-slide-toggle [(ngModel)]="isDarkMode" (click)="toggleDarkMode()" class="mr-8"></mat-slide-toggle>
+      <mat-icon>bedtime</mat-icon>
+      <user></user>
     </mat-toolbar-row>
+  </ng-container>
+
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav >
-        <mat-toolbar-row >
-            <h1>Catwalk</h1>
-        </mat-toolbar-row>
+        <mat-toolbar-row ><h1>Ludwig</h1></mat-toolbar-row>
         <mat-nav-list>
-            <mat-list-item (click)="sidenav.toggle()" [routerLink]="'/dashboard'">
-                <mat-icon mat-list-icon>dashboard</mat-icon>
-                <div>Dashboard</div>
+            <mat-list-item   (click)="sidenav.toggle()" [routerLink]="'/dashboard'">
+                <mat-icon >dashboard</mat-icon>
+                <div class="item-name">Dashboard</div>
+              <span fxFlex>
+
+              </span>
             </mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item (click)="sidenav.toggle()" [routerLink]="'/home'">
-                <mat-icon mat-list-icon>web</mat-icon>
-                <div>Home</div>
+                <mat-icon>web</mat-icon>
+                <div class="item-name">Home</div>
+              <span fxFlex>
+
+              </span>
             </mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item (click)="sidenav.toggle()" [routerLink]="'/docs/intro'">
-                <mat-icon mat-list-icon>info</mat-icon>
-                <div>Docs</div>
+                <mat-icon >info</mat-icon>
+                <div class="item-name">Docs</div>
+              <span fxFlex>
+
+              </span>
             </mat-list-item>
             <mat-divider></mat-divider>
           <mat-list-item>
-            <mat-icon mat-list-icon>list</mat-icon>
-            <div (click)="sidenav.toggle()" [routerLink]="'/conduit'">Conduit</div>
+            <mat-icon >list</mat-icon>
+            <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/conduit'">Conduit</div>
+            <span fxFlex>
+
+              </span>
           </mat-list-item>
+          <mat-divider></mat-divider>
           <mat-list-item>
-            <mat-icon mat-list-icon>list</mat-icon>
-            <div (click)="sidenav.toggle()" [routerLink]="'/apps'">Applications</div>
+            <mat-icon >list</mat-icon>
+            <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/apps'">Applications</div>
+            <span fxFlex>
+
+              </span>
           </mat-list-item>
+          <mat-divider></mat-divider>
             <mat-list-item>
-                <mat-icon mat-list-icon>list</mat-icon>
-                <div (click)="sidenav.toggle()" [routerLink]="'/flows'">Flows</div>
+                <mat-icon >list</mat-icon>
+                <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/flows'">Flows</div>
+              <span fxFlex>
+
+              </span>
             </mat-list-item>
             <mat-divider></mat-divider>
         </mat-nav-list>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup} from "@angular/forms";
 import { ActivatedRoute, Router} from "@angular/router";
-import {LegacyPageEvent as PageEvent} from "@angular/material/legacy-paginator";
+
 import {FlowService} from "../services/flow.service";
 import {Flow} from "../services/app-model";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-flow-table',

@@ -9,13 +9,14 @@ import {
   ViewChildren
 } from '@angular/core';
 import {Connection, Flow, FlowActivity} from "../../services/app-model";
-import {MatLegacyDialog as MatDialog} from "@angular/material/legacy-dialog";
+
 import {ConnectionDlgComponent} from "../connection-dlg/connection-dlg.component";
 import {FlowActivityDlgComponent} from "../flow-activity-dlg/flow-activity-dlg.component";
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
 import {CdkDragEnd, Point} from "@angular/cdk/drag-drop";
 import {FlowIcons} from "../flow-icons";
 import {SelectContainerComponent} from "ngx-drag-to-select";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-flow',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../auth/auth.service";
 import {IconService} from "../../../services/icon.service";
 import {ThemeService} from "../../../services/theme.service";
+import {MatSidenav} from "@angular/material/sidenav";
 
 @Component({
     selector: 'app-default-layout',
@@ -32,4 +33,9 @@ export class DefaultLayoutComponent implements OnInit {
     login($event: MouseEvent){
         this.authService.signIn();
     }
+
+  toggleSideNav(sidenav: MatSidenav) {
+
+    sidenav.toggle();
+  }
 }

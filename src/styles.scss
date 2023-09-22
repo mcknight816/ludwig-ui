@@ -1,14 +1,8 @@
 @use '@angular/material' as mat;
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+
+@include mat.all-component-typographies();
+@include mat.core();
+
 
 $mat-primary-scheme: (
   100: rgba(134,144,167,0.58),
@@ -46,14 +40,27 @@ $mat-primary-palette: mat.define-palette($mat-primary-scheme);
 $mat-accent-palette: mat.define-palette($mat-accent-scheme);
 $mat-warn-palette: mat.define-palette($mat-warn-scheme);
 
-$app-light-theme: mat.define-light-theme($mat-primary-palette, $mat-accent-palette, $mat-warn-palette);
-$app-dark-theme: mat.define-dark-theme($mat-primary-palette, $mat-accent-palette, $mat-warn-palette);
+$app-light-theme: mat.define-light-theme((
+  color: (primary: $mat-primary-palette,
+           accent: $mat-accent-palette,
+             warn: $mat-warn-palette),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+$app-dark-theme: mat.define-dark-theme((
+  color: (primary: $mat-primary-palette,
+    accent: $mat-accent-palette,
+    warn: $mat-warn-palette),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
 
 .light-mode {
-  @include mat.all-legacy-component-themes($app-light-theme);
+  @include mat.all-component-colors($app-light-theme);
 }
 .dark-mode {
-  @include mat.all-legacy-component-themes($app-dark-theme);
+  @include mat.all-component-colors($app-dark-theme);
 }
 $palettes: ("primary": $mat-primary-palette, "accent": $mat-accent-palette, "warn": $mat-warn-palette);
 @each $name, $palette in $palettes {
@@ -85,7 +92,9 @@ $mat-names: 'toolbar';
   }
 }
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 h2, p {
   padding: 16px;
@@ -100,3 +109,4 @@ h2, p {
 .mat-content > mat-panel-title, .mat-content > mat-panel-description {
   flex: 0 0 auto;
 }
+

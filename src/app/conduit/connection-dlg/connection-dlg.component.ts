@@ -8,10 +8,11 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from "@angular/material/legacy-dialog";
+
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
 import {JsonTreeEvent} from "../../util/json-tree/event.model";
 import {Connection} from "../../util/connection-mapper/connection.model";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-connection-dlg',
