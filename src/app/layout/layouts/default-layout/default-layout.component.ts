@@ -15,15 +15,14 @@ export class DefaultLayoutComponent implements OnInit {
 
     constructor(private authService:AuthService,private iconService:IconService,private themeService:ThemeService) {
         this.iconService.registerIcons();
-        themeService.initTheme();
-        this.isDarkMode = themeService.isDarkMode();
     }
 
     ngOnInit(): void {
+      this.isDarkMode = this.themeService.isDarkMode();
     }
 
     toggleDarkMode() {
-        this.isDarkMode ? this.themeService.update('light-mode') : this.themeService.update('dark-mode');
+      this.isDarkMode = this.themeService.toggleTheme();
     }
 
     isLoggedIn() {
@@ -35,7 +34,6 @@ export class DefaultLayoutComponent implements OnInit {
     }
 
   toggleSideNav(sidenav: MatSidenav) {
-
     sidenav.toggle();
   }
 }
