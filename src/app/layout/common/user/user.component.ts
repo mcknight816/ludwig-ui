@@ -4,8 +4,7 @@ import { BooleanInput } from '@angular/cdk/coercion';
 import {SaasyUser, SaasyUserService} from "../../../auth/saasy-user.service";
 import {IdName, SaasyService} from "../../../auth/saasy-service";
 import {AuthService} from "../../../auth/auth.service";
-
-
+import {ThemeService} from "../../../services/theme.service";
 
 @Component({
     selector       : 'user',
@@ -21,12 +20,16 @@ export class UserComponent implements OnInit {
     @Input() showAvatar: boolean = false;
     user: SaasyUser;
     tenants:Array<IdName> =[];
+    isDarkMode: boolean = false;
 
-    constructor(private authService:AuthService,private _router: Router, private _userService: SaasyUserService, private _saasyService: SaasyService) {
+    constructor(private authService:AuthService,private _router: Router, private _userService: SaasyUserService, private _saasyService: SaasyService,private themeService:ThemeService) {
         this.user = SaasyUserService.emptyUser();
     }
 
     ngOnInit(): void {
+
+        this.isDarkMode = this.themeService.isDarkMode();
+
         this._userService.getTenantUser().subscribe(u=>{
             if(u){
                 this.user = u;
@@ -84,4 +87,8 @@ export class UserComponent implements OnInit {
     navigate(url: string) {
         this._router.navigate([url]);
     }
+
+  switchTheme(lightMode: string) {
+    this.isDarkMode = this.themeService.toggleTheme();
+  }
 }

@@ -29,13 +29,15 @@ export class AppFlowComponent implements OnInit {
     this.router.navigate(['/apps']).then();
   }
 
-  save(flows: Array<Flow>) {
-    if(this.app){
+  save(flows: Array<Flow> | undefined) {
+    if(this.app && flows){
       this.app.flows = flows;
       this.applicationService.save(this.app).subscribe(a =>{
         console.log(a);
         this.back();
       });
+    }else{
+      this.back();
     }
   }
 }

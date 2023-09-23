@@ -16,7 +16,7 @@ export class SaasyInterceptor implements HttpInterceptor {
         return !!this.moduleConfig?.resourceServer?.allowedUrls?.find(u => url.startsWith(u));
     }
     private isPublicPath(url: string): boolean {
-      return url.indexOf('/meta/') > -1 || url.indexOf('/core/') > -1 ;
+      return url.indexOf('/meta/') > -1 ;// || url.indexOf('/core/') > -1
     }
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const tenant: IdName = SaasyService.getTenant();

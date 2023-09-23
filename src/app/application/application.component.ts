@@ -30,7 +30,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   editFlows(app: Application) {
-    let url = '/app/' + app.id + '/flows';
+    let url = '/apps/' + app.id + '/flows';
     this.router.navigate([url]);
   }
 

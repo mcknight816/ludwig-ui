@@ -78,9 +78,12 @@ export class ConduitComponent implements OnInit,AfterViewInit {
       height: '40%',
       width: '40%'
     });
+
     dialogRef.afterClosed().subscribe(d=>{
-      this.flows?.push(d);
-      this.selectedFlow = d;
+      if(d && d.name && d.name !== ''){
+        this.flows?.push(d);
+        this.selectedFlow = d;
+      }
     })
   }
   toggleLock(flow: Flow) {
@@ -88,5 +91,9 @@ export class ConduitComponent implements OnInit,AfterViewInit {
   }
   new() {
     this.openFlowDialog( {id:null,locked:false,name:'',activities:[],connections:[],connectionMaps:[]});
+  }
+
+  cancel() {
+    this.saveFlows.emit(undefined);
   }
 }

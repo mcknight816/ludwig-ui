@@ -14,9 +14,6 @@
       <mat-icon (click)="toggleSideNav(sidenav)">menu</mat-icon>
       <h1 class="link"  routerLink="/home" >{{ title | uppercase }}</h1>
       <div class="flex-stretch"></div>
-      <mat-icon class="mr-8">brightness_5</mat-icon>
-      <mat-slide-toggle [(ngModel)]="isDarkMode" (click)="toggleDarkMode()" class="mr-8"></mat-slide-toggle>
-      <mat-icon>bedtime</mat-icon>
       <user></user>
     </mat-toolbar-row>
   </ng-container>
@@ -50,14 +47,14 @@
               </span>
             </mat-list-item>
             <mat-divider></mat-divider>
-          <mat-list-item>
+          <!--<mat-list-item>
             <mat-icon >list</mat-icon>
             <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/conduit'">Conduit</div>
             <span fxFlex>
 
               </span>
           </mat-list-item>
-          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>-->
           <mat-list-item>
             <mat-icon >list</mat-icon>
             <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/apps'">Applications</div>
@@ -66,14 +63,14 @@
               </span>
           </mat-list-item>
           <mat-divider></mat-divider>
-            <mat-list-item>
+           <!-- <mat-list-item>
                 <mat-icon >list</mat-icon>
                 <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/flows'">Flows</div>
               <span fxFlex>
 
               </span>
             </mat-list-item>
-            <mat-divider></mat-divider>
+            <mat-divider></mat-divider>-->
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

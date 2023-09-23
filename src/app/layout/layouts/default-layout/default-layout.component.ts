@@ -10,7 +10,7 @@ import {MatSidenav} from "@angular/material/sidenav";
     styleUrls: ['./default-layout.component.scss']
 })
 export class DefaultLayoutComponent implements OnInit {
-    isDarkMode:boolean = false;
+
     title = 'ludwig ui';
 
     constructor(private authService:AuthService,private iconService:IconService,private themeService:ThemeService) {
@@ -18,12 +18,10 @@ export class DefaultLayoutComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.isDarkMode = this.themeService.isDarkMode();
+
     }
 
-    toggleDarkMode() {
-      this.isDarkMode = this.themeService.toggleTheme();
-    }
+
 
     isLoggedIn() {
         return this.authService.hasValidToken();
