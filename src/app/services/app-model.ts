@@ -1,12 +1,12 @@
 export interface Application {
-  id:string;
+  id:string | null;
   name:string;
   description:string,
   flows:Array<Flow>;
 }
 
 export interface Flow {
-  id:string | null;
+  id: string | null;
   name:string | null;
   locked:boolean | null;
   activities:Array<FlowActivity> | null;

@@ -5,7 +5,7 @@
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <h1>Flow : {{selectedFlow?.name}}</h1>
+  <h1>{{category}} > {{selectedFlow?.name}}</h1>
   <div class="flex-stretch"></div>
   <mat-divider [vertical]="true"></mat-divider>
   <button (click)="new()" mat-button mat-stroked-button>New</button>

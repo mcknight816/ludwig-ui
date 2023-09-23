@@ -26,7 +26,6 @@ export class FlowDlgComponent implements OnInit {
     this.dialog.close();
   }
   save() {
-
-    this.dialog.close(this.form.getRawValue());
+    this.dialog.close( Object.assign({}, this.data,this.form.getRawValue()));
   }
 }

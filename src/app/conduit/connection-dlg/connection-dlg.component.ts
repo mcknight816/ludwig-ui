@@ -3,10 +3,7 @@ import {
   Component,
   EventEmitter,
   Inject,
-  Input,
-  OnInit,
   ViewChild,
-  ViewEncapsulation
 } from '@angular/core';
 
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";

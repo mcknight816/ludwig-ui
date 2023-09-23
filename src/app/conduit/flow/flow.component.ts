@@ -80,8 +80,6 @@ export class FlowComponent implements  AfterViewInit {
     return activityIds;
   }
 
-
-
   getActivityKeyLabels():any{
     let keyLabels:any ={};
     this.flow?.activities?.forEach(a=>{

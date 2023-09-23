@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {ActivatedRoute} from "@angular/router";
 import {  Point} from "@angular/cdk/drag-drop";
-import {FlowService} from "../services/flow.service";
 import {Activity, Flow, FlowActivity} from "../services/app-model";
 import {FlowComponent} from "./flow/flow.component";
 import {v4 as uuidv4} from 'uuid';
@@ -19,15 +18,16 @@ import {MatDialog} from "@angular/material/dialog";
 export class ConduitComponent implements OnInit,AfterViewInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   @ViewChild(FlowComponent) flowComponentView!:FlowComponent;
-  constructor(private flowService: FlowService,private observer: BreakpointObserver,private route: ActivatedRoute,public dialog: MatDialog) {
-
-  }
-  flows:Array<Flow> = [];
+  @Input() flows: Array<Flow> | undefined = [];
+  @Input() category: string | undefined;
+  @Output() saveFlows:EventEmitter<Array<Flow>> = new EventEmitter<Array<Flow>>(true);
   selectedFlow: Flow | null = null;
   flowsExpanded:boolean = false;
+  constructor(private observer: BreakpointObserver,private route: ActivatedRoute,public dialog: MatDialog) {
 
+  }
   ngOnInit(): void {
-    this.flowService.list().subscribe(flows => this.flows = flows);
+
   }
   ngAfterViewInit() {
     setTimeout(() => {
@@ -41,17 +41,20 @@ export class ConduitComponent implements OnInit,AfterViewInit {
         }
       });
     });
+    if(!this.selectedFlow && this.flows && this.flows.length > 0){
+      this.selectedFlow = this.flows[0];
+    }
   }
 
   toggleFlows() {
     this.flowsExpanded = !this.flowsExpanded;
   }
 
-  showFlow(flow:any) {
+  showFlow(flow:Flow) {
     this.selectedFlow = flow;
   }
   save() {
-    alert('save flow');
+    this.saveFlows.emit(this.flows);
   }
   onScroll($event: Event) {
     //this.flowComponentView.onScroll($event);
@@ -76,7 +79,8 @@ export class ConduitComponent implements OnInit,AfterViewInit {
       width: '40%'
     });
     dialogRef.afterClosed().subscribe(d=>{
-      console.log(d);
+      this.flows?.push(d);
+      this.selectedFlow = d;
     })
   }
   toggleLock(flow: Flow) {
