@@ -21,7 +21,7 @@ export class DocItemComponent implements OnInit {
   expanded: boolean = false;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item?: DocNode;
-  @Input() depth: number = 0;
+  @Input() depth: number = 1;
   @Output() selectNodeEvent = new EventEmitter<DocNode>();
 
   constructor(public router: Router) {}

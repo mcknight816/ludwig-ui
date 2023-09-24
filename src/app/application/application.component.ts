@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ApplicationService} from "../services/application.service";
-import {Application, Flow} from "../services/app-model";
+import {Application} from "../services/app-model";
 import {Router} from "@angular/router";
-import {FlowDlgComponent} from "../conduit/flow-dlg/flow-dlg.component";
 import {MatDialog} from "@angular/material/dialog";
+import {AppEditComponent} from "./app-edit/app-edit.component";
 
 @Component({
   selector: 'app-application',
@@ -35,7 +35,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   openAppDialog(app:Application){
-   this.dialog.open(FlowDlgComponent, {
+   this.dialog.open(AppEditComponent, {
       data: app, height: '40%', width: '40%'
     }).afterClosed().subscribe(d=>{
       this.service.save(d).subscribe(a=>{

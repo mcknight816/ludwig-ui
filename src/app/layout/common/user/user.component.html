@@ -77,17 +77,12 @@
     </button>
 </mat-menu>
 <mat-menu class="user-status-menu" #theme="matMenu">
-  <button *ngIf="isDarkMode"
-    mat-menu-item
-    (click)="switchTheme('light-mode')">
-    <span><mat-icon>brightness_5</mat-icon></span>
+  <button *ngIf="isDarkMode" mat-menu-item (click)="switchTheme('light-mode')">
+    <mat-icon>brightness_5</mat-icon>
     <span>Light</span>
   </button>
-  <button  *ngIf="!isDarkMode"
-    mat-menu-item
-    (click)="switchTheme('dark-mode')">
-    <span><mat-icon>bedtime</mat-icon></span>
+  <button  *ngIf="!isDarkMode" mat-menu-item (click)="switchTheme('dark-mode')">
+     <mat-icon>bedtime</mat-icon>
     <span>Dark</span>
   </button>
-
 </mat-menu>

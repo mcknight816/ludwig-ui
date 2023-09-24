@@ -9,8 +9,9 @@
     <mat-nav-list (click)="sideNavClick()">
       <div *ngFor="let panel of panels; trackBy: trackByFn" >
         <mat-list-item  (click)="selectPanel(panel)">
-          <mat-icon mat-list-icon [fontIcon]="panel.icon"></mat-icon>
+          <mat-icon style="padding-right: 10px" [fontIcon]="panel.icon"></mat-icon>
           <div>{{panel.title}}</div>
+          <span fxFlex></span>
         </mat-list-item>
         <mat-divider></mat-divider>
       </div>
