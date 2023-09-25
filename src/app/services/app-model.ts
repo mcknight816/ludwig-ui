@@ -13,7 +13,8 @@ export interface Flow {
   connections:Array<Connection> | null;
   connectionMaps:Array<ConnectionMap> | null;
 }
-export interface FlowActivity extends Omit<Activity,'schema' | 'fireAndForget'>{
+
+export interface FlowActivity extends Omit<Activity,'schema' | 'fireAndForget'> {
   id:string | null;
   x:number | null;
   y:number | null;
@@ -40,7 +41,7 @@ export interface ConnectionPath {
 export interface Activity {
   icon:string | null;
   name:string | null;
-  activityClass:string | null;
+  activityClass:string;
   category:string | null;
   input:any | null;
   output:any | null;

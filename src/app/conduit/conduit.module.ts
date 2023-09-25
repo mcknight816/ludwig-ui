@@ -16,6 +16,7 @@ import {FlowService} from "../services/flow.service";
 import {DragToSelectModule} from "ngx-drag-to-select";
 import { FlowDlgComponent } from './flow-dlg/flow-dlg.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {JsonEditorModule} from "../util/json-editor/json-editor.module";
 
 
 @NgModule({
@@ -27,18 +28,19 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FlowActivityDlgComponent,
     FlowDlgComponent
   ],
-  imports: [
-    ConduitRoutingModule,
-    MaterialModule,
-    FlexModule,
-    FlexLayoutModule,
-    CommonModule,
-    JsonTreeModule,
-    ConnectionMapperModule,
-    DragToSelectModule.forRoot(),
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        ConduitRoutingModule,
+        MaterialModule,
+        FlexModule,
+        FlexLayoutModule,
+        CommonModule,
+        JsonTreeModule,
+        ConnectionMapperModule,
+        DragToSelectModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        JsonEditorModule,
+    ],
   providers: [ActivityService, FlowService],
   exports: [
     ConduitComponent

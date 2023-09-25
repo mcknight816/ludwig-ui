@@ -26,15 +26,15 @@ import {FlowFormComponent} from "./flow-form/flow-form.component";
 import {FlowTableComponent} from "./flow-table/flow-table.component";
 
 @NgModule({
-  declarations: [
-    SearchInputComponent,
-    AppComponent,
-    DashboardComponent,
-    CallbackComponent,
-    HomeComponent,
-		FlowFormComponent,
-		FlowTableComponent,
-  ],
+    declarations: [
+        SearchInputComponent,
+        AppComponent,
+        DashboardComponent,
+        CallbackComponent,
+        HomeComponent,
+        FlowFormComponent,
+        FlowTableComponent,
+    ],
     imports: [
         HttpClientModule,
         ServiceModule,
@@ -50,9 +50,9 @@ import {FlowTableComponent} from "./flow-table/flow-table.component";
         AuthModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     ],
-  providers: [
-    {provide: Config, useValue: ServiceModule.forRoot(environment)}
-  ],
-  bootstrap: [AppComponent]
+    providers: [
+        {provide: Config, useValue: ServiceModule.forRoot(environment)}
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

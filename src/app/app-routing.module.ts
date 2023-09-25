@@ -18,7 +18,8 @@ const routes: Routes = [
             {path : 'callback',    component: CallbackComponent},
             {path : 'docs',        loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule) },
             {path : 'conduit',     loadChildren: () => import('./conduit/conduit.module').then(m => m.ConduitModule),canActivate: [AuthGuard] },
-            {path : 'apps',         loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule),canActivate: [AuthGuard] }
+            {path : 'apps',        loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule),canActivate: [AuthGuard] },
+            {path : 'config',      loadChildren: () => import('./config/config.module').then(m => m.ConfigModule), canActivate: [AuthGuard] }
     ]},
 
     {path : '',                component: LayoutComponent,
