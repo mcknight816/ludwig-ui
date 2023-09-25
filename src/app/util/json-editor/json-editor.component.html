@@ -1,0 +1,34 @@
+
+<div fxLayout="column" class="dark-mode">
+  <div *ngIf="schema?.type ==='object'">
+    <h2>{{schema?.title}}</h2>
+    <div *ngIf="schema?.properties">
+      <div *ngFor="let prop of schema?.properties | keyvalue; let i = index;"  class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <json-editor [schema]="prop.value" [name]="prop.key"></json-editor>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="schema?.type ==='string' && !schema?.enum ">
+    <mat-form-field color="warn"  appearance="outline">
+      <mat-label>{{schema?.title}}</mat-label>
+      <input matInput name="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
+    </mat-form-field>
+  </div>
+  <div *ngIf="schema?.type ==='string' && schema?.enum  ">
+    <mat-form-field color="warn"  appearance="outline">
+      <mat-label>{{schema?.title}}</mat-label>
+      <mat-select formControlName="{{name}}">
+        <mat-option *ngFor="let val of schema?.enum" [value]="getValue(schema)">{{val}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<!--<div fxLayout="row" class="dark-mode" >
+    <div fxLayout="column" >
+      <h1>{{name}}</h1>
+      <pre><code>{{schema | json}}</code></pre>
+    </div>
+    <div fxLayout="column" >
+      <pre><code>{{data | json }}</code></pre>
+    </div>
+</div>-->
