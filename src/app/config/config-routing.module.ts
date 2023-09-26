@@ -5,8 +5,9 @@ import {ConfigEditComponent} from "./config-edit/config-edit.component";
 import {ConfigComponent} from "./config.component";
 
 const routes: Routes = [
-  { path: 'edit/:configId', component: ConfigEditComponent },
-  { path: '',               component: ConfigComponent }];
+  { path: 'edit/:configType/:configId', component: ConfigEditComponent },
+  { path: 'edit/:configType',           component: ConfigEditComponent },
+  { path: '',                           component: ConfigComponent }];
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(routes)],

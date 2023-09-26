@@ -32,6 +32,7 @@ export class ConfigComponent {
   ngOnInit(): void {
     this.activityConfigService.list().subscribe(c=>{
       this.configTypes = c;
+      console.log(c);
     })
     this.search();
   }
@@ -43,18 +44,14 @@ export class ConfigComponent {
   }
 
   search() {
-    /*this.service.search(this._currentSearchValue,this._currentPage -1,this._pageSize).subscribe((p)=>{
-      this.dataSource = p.content;
-      this._dataLength = p.totalElements;
-    })*/
     this.service.list().subscribe(a=>{
       this.dataSource = a;
       this._dataLength = a.length;
     })
   }
 
-  add(){
-    this.router.navigate(['/config']);
+  add(configType:any){
+    this.router.navigate(['/config/edit/' + configType.configClass]);
   }
 
   rowClicked(row:any){

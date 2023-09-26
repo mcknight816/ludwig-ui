@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigComponent } from './config.component';
 import { ConfigEditComponent } from './config-edit/config-edit.component';
-import {ExtendedModule} from "@angular/flex-layout";
+import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -14,6 +14,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {ConfigService} from "./config.service";
 import {ActivityConfigService} from "./activity-config.service";
 import {ConfigRoutingModule} from "./config-routing.module";
+import {JsonEditorModule} from "../util/json-editor/json-editor.module";
 @NgModule({
   declarations: [
     ConfigComponent,
@@ -30,7 +31,9 @@ import {ConfigRoutingModule} from "./config-routing.module";
     MatMenuModule,
     MatPaginatorModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    JsonEditorModule,
+    FlexModule
   ],
   providers: [ConfigService,ActivityConfigService]
 })

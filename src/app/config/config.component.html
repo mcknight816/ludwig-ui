@@ -11,9 +11,9 @@
       / SEARCH -->
     <div class="flex-stretch"></div>
     <mat-divider [vertical]="true"></mat-divider>
-    <button (click)="add()" [matMenuTriggerFor]="config_menu" mat-button mat-stroked-button>New</button>
+    <button [matMenuTriggerFor]="config_menu" mat-button mat-stroked-button>New</button>
     <mat-menu xPosition="before"  #config_menu="matMenu">
-      <button  *ngFor="let configType of configTypes" class="action-menu" (click)="rowClicked(configType)" mat-menu-item>
+      <button  *ngFor="let configType of configTypes" class="action-menu" (click)="add(configType)" mat-menu-item>
         <mat-icon>settings</mat-icon>
         {{configType?.name}}
       </button>
