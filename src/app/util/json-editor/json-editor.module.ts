@@ -7,12 +7,15 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MaterialModule} from "../../material-module";
 import { SchemaFormComponent } from './schema-form/schema-form.component';
+import { FormatterComponent } from './formatter/formatter.component';
+import {SchemaFormattersModule} from "../../schema-formatters/schema-formatters.module";
 
 
 @NgModule({
   declarations: [
     JsonEditorComponent,
     SchemaFormComponent,
+    FormatterComponent,
 
   ],
   exports: [
@@ -24,7 +27,8 @@ import { SchemaFormComponent } from './schema-form/schema-form.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MaterialModule
+    MaterialModule,
+    SchemaFormattersModule
   ]
 })
 export class JsonEditorModule { }

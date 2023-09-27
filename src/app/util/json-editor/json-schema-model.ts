@@ -7,6 +7,7 @@ export interface Schema {
   required: Array<string> | null;
   format: string | null;
   value: any | null;
+  meta: any | null;
   'default':any | null;
   enum: Array<any> | null;
 }

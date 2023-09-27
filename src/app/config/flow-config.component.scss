@@ -38,7 +38,9 @@ span {
   display: inline-block;
   width: 100%;
 }
-
+.mat-column-action {
+  flex: 0 0 15%;
+}
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   border-bottom-width: 0;
 }

@@ -1,8 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Activity, FlowActivity} from "../../services/app-model";
 import {ActivityService} from "../../services/activity.service";
 import {Schema} from "../../util/json-editor/json-schema-model";
+import {JsonEditorComponent} from "../../util/json-editor/json-editor.component";
 
 
 @Component({
@@ -12,6 +13,7 @@ import {Schema} from "../../util/json-editor/json-schema-model";
 })
 export class FlowActivityDlgComponent implements OnInit {
   schema : Schema | undefined;
+  @ViewChild(JsonEditorComponent) jsonEditor:JsonEditorComponent | undefined;
   activities: Map<string,Activity> = new Map<string,Activity>();
   constructor(@Inject(MAT_DIALOG_DATA) public data:FlowActivity,private activityService: ActivityService) { }
 
