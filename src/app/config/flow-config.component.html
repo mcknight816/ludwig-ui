@@ -29,9 +29,13 @@
     <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
   </ng-container>
+  <ng-container  matColumnDef="configClass">
+    <mat-header-cell *matHeaderCellDef>Config Class</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.configClass}}</mat-cell>
+  </ng-container>
   <ng-container matColumnDef="action">
     <mat-header-cell id="action" mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-    <td  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
+    <mat-cell  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
       <button  mat-icon-button [matMenuTriggerFor]="action_menu" aria-label="Action menu selection">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -49,7 +53,7 @@
           Delete
         </button>
       </mat-menu>
-    </td>
+    </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
   <mat-row  *matRowDef="let row; columns: tableColumns"></mat-row>

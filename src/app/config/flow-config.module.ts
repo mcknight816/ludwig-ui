@@ -15,6 +15,8 @@ import {FlowConfigService} from "./flow-config.service";
 import {ActivityConfigService} from "./activity-config.service";
 import {FlowConfigRoutingModule} from "./flow-config-routing.module";
 import {JsonEditorModule} from "../util/json-editor/json-editor.module";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 @NgModule({
   declarations: [
     FlowConfigComponent,
@@ -33,7 +35,9 @@ import {JsonEditorModule} from "../util/json-editor/json-editor.module";
     MatTableModule,
     MatToolbarModule,
     JsonEditorModule,
-    FlexModule
+    FlexModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [FlowConfigService,ActivityConfigService]
 })

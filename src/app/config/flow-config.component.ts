@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PageEvent} from "@angular/material/paginator";
 import {FlowConfigService} from "./flow-config.service";
 import {ActivityConfigService} from "./activity-config.service";
+import {FlowConfig} from "./flow-config.model";
 
 @Component({
   selector: 'app-config',
@@ -16,11 +17,12 @@ export class FlowConfigComponent {
   private _pageSize: number = 20;
   public _dataLength: number = 0;
 
-  dataSource:any[]  = [];
+  dataSource:Array<FlowConfig>  = [];
 
   tableColumns = [
     'id',
     'name',
+    'configClass',
     'action'
   ];
   configTypes: Array<any> = [];
@@ -54,7 +56,7 @@ export class FlowConfigComponent {
   }
 
   rowClicked(row:any){
-    let url = '/config/' + row['id'];
+    let url = '/config/edit/' + row['configClass'] + '/' +  row['id'];
     this.router.navigate([url]);
   }
 

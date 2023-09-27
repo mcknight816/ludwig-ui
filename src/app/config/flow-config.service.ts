@@ -9,7 +9,7 @@ import {FlowConfig} from "./flow-config.model";
 export class FlowConfigService {
   constructor(public http: HttpClient,public config:Config ) { }
 
-  search(term:string = '',page:number = 0,limit:number = 50):Observable<Page<FlowConfig>> {
+  search(term:string = '',page:number = 0,limit:number = 50): Observable<Page<FlowConfig>> {
     let url:string = this.config.api + "/core/config/search";
     const params = new HttpParams()
       .set('page', String(page))
@@ -18,19 +18,19 @@ export class FlowConfigService {
     return this.http.get<Page<FlowConfig>>(url, {params});
   }
 
-  list():Observable<Array<FlowConfig>> {
+  list(): Observable<Array<FlowConfig>> {
     return this.http.get<Array<FlowConfig>>(this.config.api + "/core/config");
   }
 
-  save(model: any):Observable<FlowConfig>{
+  save(model: FlowConfig): Observable<FlowConfig>{
     return this.http.post<FlowConfig>(this.config.api + "/core/config", model);
   }
 
-  getById(id: string):Observable<FlowConfig> {
+  getById(id: string): Observable<FlowConfig> {
     return this.http.get<FlowConfig>(this.config.api + "/core/config/" + id);
   }
 
-  removeById(id: string | null):Observable<FlowConfig>{
+  removeById(id: string | null): Observable<FlowConfig>{
     return this.http.delete<FlowConfig>(this.config.api + "/core/config/" + id);
   }
 }
