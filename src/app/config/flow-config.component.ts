@@ -55,7 +55,8 @@ export class FlowConfigComponent {
     this.router.navigate(['/config/edit/' + configType.configClass]);
   }
 
-  rowClicked(row:any){
+  rowClicked(event:any,row:any){
+    event.stopPropagation();
     let url = '/config/edit/' + row['configClass'] + '/' +  row['id'];
     this.router.navigate([url]);
   }

@@ -40,7 +40,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu xPosition="before"  #action_menu="matMenu">
-        <button  class="action-menu" (click)="rowClicked(element)" mat-menu-item>
+        <button  class="action-menu" (click)="rowClicked($event,element)" mat-menu-item>
           <mat-icon color="primary">edit</mat-icon>
           Edit
         </button>
@@ -56,5 +56,5 @@
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-  <mat-row  *matRowDef="let row; columns: tableColumns"></mat-row>
+  <mat-row (dblclick)="rowClicked($event,row)" *matRowDef="let row; columns: tableColumns"></mat-row>
 </mat-table>
