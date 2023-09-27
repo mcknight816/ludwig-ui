@@ -7,6 +7,7 @@ export class FlowIcons {
     'mongoget':'energy_savings_leaf',
     'mongodelete':'energy_savings_leaf',
     'mongocolumns':'energy_savings_leaf',
+    'mongo':'energy_savings_leaf',
     'couchfind':'download',
     'couchsave':'download',
     'couchget':'download',

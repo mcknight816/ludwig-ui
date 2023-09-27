@@ -5,10 +5,8 @@ import {HomeComponent} from "./home/home.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CallbackComponent} from "./callback/callback.component";
 import {AuthGuard} from "./auth/guards/auth.guard";
-import {FlowFormComponent} from "./flow-form/flow-form.component";
-import {FlowTableComponent} from "./flow-table/flow-table.component";
-
 import {LayoutComponent} from "./layout/layout.component";
+
 const routes: Routes = [
     {path : '',                pathMatch : 'full', redirectTo: 'home'},
     {path : '',                component: LayoutComponent,
@@ -19,14 +17,7 @@ const routes: Routes = [
             {path : 'docs',        loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule) },
             {path : 'conduit',     loadChildren: () => import('./conduit/conduit.module').then(m => m.ConduitModule),canActivate: [AuthGuard] },
             {path : 'apps',        loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule),canActivate: [AuthGuard] },
-            {path : 'config',      loadChildren: () => import('./config/config.module').then(m => m.ConfigModule), canActivate: [AuthGuard] }
-    ]},
-
-    {path : '',                component: LayoutComponent,
-        children:[
-          {path : 'flow',     			component:FlowFormComponent},
-          {path : 'flow/:id',     	component:FlowFormComponent},
-          {path : 'flows',     			component:FlowTableComponent},
+            {path : 'config',      loadChildren: () => import('./config/flow-config.module').then(m => m.FlowConfigModule), canActivate: [AuthGuard] }
     ]},
     {path : '',                component: LayoutComponent,
         children:[

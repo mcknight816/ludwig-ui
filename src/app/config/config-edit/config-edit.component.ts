@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {ConfigService} from "../config.service";
+import {FlowConfigService} from "../flow-config.service";
 import {Schema} from "../../util/json-editor/json-schema-model";
 import {ActivityConfigService} from "../activity-config.service";
+import {FlowConfig} from "../flow-config.model";
 
 @Component({
   selector: 'app-config-edit',
@@ -10,9 +11,9 @@ import {ActivityConfigService} from "../activity-config.service";
   styleUrls: ['./config-edit.component.scss']
 })
 export class ConfigEditComponent {
-  @Input() config: any;
+  @Input() flowConfig: FlowConfig | undefined;
   @Input() schema: Schema | undefined;
-  constructor(private service:ConfigService,private activityConfigService: ActivityConfigService,private router: Router,private route: ActivatedRoute) {
+  constructor(private service:FlowConfigService, private activityConfigService: ActivityConfigService, private router: Router, private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
@@ -20,8 +21,8 @@ export class ConfigEditComponent {
     let configType = this.route.snapshot.paramMap.get('configType');
     if(id){
       this.service.getById(id).subscribe(c =>{
-        this.config = c;
-        this.schema = c.schema;
+        this.flowConfig = c;
+        this.schema = c.config.schema;
       });
     }
     if(configType){
@@ -32,7 +33,7 @@ export class ConfigEditComponent {
   }
 
   public save() {
-    this.service.save(this.config).subscribe(()=>{
+    this.service.save(this.flowConfig).subscribe(()=>{
       this.back();
     });
   }

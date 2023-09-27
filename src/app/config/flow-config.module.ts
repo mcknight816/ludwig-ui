@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfigComponent } from './config.component';
+import { FlowConfigComponent } from './flow-config.component';
 import { ConfigEditComponent } from './config-edit/config-edit.component';
 import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
@@ -11,17 +11,17 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {ConfigService} from "./config.service";
+import {FlowConfigService} from "./flow-config.service";
 import {ActivityConfigService} from "./activity-config.service";
-import {ConfigRoutingModule} from "./config-routing.module";
+import {FlowConfigRoutingModule} from "./flow-config-routing.module";
 import {JsonEditorModule} from "../util/json-editor/json-editor.module";
 @NgModule({
   declarations: [
-    ConfigComponent,
+    FlowConfigComponent,
     ConfigEditComponent
   ],
   imports: [
-    ConfigRoutingModule,
+    FlowConfigRoutingModule,
     CommonModule,
     ExtendedModule,
     MatButtonModule,
@@ -35,6 +35,6 @@ import {JsonEditorModule} from "../util/json-editor/json-editor.module";
     JsonEditorModule,
     FlexModule
   ],
-  providers: [ConfigService,ActivityConfigService]
+  providers: [FlowConfigService,ActivityConfigService]
 })
-export class ConfigModule { }
+export class FlowConfigModule { }

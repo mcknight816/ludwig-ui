@@ -22,8 +22,7 @@ import {MatCarouselModule} from "./carousel/carousel.module";
 import {LayoutModule} from "./layout/layout.module";
 import {AuthModule} from "./auth/auth.module";
 import {CallbackComponent} from "./callback/callback.component";
-import {FlowFormComponent} from "./flow-form/flow-form.component";
-import {FlowTableComponent} from "./flow-table/flow-table.component";
+
 
 @NgModule({
     declarations: [
@@ -31,9 +30,7 @@ import {FlowTableComponent} from "./flow-table/flow-table.component";
         AppComponent,
         DashboardComponent,
         CallbackComponent,
-        HomeComponent,
-        FlowFormComponent,
-        FlowTableComponent,
+        HomeComponent
     ],
     imports: [
         HttpClientModule,

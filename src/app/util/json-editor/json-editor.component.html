@@ -1,34 +1,16 @@
 
-<div    class="dark-mode input-row">
-  <div *ngIf="schema?.type ==='object'"  style="margin-left: 5px" >
-    <h2>{{schema?.title}}</h2>
-    <div *ngIf="schema?.properties" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
-      <div *ngFor="let prop of schema?.properties | keyvalue; let i = index;" >
-        <json-editor [schema]="prop.value" [name]="prop.key"></json-editor>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="schema?.type ==='string' && !schema?.enum ">
-    <mat-form-field color="warn"  fxFlex="0 1 calc(100%)" appearance="outline">
-      <mat-label>{{schema?.title}}</mat-label>
-      <input matInput name="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
-    </mat-form-field>
-  </div>
-  <div *ngIf="schema?.type ==='string' && schema?.enum  ">
-    <mat-form-field color="warn" fxFlex="0 1 calc(100%)" appearance="outline">
-      <mat-label>{{schema?.title}}</mat-label>
-      <mat-select formControlName="{{name}}">
-        <mat-option *ngFor="let val of schema?.enum" [value]="getValue(schema)">{{val}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-</div>
-<!--<div fxLayout="row" class="dark-mode" >
+
+<schema-form [form]="form" [schema]="schema"></schema-form>
+
+<div fxLayout="row" class="dark-mode" >
     <div fxLayout="column" >
-      <h1>{{name}}</h1>
+
       <pre><code>{{schema | json}}</code></pre>
     </div>
-    <div fxLayout="column" >
-      <pre><code>{{data | json }}</code></pre>
+    <div fxLayout="column">
+      <pre><code>{{this.form.getRawValue() | json }}</code></pre>
     </div>
-</div>-->
+</div>
+
+
+
