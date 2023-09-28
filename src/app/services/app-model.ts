@@ -10,7 +10,7 @@ export interface Flow {
   name:string | null;
   locked:boolean | null;
   activities:Array<FlowActivity> | null;
-  connections:Array<Connection> | null;
+  connections:Array<Connection> | undefined;
   connectionMaps:Array<ConnectionMap> | null;
 }
 

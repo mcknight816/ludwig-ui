@@ -178,18 +178,14 @@ export class FlowComponent implements  AfterViewInit {
       }
     });
 
-    const index = this.flow?.activities?.indexOf(activity, 0);
-    if (index != undefined && index > -1 ) {
-      console.log(activity);
-      console.log(index);
-      this.flow?.activities?.splice(index, 1);
+    if (this.flow?.activities) {
+      this.flow.activities = this.flow.activities.filter(a => activity.id !== a.id);
     }
   }
 
-  deleteConnection(connection:Connection){
-    const index = this.flow?.connections?.indexOf(connection, 0);
-    if (index != undefined && index > -1) {
-      this.flow?.connections?.splice(index, 1);
+  deleteConnection(con:Connection){
+    if (this?.flow?.connections) {
+      this.flow.connections = this.flow?.connections.filter(c => c.src !== con.src && c.tgt !== con.tgt);
     }
   }
 
