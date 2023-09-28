@@ -1,6 +1,0 @@
-<mat-form-field color="warn" fxFlex="0 1 calc(100%)" appearance="outline">
-  <mat-label>{{schema?.title}}</mat-label>
-  <mat-select formControlName="{{name}}">
-    <mat-option *ngFor="let val of getConfigs()" [value]="getValue(schema)">{{val.name}}</mat-option>
-  </mat-select>
-</mat-form-field>

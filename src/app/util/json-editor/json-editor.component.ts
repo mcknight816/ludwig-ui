@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Schema} from "./json-schema-model";
+
 
 @Component({
   selector: 'json-editor',
@@ -13,20 +14,15 @@ export class JsonEditorComponent implements OnChanges{
   @Input() form: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.form = this.createForm(this.schema);
-  }
-  private createForm(schema: Schema | undefined) {
-    return this.fb.group({});
+    this.form = this.fb.group({});
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(!this.form){
-      this.form = this.fb.group({});
-      this.form.setValue(this.data);
-    }
-
     if(this.schema){
       this.handleSchema(this.schema,this.form,null);
+      let formData:any = Object.assign({},this.form.getRawValue());
+      Object.keys(formData).forEach(key=> formData[key]=this.data[key]);
+      this.form.setValue(formData);
     }
   }
 
@@ -57,7 +53,7 @@ export class JsonEditorComponent implements OnChanges{
   }
   private handleString(schema:Schema,form:FormGroup,key:string | null) {
     if(key &&  form) {
-      form.addControl(key, new FormControl(schema.value, Validators.required));
+      form.addControl(key, new FormControl(schema.value));
     }
   }
 
@@ -78,5 +74,7 @@ export class JsonEditorComponent implements OnChanges{
   private handleNull(schema:Schema,form:FormGroup, key:string | null) {
     console.log('null not handled ' + key);
   }
+
+
 
 }

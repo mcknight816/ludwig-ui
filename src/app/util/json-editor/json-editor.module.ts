@@ -7,19 +7,17 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MaterialModule} from "../../material-module";
 import { SchemaFormComponent } from './schema-form/schema-form.component';
-import { FormatterComponent } from './formatter/formatter.component';
-import {SchemaFormattersModule} from "../../schema-formatters/schema-formatters.module";
+import {FlowConfigService} from "../../config/flow-config.service";
 
 
 @NgModule({
   declarations: [
     JsonEditorComponent,
     SchemaFormComponent,
-    FormatterComponent,
-
   ],
   exports: [
-    JsonEditorComponent
+    JsonEditorComponent,
+    SchemaFormComponent
   ],
   imports: [
     CommonModule,
@@ -27,8 +25,8 @@ import {SchemaFormattersModule} from "../../schema-formatters/schema-formatters.
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MaterialModule,
-    SchemaFormattersModule
-  ]
+    MaterialModule
+  ],
+  providers: [FlowConfigService]
 })
 export class JsonEditorModule { }

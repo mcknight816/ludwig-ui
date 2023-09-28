@@ -41,13 +41,30 @@ export class FlowComponent implements  AfterViewInit {
       this.connectionMapper?.refresh();
     });
   }
-  showProperties($event: MouseEvent, flowActivity: FlowActivity) {
+  editFlowActivity($event: MouseEvent, flowActivity: FlowActivity) {
     const dialogRef = this.dialog.open(FlowActivityDlgComponent,{
         data: flowActivity ,
       height: '70%',
        width: '60%'
     });
+
+    dialogRef.afterClosed().subscribe(d=>{
+      console.log(d);
+      if(d && d.name && d.name !== ''){
+        this.updateFlowActivity(d);
+      }
+    })
   }
+  updateFlowActivity(flowActivity:FlowActivity){
+    this.flow?.activities?.forEach((a,index)=>{
+      if(a.id === flowActivity.id){
+        if(this.flow?.activities){
+          this.flow.activities[index] = flowActivity;
+        }
+      }
+    })
+  }
+
   refresh():string {
     this.connectionMapper?.refresh();
     return "";
