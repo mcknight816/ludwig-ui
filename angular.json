@@ -33,9 +33,10 @@
               "src/sw-toolbox.js"
             ],
             "styles": [
+              "./node_modules/swagger-ui/dist/swagger-ui.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-             "node_modules/ngx-drag-to-select/ngx-drag-to-select.css"
+              "node_modules/ngx-drag-to-select/ngx-drag-to-select.css"
             ],
             "scripts": [
             ]

@@ -2,6 +2,7 @@ export interface Application {
   id:string | null;
   name:string;
   description:string,
+  path:string,
   flows:Array<Flow>;
 }
 

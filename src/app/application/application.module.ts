@@ -10,11 +10,16 @@ import {MatInputModule} from "@angular/material/input";
 import { AppFlowComponent } from './app-flow/app-flow.component';
 import {ConduitModule} from "../conduit/conduit.module";
 import {ApplicationService} from "../services/application.service";
+import { AppOpenApiComponent } from './app-open-api/app-open-api.component';
+import { AppRequestComponent } from './app-request/app-request.component';
+import {OpenApiService} from "../services/open-api.service";
 @NgModule({
   declarations: [
     ApplicationComponent,
     AppEditComponent,
-    AppFlowComponent
+    AppFlowComponent,
+    AppOpenApiComponent,
+    AppRequestComponent
   ],
     imports: [
         ApplicationRoutingModule,
@@ -25,6 +30,6 @@ import {ApplicationService} from "../services/application.service";
         FlexModule,
         ConduitModule
     ],
-    providers: [ApplicationService],
+    providers: [ApplicationService,OpenApiService],
 })
 export class ApplicationModule { }

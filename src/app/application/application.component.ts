@@ -26,7 +26,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   add() {
-    this.openAppDialog({id:null,name:'',description:'',flows:[]});
+    this.openAppDialog({id:null,name:'',description:'',path:'',flows:[]});
   }
 
   editFlows(app: Application) {
@@ -44,4 +44,17 @@ export class ApplicationComponent implements OnInit {
     })
   }
 
+  openApi(app: Application) {
+    let url = '/apps/' + app.id + '/swagger';
+    this.router.navigate([url]);
+  }
+
+  showRequests(app: Application) {
+    let url = '/apps/' + app.id + '/requests';
+    this.router.navigate([url]);
+  }
+
+  editApp(app: Application) {
+    this.openAppDialog(app);
+  }
 }

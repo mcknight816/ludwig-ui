@@ -19,6 +19,8 @@ export class AppEditComponent implements OnInit {
   public createForm() :FormGroup {
     return this.fb.group({
       "name": [this.data?.name],
+      "path": [this.data?.path],
+      "description": [this.data?.description],
     });
   }
   cancel() {
