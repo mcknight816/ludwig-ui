@@ -51,6 +51,7 @@ export class SettingsTeamComponent implements OnInit {
     }
 
     createUser(): void {
+      console.log('create user ' + this.form.getRawValue().name);
         this.saveUser(this.form.getRawValue());
     }
 

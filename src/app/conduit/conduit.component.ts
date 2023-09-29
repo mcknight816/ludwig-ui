@@ -81,10 +81,15 @@ export class ConduitComponent implements OnInit,AfterViewInit {
 
     dialogRef.afterClosed().subscribe(d=>{
       if(d && d.name && d.name !== ''){
+        if (!d.id) { // add
+          d.id = uuidv4();
+        } else { // edit
+           this.delete(flow);
+        }
         this.flows?.push(d);
         this.selectedFlow = d;
       }
-    })
+    });
   }
   toggleLock(flow: Flow) {
     flow.locked = !flow.locked;
@@ -95,5 +100,13 @@ export class ConduitComponent implements OnInit,AfterViewInit {
 
   cancel() {
     this.saveFlows.emit(undefined);
+  }
+
+  clone(flow: Flow) {
+    this.flows?.push(Object.assign({},flow,{id:uuidv4(),name:flow.name + ' clone'}));
+  }
+
+  delete(flow: Flow) {
+    this.flows = this.flows?.filter(f=> f.id !== flow.id);
   }
 }

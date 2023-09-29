@@ -29,8 +29,22 @@
             <mat-icon>remove</mat-icon>
             <div class="item-name">{{flow.name}}</div>
             <span fxFlex>
-               <mat-icon (click)="toggleLock(flow)">{{flow.locked ? 'lock' : 'lock_open' }}</mat-icon>
-               <mat-icon (click)="openFlowDialog(flow)">settings</mat-icon>
+              <mat-icon (click)="toggleLock(flow)">{{flow.locked ? 'lock' : 'lock_open' }}></mat-icon>
+              <mat-icon [matMenuTriggerFor]="action_menu" >more_vert</mat-icon>
+                <mat-menu xPosition="before"  #action_menu="matMenu">
+                  <button  class="action-menu" (click)="openFlowDialog(flow)" mat-menu-item>
+                    <mat-icon color="accent">edit</mat-icon>
+                    Edit
+                  </button>
+                  <button (click)="clone(flow)"  mat-menu-item>
+                    <mat-icon color="accent">redo</mat-icon>
+                    Clone
+                  </button>
+                  <button (click)="delete(flow)" mat-menu-item>
+                    <mat-icon color="accent">delete</mat-icon>
+                    Delete
+                  </button>
+                </mat-menu>
             </span>
           </mat-list-item>
           <mat-divider></mat-divider>

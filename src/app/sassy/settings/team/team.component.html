@@ -5,17 +5,18 @@
     <!-- Add team member -->
   <form [formGroup]="form">
     <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
-      <mat-form-field  fxFlex="40" appearance="outline" >
+      <mat-form-field color="accent" fxFlex="40" appearance="outline" >
           <mat-label>Name</mat-label>
           <mat-icon matPrefix>person</mat-icon>
           <input formControlName="name" matInput [placeholder]="'Full Name'">
       </mat-form-field>
-      <mat-form-field fxFlex="40" appearance="outline">
+      <mat-form-field color="accent" fxFlex="40" appearance="outline">
+          <mat-label>Email</mat-label>
           <mat-icon matPrefix>email</mat-icon>
           <input formControlName="email" matInput [placeholder]="'Email address'">
       </mat-form-field>
-      <button class="add-button" mat-stroked-button mat-button fxFlex="20" >
-        <mat-icon (click)="createUser()">person_add</mat-icon>
+      <button (click)="createUser()" class="add-button" mat-stroked-button mat-button fxFlex="20" >
+        <mat-icon >person_add</mat-icon>
         Add User
       </button>
     </div>
