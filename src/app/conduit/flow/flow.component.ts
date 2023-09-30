@@ -8,7 +8,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {Connection, Flow, FlowActivity} from "../../services/app-model";
+import {Connection, ConnectionMap, ConnectionPath, Flow, FlowActivity} from "../../services/app-model";
 
 import {ConnectionDlgComponent} from "../connection-dlg/connection-dlg.component";
 import {FlowActivityDlgComponent} from "../flow-activity-dlg/flow-activity-dlg.component";
@@ -78,7 +78,7 @@ export class FlowComponent implements  AfterViewInit {
   getSourceActivities(connection:Connection):any{
     let srcActivities: any = {};
     if(connection.src){
-      this.getSourceActivityIds(connection.src).forEach(id=>{
+      this.getSourceActivityIds(connection.src).reverse().forEach(id=>{
         let fa = this.getActivityById(id);
         if(fa){
           srcActivities[id] = {input:fa.input,output:fa.output};
@@ -123,11 +123,24 @@ export class FlowComponent implements  AfterViewInit {
           width: '60%'
         });
 
-        dialogRef.componentInstance.onDelete.subscribe(c => {
+        dialogRef.componentInstance.eventDelete.subscribe(c => {
           this.deleteConnection(c);
           dialogRef.close();
         });
-
+        dialogRef.componentInstance.eventSave.subscribe(c => {
+            let connectionMaps:Array<ConnectionMap> = c.map( c => {
+              return {  src: c.src,
+                tgt: c.tgt,
+                targetPath: null,
+                sourcePath: null };
+            });
+          if(this.flow?.connectionMaps){
+            this.flow.connectionMaps = [...connectionMaps,...this.flow.connectionMaps];
+          } else if(this.flow){
+            this.flow.connectionMaps =  connectionMaps;
+          }
+          dialogRef.close();
+        });
       }
     }
   }

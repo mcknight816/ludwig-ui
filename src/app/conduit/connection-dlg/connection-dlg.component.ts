@@ -18,7 +18,8 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 })
 export class ConnectionDlgComponent implements AfterViewInit{
   @ViewChild(ConnectionMapperComponent) connectionMapper:ConnectionMapperComponent | null = null;
-  onDelete = new EventEmitter();
+  eventDelete = new EventEmitter(true);
+  eventSave = new EventEmitter<Array<Connection>>(true);
   constructor(@Inject(MAT_DIALOG_DATA) public data:{src:any,tgt:any,labels:any,connection:Connection,connections:Array<Connection>}) {
 
   }
@@ -28,11 +29,11 @@ export class ConnectionDlgComponent implements AfterViewInit{
     }
   }
   delete() {
-    this.onDelete.emit(this.data.connection);
+    this.eventDelete.emit(this.data.connection);
   }
 
   save() {
-
+    this.eventSave.emit(this.data.connections);
   }
   protected readonly close = close;
   handelEvent(event: JsonTreeEvent) {
@@ -45,6 +46,7 @@ export class ConnectionDlgComponent implements AfterViewInit{
     console.log('scrolling');
     this.connectionMapper?.refresh();
   }
+
 
 
 }

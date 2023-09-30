@@ -3,7 +3,7 @@ import {JsonTreeEvent} from "./event.model";
 
 @Component({
   selector: 'json-tree',
-  template: '<json-node [key]="rootName" [value]="json" start-expanded="recursive" [key-labels]="keyLabels" [node-class]="nodeClass" (jsonNodeEventEmitter)="handleEvent($event)" ></json-node>',
+  template: '<json-node [key]="rootName" [value]="json" [start-expanded]="startExpanded" [key-labels]="keyLabels" [node-class]="nodeClass" (jsonNodeEventEmitter)="handleEvent($event)" ></json-node>',
   styleUrls: ['./json-tree.component.scss']
 })
 export class JsonTreeComponent implements AfterContentChecked {
@@ -11,6 +11,7 @@ export class JsonTreeComponent implements AfterContentChecked {
   @Input('root-name') rootName:string = 'Object';
   @Input('key-labels') keyLabels:any;
   @Input('node-class') nodeClass:string = 'node';
+  @Input('start-expanded') startExpanded:string = 'recursive';
   @Output() jsonTreeEventEmitter = new EventEmitter<JsonTreeEvent>();
 
   childCount:number = 0;

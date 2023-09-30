@@ -3,6 +3,6 @@
 <span class="branch-preview" *ngIf="isExpandable && showPreview" [hidden]="isExpanded " (click)="toggleExpanded()">{{preview}}</span>
 <ul class="branch-value" *ngIf="isExpandable && shouldRender" [hidden]="!isExpanded">
   <li *ngFor="let sub of value | keyvalue" >
-   <json-node [parent]="this" [node-class]="nodeClass" [key]=sub.key [value]=sub.value [key-labels]="keyLabels" (jsonNodeEventEmitter)="handleEvent($event)"></json-node>
+   <json-node [parent]="this" [start-expanded]="startExpanded" [node-class]="nodeClass" [key]=sub.key [value]=sub.value [key-labels]="keyLabels" (jsonNodeEventEmitter)="handleEvent($event)"></json-node>
   </li>
 </ul>

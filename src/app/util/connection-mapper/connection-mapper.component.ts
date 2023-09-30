@@ -12,7 +12,7 @@ export class ConnectionMapperComponent implements OnInit {
   @Input('target-selector') tgtSelector: string = '';
   @Input('container-id') containerId: string = '';
   @Input('connections') connections: Array<Connection> | null | undefined = [];
-  @Output('connection-event') connectionEvent = new EventEmitter<{ event: Event, connection: Connection }>();
+  @Output('connection-event') connectionEvent = new EventEmitter<{ event: Event, connection: Connection }>(true);
   srcNodes: Map<string, Element> = new Map<string, Element>();
   tgtNodes: Map<string, Element> = new Map<string, Element>();
 

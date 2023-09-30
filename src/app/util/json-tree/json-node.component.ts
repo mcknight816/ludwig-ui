@@ -16,9 +16,9 @@ export class JsonNodeComponent implements OnInit {
   @Input('node-class') nodeClass:string = 'node';
   @Output() jsonNodeEventEmitter = new EventEmitter<JsonTreeEvent>();
   isExpandable: boolean = false;
-  shouldRender: boolean = false;
+  shouldRender: boolean = true;
   preview: any;
-  isExpanded: boolean = false;
+  isExpanded: boolean = true;
   constructor(private elm: ElementRef) { }
 
   ngOnInit(): void {
@@ -39,8 +39,10 @@ export class JsonNodeComponent implements OnInit {
 
         if (this.parent &&  this.parent.startExpanded && this.parent.startExpanded === 'recursive') {
           this.startExpanded = this.parent.startExpanded;
+          this.elm.nativeElement.classList.add('expanded');
+          this.shouldRender = true;
         }
-      }else{
+      } else {
         this.isExpandable = false;
         // Add expandable class for CSS usage
         this.elm.nativeElement.classList.add('not-expandable');
