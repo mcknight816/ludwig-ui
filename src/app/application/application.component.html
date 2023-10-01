@@ -24,7 +24,23 @@
           <button mat-button (click)="editFlows(app)">FLOWS</button>
           <button mat-button (click)="openApi(app)">SWAGGER</button>
           <button mat-button (click)="showRequests(app)">LOG</button>
-          <button mat-button (click)="editApp(app)">EDIT</button>
+          <div class="flex-stretch"></div>
+          <mat-icon   [matMenuTriggerFor]="action_menu" >more_vert</mat-icon>
+          <mat-menu xPosition="before"  #action_menu="matMenu">
+            <button  class="action-menu" (click)="editApp(app)" mat-menu-item>
+              <mat-icon color="accent">edit</mat-icon>
+              Edit
+            </button>
+            <button (click)="clone(app)"  mat-menu-item>
+              <mat-icon color="accent">redo</mat-icon>
+              Clone
+            </button>
+            <button (click)="delete(app)" mat-menu-item>
+              <mat-icon color="accent">delete</mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+
         </mat-card-actions>
       </mat-card>
     </div>

@@ -57,4 +57,17 @@ export class ApplicationComponent implements OnInit {
   editApp(app: Application) {
     this.openAppDialog(app);
   }
+
+  clone(app: Application) {
+    app.id = null;
+    this.service.save(app).subscribe(a=>{
+      this.refreshApps();
+    });
+  }
+
+  delete(app: Application) {
+    this.service.removeById(app.id).subscribe(a=>{
+      this.refreshApps();
+    });
+  }
 }
