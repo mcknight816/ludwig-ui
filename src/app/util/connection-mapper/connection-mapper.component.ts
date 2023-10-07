@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input,  OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Connection, Point} from "./connection.model";
 import {Draggable} from "gsap/Draggable";
 import {gsap} from "gsap";
+
 @Component({
   selector: 'connection-mapper',
   templateUrl: './connection-mapper.component.html',
@@ -18,6 +19,7 @@ export class ConnectionMapperComponent implements OnInit {
 
   selectedSourceNode: Element | null = null;
   handle: HTMLElement | null = null;
+
   constructor() {
   }
 
@@ -29,12 +31,16 @@ export class ConnectionMapperComponent implements OnInit {
   }
   ngOnInit(): void {
     gsap.registerPlugin(Draggable);
+
   }
   refresh():string {
+    this.renderConnections();
     this.registerNodeEndpoints();
     return "";
   }
   registerNodeEndpoints(){
+    this.srcNodes = new Map<string, Element>();
+    this.tgtNodes = new Map<string, Element>();
     document.querySelectorAll(this.srcSelector).forEach(e=> {
       if(e?.id) {this.srcNodes.set(e.id,e);}
       else if(e?.parentElement?.id){this.srcNodes.set(e.parentElement.id,e);}
@@ -87,19 +93,32 @@ export class ConnectionMapperComponent implements OnInit {
   addConnection(sourceId:string,targetId:string){
     let connection:Connection = {src:sourceId,tgt:targetId};
     this.connections?.push(connection);
-    this.refresh();
-  }
-  getConnectionPath(connection:Connection): string | null {
-    if(connection.src && connection.tgt) {
-      const src:Element | undefined = this.srcNodes.has(connection.src) ? this.srcNodes.get(connection.src) : undefined;
-      const tgt:Element | undefined = this.tgtNodes.has(connection.tgt) ? this.tgtNodes.get(connection.tgt) : undefined;
-      if(src && tgt){
-        return this.calculatePath(src,tgt);
-      }
-    }
-    return null;
   }
 
+  getClosestElement(id:string): Element | null {
+    let elm: Element | null = document.getElementById(id);
+    if(!elm && id.lastIndexOf('[')) {
+      let newId: string = id.substring(0, id.lastIndexOf('['));
+      console.log('element not found for id ' + id + 'trying id ' + newId);
+      return this.getClosestElement(newId);
+    }
+    return elm;
+  }
+  renderConnections(){
+    this.connections?.forEach(c=>{
+      this.renderConnection(c);
+    });
+  }
+  renderConnection(connection: Connection)  {
+    let pathElement: HTMLElement | null = document.getElementById(this.getConnectionId(connection));
+    if ( pathElement && connection.src && connection.tgt) {
+      const src:Element | null = this.getClosestElement(connection.src);
+      const tgt:Element | null = this.getClosestElement(connection.tgt);
+      if (src && tgt) {
+        return this.renderPath(pathElement,src,tgt);
+      }
+    }
+  }
   renderPath(path:HTMLElement | null,src:Element,tgt:Element,srcPosition:string = 'right-center',tgtPosition:string = 'left-center' ){
     path?.setAttribute("d", this.calculatePath(src,tgt,srcPosition,tgtPosition));
   }
@@ -120,7 +139,7 @@ export class ConnectionMapperComponent implements OnInit {
     }
     return rect;
   }
-  calculatePath(src:Element,tgt:Element,srcPosition:string = 'right-center',tgtPosition:string = 'left-center' ): string{
+  calculatePath(src:Element,tgt:Element,srcPosition:string = 'right-center',tgtPosition:string = 'left-center' ): string {
     const offset:Point = this.calculateOffset();
     if(src && tgt) {
       let srcRect: DOMRect = this.adjustPosition(srcPosition,src.getBoundingClientRect());
@@ -153,7 +172,6 @@ export class ConnectionMapperComponent implements OnInit {
   calculateOffset(): Point {
     return  ConnectionMapperComponent.getAbsoluteOffsetFromBody(document.getElementById(this.containerId));
   }
-
   public static getAbsoluteOffsetFromBody( el: HTMLElement | null ): Point {
     let _x = 0;
     let _y = 0;
@@ -164,7 +182,7 @@ export class ConnectionMapperComponent implements OnInit {
     }
     return { y: -Math.abs(_y), x: -Math.abs(_x) };
   }
-  getConnectionId(connection:Connection) {
+  getConnectionId(connection:Connection): string {
     return connection.src + '-' + connection.tgt;
   }
   editConnection($event: MouseEvent, connection: Connection) {

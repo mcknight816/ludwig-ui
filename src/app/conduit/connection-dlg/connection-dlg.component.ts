@@ -25,7 +25,7 @@ export class ConnectionDlgComponent implements AfterViewInit{
   }
   ngAfterViewInit(): void {
     if(this.connectionMapper){
-      //this.connectionMapper.refresh();
+       //this.connectionMapper.refresh();
     }
   }
   delete() {
@@ -37,7 +37,6 @@ export class ConnectionDlgComponent implements AfterViewInit{
   }
   protected readonly close = close;
   handelEvent(event: JsonTreeEvent) {
-    console.log('received event :' + event.name);
     switch(event.name){
       case 'tree-toggle-event': this.connectionMapper?.refresh(); break;
     }

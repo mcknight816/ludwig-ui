@@ -12,13 +12,13 @@ export class JsonTreeComponent implements AfterContentChecked {
   @Input('key-labels') keyLabels:any;
   @Input('node-class') nodeClass:string = 'node';
   @Input('start-expanded') startExpanded:string = 'recursive';
-  @Output() jsonTreeEventEmitter = new EventEmitter<JsonTreeEvent>();
+  @Output() jsonTreeEventEmitter = new EventEmitter<JsonTreeEvent>(true);
 
   childCount:number = 0;
   constructor(private elm: ElementRef ) {}
 
   handleEvent(event: JsonTreeEvent) {
-    // this.jsonTreeEventEmitter.emit(event);
+      this.jsonTreeEventEmitter.emit(event);
   }
 
   ngAfterContentChecked(): void {

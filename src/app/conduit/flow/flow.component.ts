@@ -38,7 +38,7 @@ export class FlowComponent implements  AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.activities?.changes.subscribe( () => {
-      this.connectionMapper?.refresh();
+       this.connectionMapper?.refresh();
     });
   }
   editFlowActivity($event: MouseEvent, flowActivity: FlowActivity) {
@@ -66,7 +66,7 @@ export class FlowComponent implements  AfterViewInit {
   }
 
   refresh():string {
-    this.connectionMapper?.refresh();
+    this.connectionMapper?.renderConnections();
     return "";
   }
   getActivityById(activityId:string):FlowActivity | null {
@@ -146,7 +146,7 @@ export class FlowComponent implements  AfterViewInit {
   }
 
   onScroll($event: Event) {
-    this.connectionMapper?.refresh();
+    this.connectionMapper?.renderConnections();
   }
 
   dragEnd(event: CdkDragEnd) {

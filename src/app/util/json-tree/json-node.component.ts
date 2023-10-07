@@ -66,10 +66,11 @@ export class JsonNodeComponent implements OnInit {
       this.isExpanded = !this.isExpanded;
       if (this.isExpanded) {
         this.elm.nativeElement.classList.add('expanded');
+        this.shouldRender = true;
       } else {
         this.elm.nativeElement.classList.remove('expanded');
+        this.shouldRender = false;
       }
-      this.shouldRender = true;
       this.jsonNodeEventEmitter.emit({name:'tree-toggle-event',data:{},id:''})
   }
   whatClass():string{
