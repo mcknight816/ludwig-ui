@@ -19,12 +19,21 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+
           "options": {
             "outputPath": "dist/angular-template",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "lodash", "js-file-download", "immutable", "deepmerge", "moment",
+              "minim", "stampit", "process", "brace", "traverse", "zenscroll",
+              "url-parse", "serialize-error", "repeat-string", "redux-immutable",
+              "react-immutable-proptypes", "react-debounce-input", "react-copy-to-clipboard",
+              "randexp", "prop-types", "ieee754", "dompurify", "css.escape","classnames",
+              "base64-js", "@braintree/sanitize-url", "hoist-non-react-statics"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -52,6 +61,8 @@
               "./node_modules/ace-builds/src-min/mode-yaml.js",
               "./node_modules/ace-builds/src-min/worker-json.js",
               "./node_modules/ace-builds/src-min/theme-twilight.js",
+              "./node_modules/swagger-ui-dist/swagger-ui-bundle.js",
+              "./node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js",
               "./node_modules/prismjs/prism.js",
               "./node_modules/prismjs/components/prism-java.min.js",
               "./node_modules/prismjs/components/prism-javascript.min.js",
