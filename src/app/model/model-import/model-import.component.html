@@ -1,0 +1,79 @@
+<mat-toolbar color="accent" >
+  <mat-toolbar-row>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-label> Model Importer</mat-label>
+    <div class="flex-stretch"></div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="back()" class="mat-button">Back</button>
+    <mat-divider [vertical]="true"></mat-divider>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-tab-group>
+  <mat-tab label="From AI">
+    <mat-toolbar color="primary" >
+      <mat-toolbar-row>
+        <mat-form-field class="ai-field" >
+          <input matInput name="ai-description"  [(ngModel)]="aiDescription" placeholder="Describe the model / entity you would like AI to create.">
+        </mat-form-field>
+        <mat-spinner *ngIf="aiRunning" color="warn" [diameter]="32"></mat-spinner>
+        <button (click)="createModelViaAI()"  *ngIf="!aiRunning" class="mat-button">Create From AI</button>
+        <div class="flex-stretch"></div>
+        <button (click)="formatJson()"  class="mat-button">Format</button>
+        <button (click)="unFormatJson()"  class="mat-button">UnFormat</button>
+        <div class="flex-stretch"></div>
+        <button (click)="import()"  class="mat-button">Import</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ace-editor #editor
+                theme="tomorrow"
+                mode="json"
+                style="min-height: 350px; width:100%; font-size:16px;overflow: auto;"
+                value="{{json}}">
+    </ace-editor>
+  </mat-tab>
+  <mat-tab label="From Json">
+    <mat-toolbar color="primary" >
+      <mat-toolbar-row>
+        <mat-form-field class="toolbar-field">
+          <input matInput name="name" [(ngModel)]="name">
+        </mat-form-field>
+        <div class="flex-stretch"></div>
+        <button (click)="formatJson()"  class="mat-button">Format</button>
+        <button (click)="unFormatJson()"  class="mat-button">UnFormat</button>
+        <div class="flex-stretch"></div>
+        <button (click)="import()"  class="mat-button">Import</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ace-editor #editor
+                theme="tomorrow"
+                mode="json"
+                style="min-height: 350px; width:100%; font-size:16px;overflow: auto;"
+                value="{{json}}">
+    </ace-editor>
+  </mat-tab>
+  <mat-tab label="Yaml">
+    <mat-toolbar color="primary" >
+      <mat-toolbar-row>
+        <div class="flex-stretch"></div>
+        <button (click)="importYaml()"  class="mat-button">Import</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ace-editor #yamleditor
+                theme="tomorrow"
+                mode="yaml"
+                style="min-height: 350px; width:100%; font-size:16px;overflow: auto;"
+                value="{{yaml}}">
+    </ace-editor>
+  </mat-tab>
+  <mat-tab label="From Models">
+    <app-model-list [importMode]="true" (onImport)="importModel($event)">
+
+    </app-model-list>
+  </mat-tab>
+ <!-- <mat-tab label="From Apps">
+    <app-app-list [importMode]="true" (onImport)="importModel($event)">
+
+    </app-app-list>
+  </mat-tab>-->
+
+</mat-tab-group>

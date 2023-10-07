@@ -1,0 +1,97 @@
+<mat-toolbar color="accent" >
+  <mat-toolbar-row>
+    <mat-icon fxHide.xs>schema</mat-icon>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-label  *ngIf="!editMode" (click)="toggleEditMode()"> Fields (click to add)</mat-label>
+    <mat-form-field *ngIf="editMode">
+      <input matInput placeholder="Field Name" autofocus (keydown.enter)="addField($event)">
+    </mat-form-field>
+    <button *ngIf="editMode" (click)="addField($event)" class="mat-button">Add</button>
+    <button *ngIf="editMode" (click)="toggleEditMode()" class="mat-button">Done</button>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="flex-stretch"></div>
+
+    <div class="flex-stretch"></div>
+    <mat-divider [vertical]="true"></mat-divider>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-table #table [dataSource]="dataSource"
+           cdkDropList
+           (cdkDropListDropped)="drop($event)"
+           [cdkDropListData]="dataSource" >
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i= index" (click)="editField(i,$event)">
+      <mat-form-field floatLabel="auto" *ngIf="selectedField==i"  (keydown.enter)="selectedField=null" (click)="$event.stopPropagation()">
+        <input matInput autofocus placeholder="Name" [value]="element.name" [(ngModel)]="element.name" maxlength="128"/>
+      </mat-form-field>
+      <div *ngIf="selectedField!=i">
+        {{element.name}}
+      </div>
+    </mat-cell>
+  </ng-container>
+  <!-- Type Column -->
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+    <mat-cell *matCellDef="let element;let i= index" (click)="editField(i,$event)">
+      <mat-form-field floatLabel="auto" *ngIf="selectedField==i" (change)="selectedField=null" (click)="$event.stopPropagation()">
+        <mat-select [(value)]="element.type" placeholder="Type">
+           <mat-option *ngFor="let type of this.types" [value]="type">{{type}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="selectedField!=i">
+        {{element.type}}
+      </div>
+    </mat-cell>
+  </ng-container>
+  <!-- @Id annotation -->
+  <ng-container matColumnDef="primary">
+    <mat-header-cell *matHeaderCellDef>id</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i= index">
+      <mat-checkbox (change)="changePrimary(i,$event)" [checked]="element.primary"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <!-- List<T> type -->
+  <ng-container matColumnDef="list">
+    <mat-header-cell *matHeaderCellDef>list</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i= index">
+      <mat-checkbox (change)="changeList(i,$event)" [checked]="element.list"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <!-- @NotNull annotation -->
+  <ng-container matColumnDef="notNull">
+    <mat-header-cell *matHeaderCellDef>Not Null</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i= index">
+      <mat-checkbox (change)="changeNotNull(i,$event)"  [checked]="element.notNull"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <!-- @JsonIgnore annotaion -->
+  <ng-container matColumnDef="ignore">
+    <mat-header-cell *matHeaderCellDef>Json Ignore</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i= index">
+      <mat-checkbox (change)="changeIgnore(i,$event)" [checked]="element.ignore"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+    <mat-cell *matCellDef="let element;let i= index">
+       <!-- <button (click)="delete(i)" class="mat-button">Remove</button> -->
+      <button mat-icon-button (click)="$event.stopPropagation();" [matMenuTriggerFor]="field_menu" aria-label="Action menu selection">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu xPosition="before"  #field_menu="matMenu">
+        <button  class="action-menu" (click)="delete(i)" mat-menu-item>
+          <mat-icon color="accent">delete</mat-icon>
+          Remove
+        </button>
+      </mat-menu>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="getDisplayedColumns()"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: getDisplayedColumns()" (click)="selectedField=null" cdkDrag></mat-row>
+</mat-table>
+

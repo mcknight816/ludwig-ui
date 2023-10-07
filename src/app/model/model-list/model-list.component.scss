@@ -1,0 +1,15 @@
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+span {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+table {
+  width: 100%;
+}
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  border-bottom-width: 0;
+}

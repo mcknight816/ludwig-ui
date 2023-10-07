@@ -1,0 +1,41 @@
+<mat-toolbar color="accent" >
+  <mat-toolbar-row>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-label> Model</mat-label>
+    <div class="flex-stretch"></div>
+    <mat-progress-bar class="download-progress-bar" *ngIf="waiting" mode="query"></mat-progress-bar>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="back()" mat-button mat-stroked-button>Back</button>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="save()" mat-button mat-stroked-button>Save</button>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button mat-button mat-stroked-button [matMenuTriggerFor]="menu">Download</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="downLoad('mongo')">Mongo</button>
+      <button mat-menu-item (click)="downLoad('postgres')">SQL</button>
+      <button mat-menu-item (click)="downLoad('couch')">Couchbase</button>
+    </mat-menu>
+    <!--<button  (click)="publish()" mat-button mat-stroked-button>Publish</button>-->
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<form fxLayout="column" [formGroup]="form">
+  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" formControlName="name" maxlength="64" placeholder="Model Name"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Package Name</mat-label>
+      <input matInput name="packageName" formControlName="packageName" maxlength="64" placeholder="Package Name"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput name="description" formControlName="description" maxlength="256" placeholder="Model Description"/>
+    </mat-form-field>
+  </div>
+</form>
+ <!--<pre>{{item | json}}</pre>-->
+<app-entity-list    [entities]="item.entities" >
+
+</app-entity-list>

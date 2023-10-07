@@ -1,0 +1,56 @@
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
+span {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+/*.mat-toolbar {
+  min-height: 50px !important;
+  height: 50px !important;
+}*/
+
+.toolbar-field{
+  padding-top: 10px;
+  vertical-align: center;
+  width: 150px;
+}
+.field-count{
+  padding-top: 10px;
+  vertical-align: center;
+  width: 70px;
+}
+.footer{
+  height:50px;
+}
+/*.mat-toolbar-row {
+  min-height: 50px !important;
+  height: 50px !important;
+}
+/*.BigInteger{
+  background-color: orange;
+}
+.Integer{
+  background-color: #5a441a;
+}
+.Long{
+  background-color: #937234;
+}
+.Double{
+  background-color: orangered;
+}
+.String{
+  background-color: green;
+}*/
+/*::ng-deep .mat-form-field-underline {
+  display: none;
+}*/
+
+/*
+.input-row:nth-child(even){
+  background-color: #d0d2cc;
+}
+*/
+

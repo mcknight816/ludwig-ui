@@ -70,6 +70,16 @@
               </span>
           </mat-list-item>
           <mat-divider></mat-divider>
+
+          <mat-list-item>
+            <mat-icon >settings_applications</mat-icon>
+            <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/models'">Models</div>
+            <span fxFlex>
+              </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+
+
            <!-- <mat-list-item>
                 <mat-icon >list</mat-icon>
                 <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/flows'">Flows</div>

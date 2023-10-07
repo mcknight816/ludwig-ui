@@ -1,0 +1,65 @@
+<mat-toolbar  color="accent" *ngIf="!importMode" >
+  <mat-toolbar-row>
+    <mat-divider [vertical]="true"></mat-divider>
+   <mat-label *ngIf="!editMode" (click)="toggleEditMode()">Entities (click to add)</mat-label>
+    <mat-form-field  *ngIf="editMode">
+      <input #entityName matInput placeholder="Entity Name" autofocus (keydown.enter)="addEntity(entityName)">
+      <button (click)="addEntity(entityName)" mat-stroked-button class="mat-button">Add</button>
+      <button (click)="toggleEditMode()" mat-stroked-button class="mat-button">Done</button>
+    </mat-form-field>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="flex-stretch"></div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button  (click)="import()" mat-stroked-button class="mat-button">Import</button>
+    <button  (click)="export()" mat-stroked-button class="mat-button">Export</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-accordion *ngIf="!importMode">
+  <div  *ngFor="let entity of entities; let i=index">
+    <mat-expansion-panel (click)="selectedEntity=null">
+      <mat-expansion-panel-header class="right-aligned-header"  >
+
+        <mat-panel-title class="toolbar-field">
+          <div  (click)="editEntity(i,$event)">
+            <mat-form-field floatLabel="auto" *ngIf="selectedEntity==i"  (keydown.enter)="selectedEntity=null" (click)="$event.stopPropagation()">
+              <input matInput autofocus [(ngModel)]="entities[i]['name']"   maxlength="128"  />
+            </mat-form-field>
+            <div *ngIf="selectedEntity!=i">
+              {{entities[i].name}}
+            </div>
+          </div>
+        </mat-panel-title>
+
+        <mat-panel-description class="field-count">
+          <mat-basic-chip>{{variablesValue(i).length}} fields</mat-basic-chip>
+        </mat-panel-description>
+
+        <mat-panel-description >
+          <button mat-icon-button (click)="$event.stopPropagation();" [matMenuTriggerFor]="entity_menu" aria-label="Action menu selection">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu xPosition="before"  #entity_menu="matMenu">
+            <button  class="action-menu" (click)="removeEntity(i)" mat-menu-item>
+              <mat-icon color="accent">delete</mat-icon>
+              Remove
+            </button>
+          </mat-menu>
+        </mat-panel-description>
+
+      </mat-expansion-panel-header>
+      <app-field-list [dataSource]="variablesValue(i)" [types]="types()">
+      </app-field-list>
+    </mat-expansion-panel>
+  </div>
+  <br>
+  <br>
+</mat-accordion>
+<app-model-import *ngIf="importMode" (onChange)="merge($event)">
+
+</app-model-import>
+
+<div class="footer">
+
+</div>
+

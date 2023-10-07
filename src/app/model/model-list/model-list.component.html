@@ -1,0 +1,110 @@
+<!-- HEADER -->
+<mat-toolbar color="accent" >
+  <mat-toolbar-row>
+    <mat-icon fxHide.xs>schema</mat-icon>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-label fxHide.xs> Models</mat-label>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="flex-stretch"></div>
+    <!-- SEARCH -->
+    <!-- <app-search-input placeholder="Search" (setValue)="filterList($event)"></app-search-input> -->
+    <!-- / SEARCH -->
+    <div class="flex-stretch"></div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="add()" mat-button mat-stroked-button>New</button>
+    <button (click)="import()" mat-button mat-stroked-button>Import</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container>
+  <mat-drawer *ngIf="selection.selected.length >0" mode="side" opened>
+    <mat-toolbar-row >
+      <h1>Actions</h1>
+    </mat-toolbar-row>
+    <mat-nav-list>
+      <mat-list-item>
+        <button *ngIf="importMode" (click)="importSelected()" class="mat-button">Import</button>
+        <button *ngIf="!importMode" (click)="removeSelected()" class="mat-button">Remove</button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <!-- / HEADER -->
+    <mat-table [dataSource]="dataSource">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container  matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element" >{{element.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="owner">
+        <mat-header-cell *matHeaderCellDef>Owner</mat-header-cell>
+        <mat-cell *matCellDef="let element" >{{element.owner}}</mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.description}}</mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="entities">
+        <mat-header-cell *matHeaderCellDef>Count</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.entities.length}} entities</mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="createDate">
+        <mat-header-cell *matHeaderCellDef>Created On</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.createDate  | date:'short'}}</mat-cell>
+      </ng-container>
+      <ng-container  matColumnDef="updateDate">
+        <mat-header-cell *matHeaderCellDef>Last Updated</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.updateDate  | date:'short'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th id="action" mat-header-cell *matHeaderCellDef>Action</th>
+        <td  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
+          <button  mat-icon-button [matMenuTriggerFor]="action_menu" aria-label="Action menu selection">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu xPosition="before"  #action_menu="matMenu">
+            <button  class="action-menu" (click)="rowClicked(element)" mat-menu-item>
+              <mat-icon color="accent">edit</mat-icon>
+              Edit
+            </button>
+            <button (click)="clone(element)"  mat-menu-item>
+              <mat-icon color="accent">redo</mat-icon>
+              Clone
+            </button>
+            <button (click)="export(element)" mat-menu-item>
+              <mat-icon color="accent">download</mat-icon>
+              Export
+            </button>
+            <button (click)="delete(element)" mat-menu-item>
+              <mat-icon color="accent">delete</mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="getDisplayedColumns()"></mat-header-row>
+      <mat-row (click)="rowClicked(row)" *matRowDef="let row; columns: getDisplayedColumns()"></mat-row>
+    </mat-table>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
