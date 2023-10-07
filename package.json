@@ -30,6 +30,8 @@
     "gsap": "^3.12.2",
     "marked": "^4.2.3",
     "moment": "^2.29.4",
+    "lodash": "^4.17.21",
+    "lodash.clonedeep": "^4.5.0",
     "ngx-drag-to-select": "^5.0.1",
     "ng2-ace-editor": "0.3.9",
     "rxjs": "7.4.0",
@@ -38,12 +40,14 @@
     "uuid": "^9.0.1",
     "zone.js": "~0.11.4"
   },
+
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.9",
     "@angular/cli": "^15.2.9",
     "@angular/compiler-cli": "15.2.9",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.20.38",
+    "@types/lodash": "^4.14.50",
     "@types/swagger-ui": "^3.52.2",
     "@types/uuid": "^9.0.4",
     "jasmine-core": "~3.8.0",
