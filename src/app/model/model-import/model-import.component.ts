@@ -1,10 +1,11 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Entity, ModelService} from "../model";
 
 @Component({
   selector: 'app-model-import',
   templateUrl: './model-import.component.html',
-  styleUrls: ['./model-import.component.scss']
+  styleUrls: ['./model-import.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ModelImportComponent implements OnInit {
   @ViewChild("editor") editor:any;

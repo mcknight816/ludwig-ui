@@ -44,9 +44,12 @@
               <mat-icon color="accent">delete</mat-icon>
               Remove
             </button>
+            <button  class="action-menu"  (click)="copySchema(i)" mat-menu-item>
+              <mat-icon color="accent">schema</mat-icon>
+              Copy Schema
+            </button>
           </mat-menu>
         </mat-panel-description>
-
       </mat-expansion-panel-header>
       <app-field-list [dataSource]="variablesValue(i)" [types]="types()">
       </app-field-list>

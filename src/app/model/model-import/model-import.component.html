@@ -9,7 +9,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-tab-group>
-  <mat-tab label="From AI">
+  <!--<mat-tab label="From AI">
     <mat-toolbar color="primary" >
       <mat-toolbar-row>
         <mat-form-field class="ai-field" >
@@ -30,13 +30,11 @@
                 style="min-height: 350px; width:100%; font-size:16px;overflow: auto;"
                 value="{{json}}">
     </ace-editor>
-  </mat-tab>
- <!-- <mat-tab label="From Json">
-    <mat-toolbar color="primary" >
+  </mat-tab>-->
+ <mat-tab label="From Json" >
+    <mat-toolbar color="accent" >
       <mat-toolbar-row>
-        <mat-form-field class="toolbar-field">
-          <input matInput name="name" [(ngModel)]="name">
-        </mat-form-field>
+        <label>From Json</label>
         <div class="flex-stretch"></div>
         <button mat-button (click)="formatJson()"  class="mat-button">Format</button>
         <button mat-button (click)="unFormatJson()"  class="mat-button">UnFormat</button>
@@ -50,7 +48,7 @@
                 style="min-height: 350px; width:100%; font-size:16px;overflow: auto;"
                 value="{{json}}">
     </ace-editor>
-  </mat-tab>-->
+  </mat-tab>
   <!--<mat-tab label="Yaml">
     <mat-toolbar color="primary" >
       <mat-toolbar-row>
@@ -65,7 +63,7 @@
                 value="{{yaml}}">
     </ace-editor>
   </mat-tab>-->
-  <mat-tab label="From Models">
+  <mat-tab   label="From Models" >
     <app-model-list [importMode]="true" (onImport)="importModel($event)">
 
     </app-model-list>

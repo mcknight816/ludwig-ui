@@ -91,4 +91,9 @@ export class ModelService {
     if(!modelType) return of();
     return this.http.get<ModelJson>(this.config.api + "/core/model/create-from-ai/" + modelType);
   }
+
+  entityToSchema(entityName:string,entities: Array<Entity>) : Observable<any>{
+    return this.http.post<any>(this.config.api + "/core/model/entity-to-schema/" + entityName,entities);
+  }
+
 }

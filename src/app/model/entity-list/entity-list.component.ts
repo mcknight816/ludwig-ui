@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Entity, Variable} from "../model";
-
+import {Entity, ModelService, Variable} from "../model";
+import { Clipboard } from '@angular/cdk/clipboard';
 @Component({
   selector: 'app-entity-list',
   templateUrl: './entity-list.component.html',
@@ -13,7 +13,8 @@ export class EntityListComponent implements OnInit {
   selectedEntity:number | null = null;
   editMode: boolean =false;
 
-  constructor() {}
+
+  constructor(private service:ModelService,private clipboard: Clipboard) {}
 
   types():Array<string>{
     let types =  new Array<string>();
@@ -84,5 +85,10 @@ export class EntityListComponent implements OnInit {
 
   private static hasWhiteSpace(value: any):boolean {
     return /\s/g.test(value);
+  }
+
+  copySchema(i: number) {
+    this.service.entityToSchema(this.entities[i].name,this.entities)
+      .subscribe(d => this.clipboard.copy(JSON.stringify(d)));
   }
 }

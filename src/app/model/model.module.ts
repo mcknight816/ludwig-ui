@@ -11,6 +11,7 @@ import {AceEditorModule} from "ng2-ace-editor";
 import {ModelRoutingModule} from "./model-routing.module";
 import {ModelService} from "./model";
 import {ExtendedModule, FlexModule} from "@angular/flex-layout";
+import {Clipboard, ClipboardModule} from "@angular/cdk/clipboard";
 
 
 
@@ -24,8 +25,9 @@ import {ExtendedModule, FlexModule} from "@angular/flex-layout";
     FormsModule,
     AceEditorModule,
     FlexModule,
-    ExtendedModule
+    ExtendedModule,
+    ClipboardModule
   ],
-  providers: [ ModelService]
+  providers: [ ModelService, Clipboard]
 })
 export class ModelModule { }
