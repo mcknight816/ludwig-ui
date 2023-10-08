@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Entity, ModelService} from "../model";
 
-
 @Component({
   selector: 'app-model-import',
   templateUrl: './model-import.component.html',

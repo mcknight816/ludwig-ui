@@ -4,7 +4,7 @@
     <mat-label> Model Importer</mat-label>
     <div class="flex-stretch"></div>
     <mat-divider [vertical]="true"></mat-divider>
-    <button (click)="back()" class="mat-button">Back</button>
+    <button mat-button (click)="back()" class="mat-button">Back</button>
     <mat-divider [vertical]="true"></mat-divider>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -16,12 +16,12 @@
           <input matInput name="ai-description"  [(ngModel)]="aiDescription" placeholder="Describe the model / entity you would like AI to create.">
         </mat-form-field>
         <mat-spinner *ngIf="aiRunning" color="warn" [diameter]="32"></mat-spinner>
-        <button (click)="createModelViaAI()"  *ngIf="!aiRunning" class="mat-button">Create From AI</button>
+        <button mat-button (click)="createModelViaAI()"  *ngIf="!aiRunning" class="mat-button">Create From AI</button>
         <div class="flex-stretch"></div>
-        <button (click)="formatJson()"  class="mat-button">Format</button>
-        <button (click)="unFormatJson()"  class="mat-button">UnFormat</button>
+        <button mat-button (click)="formatJson()"  class="mat-button">Format</button>
+        <button mat-button (click)="unFormatJson()"  class="mat-button">UnFormat</button>
         <div class="flex-stretch"></div>
-        <button (click)="import()"  class="mat-button">Import</button>
+        <button mat-button (click)="import()"  class="mat-button">Import</button>
       </mat-toolbar-row>
     </mat-toolbar>
     <ace-editor #editor
@@ -31,17 +31,17 @@
                 value="{{json}}">
     </ace-editor>
   </mat-tab>
-  <mat-tab label="From Json">
+ <!-- <mat-tab label="From Json">
     <mat-toolbar color="primary" >
       <mat-toolbar-row>
         <mat-form-field class="toolbar-field">
           <input matInput name="name" [(ngModel)]="name">
         </mat-form-field>
         <div class="flex-stretch"></div>
-        <button (click)="formatJson()"  class="mat-button">Format</button>
-        <button (click)="unFormatJson()"  class="mat-button">UnFormat</button>
+        <button mat-button (click)="formatJson()"  class="mat-button">Format</button>
+        <button mat-button (click)="unFormatJson()"  class="mat-button">UnFormat</button>
         <div class="flex-stretch"></div>
-        <button (click)="import()"  class="mat-button">Import</button>
+        <button mat-button (click)="import()"  class="mat-button">Import</button>
       </mat-toolbar-row>
     </mat-toolbar>
     <ace-editor #editor
@@ -50,8 +50,8 @@
                 style="min-height: 350px; width:100%; font-size:16px;overflow: auto;"
                 value="{{json}}">
     </ace-editor>
-  </mat-tab>
-  <mat-tab label="Yaml">
+  </mat-tab>-->
+  <!--<mat-tab label="Yaml">
     <mat-toolbar color="primary" >
       <mat-toolbar-row>
         <div class="flex-stretch"></div>
@@ -64,7 +64,7 @@
                 style="min-height: 350px; width:100%; font-size:16px;overflow: auto;"
                 value="{{yaml}}">
     </ace-editor>
-  </mat-tab>
+  </mat-tab>-->
   <mat-tab label="From Models">
     <app-model-list [importMode]="true" (onImport)="importModel($event)">
 

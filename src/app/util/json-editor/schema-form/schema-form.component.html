@@ -1,5 +1,5 @@
 
-<div class="dark-mode input-row" [formGroup]="form" >
+<div class="input-row" [formGroup]="form" >
   <div *ngIf="schema?.type ==='object'" style="margin-left: 5px" >
      <!-- <h2>{{schema?.title}}</h2> -->
       <div *ngIf="schema?.properties" fxLayout="row wrap"  fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">

@@ -22,7 +22,7 @@
 
         <mat-panel-title class="toolbar-field">
           <div  (click)="editEntity(i,$event)">
-            <mat-form-field floatLabel="auto" *ngIf="selectedEntity==i"  (keydown.enter)="selectedEntity=null" (click)="$event.stopPropagation()">
+            <mat-form-field   *ngIf="selectedEntity==i"  (keydown.enter)="selectedEntity=null" (click)="$event.stopPropagation()">
               <input matInput autofocus [(ngModel)]="entities[i]['name']"   maxlength="128"  />
             </mat-form-field>
             <div *ngIf="selectedEntity!=i">

@@ -85,7 +85,4 @@ export class EntityListComponent implements OnInit {
   private static hasWhiteSpace(value: any):boolean {
     return /\s/g.test(value);
   }
-
-
-
 }
