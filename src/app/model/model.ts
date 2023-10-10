@@ -8,8 +8,8 @@ export interface Model{
   name: string;
   packageName: string;
   description:string | null;
-  createDate:any | null;
-  updateDate:any | null;
+  createDate:any  | null;
+  updateDate:any  | null;
   entities: Array<Entity>;
 }
 

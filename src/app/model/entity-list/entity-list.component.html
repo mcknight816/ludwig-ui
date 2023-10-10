@@ -1,12 +1,14 @@
 <mat-toolbar  color="accent" *ngIf="!importMode" >
   <mat-toolbar-row>
     <mat-divider [vertical]="true"></mat-divider>
-   <mat-label *ngIf="!editMode" (click)="toggleEditMode()">Entities (click to add)</mat-label>
-    <mat-form-field  *ngIf="editMode">
+
+    <mat-form-field style="margin-top: 20px " appearance="outline">
       <input #entityName matInput placeholder="Entity Name" autofocus (keydown.enter)="addEntity(entityName)">
-      <button (click)="addEntity(entityName)" mat-stroked-button class="mat-button">Add</button>
-      <button (click)="toggleEditMode()" mat-stroked-button class="mat-button">Done</button>
+      <button (click)="addEntity(entityName)" style="height: 54px" mat-stroked-button mat-button matSuffix >Add</button>
     </mat-form-field>
+    <div class="flex-stretch"></div>
+    <mat-label *ngIf="!editMode" (click)="toggleEditMode()">Entities | Objects</mat-label>
+
     <mat-divider [vertical]="true"></mat-divider>
     <div class="flex-stretch"></div>
     <mat-divider [vertical]="true"></mat-divider>

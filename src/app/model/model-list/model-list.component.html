@@ -69,11 +69,11 @@
       </ng-container>
       <ng-container  matColumnDef="createDate">
         <mat-header-cell *matHeaderCellDef>Created On</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.createDate  | date:'short'}}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.createDate * 1000 | date:'short'}}</mat-cell>
       </ng-container>
       <ng-container  matColumnDef="updateDate">
         <mat-header-cell *matHeaderCellDef>Last Updated</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.updateDate  | date:'short'}}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.updateDate * 1000 | date:'short' }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">
         <mat-header-cell id="action" mat-header-cell *matHeaderCellDef>Action</mat-header-cell>

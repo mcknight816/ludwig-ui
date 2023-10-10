@@ -1,16 +1,13 @@
 <mat-toolbar color="accent" >
   <mat-toolbar-row>
-    <mat-icon fxHide.xs>schema</mat-icon>
-    <mat-divider [vertical]="true"></mat-divider>
-    <mat-label  *ngIf="!editMode" (click)="toggleEditMode()"> Fields (click to add)</mat-label>
-    <mat-form-field *ngIf="editMode">
+    <mat-form-field style="margin-top: 20px " appearance="outline">
       <input matInput placeholder="Field Name" autofocus (keydown.enter)="addField($event)">
+      <button  style="height: 54px" (click)="addField($event)" mat-stroked-button mat-button matSuffix>Add</button>
     </mat-form-field>
-    <button *ngIf="editMode" (click)="addField($event)" class="mat-button">Add</button>
-    <button *ngIf="editMode" (click)="toggleEditMode()" class="mat-button">Done</button>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="flex-stretch"></div>
 
+    <mat-label  *ngIf="!editMode" (click)="toggleEditMode()">Fields | Properties</mat-label>
     <div class="flex-stretch"></div>
     <mat-divider [vertical]="true"></mat-divider>
   </mat-toolbar-row>
@@ -22,7 +19,7 @@
            [cdkDropListData]="dataSource" >
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Field Name</mat-header-cell>
     <mat-cell *matCellDef="let element;let i= index" (click)="editField(i,$event)">
       <mat-form-field floatLabel="auto" *ngIf="selectedField==i"  (keydown.enter)="selectedField=null" (click)="$event.stopPropagation()">
         <input matInput autofocus placeholder="Name" [value]="element.name" [(ngModel)]="element.name" maxlength="128"/>
@@ -34,7 +31,7 @@
   </ng-container>
   <!-- Type Column -->
   <ng-container matColumnDef="type">
-    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Field Type</mat-header-cell>
     <mat-cell *matCellDef="let element;let i= index" (click)="editField(i,$event)">
       <mat-form-field floatLabel="auto" *ngIf="selectedField==i" (change)="selectedField=null" (click)="$event.stopPropagation()">
         <mat-select [(value)]="element.type" placeholder="Type">
@@ -48,21 +45,21 @@
   </ng-container>
   <!-- @Id annotation -->
   <ng-container matColumnDef="primary">
-    <mat-header-cell *matHeaderCellDef>id</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Is Primary Id</mat-header-cell>
     <mat-cell *matCellDef="let element;let i= index">
       <mat-checkbox (change)="changePrimary(i,$event)" [checked]="element.primary"></mat-checkbox>
     </mat-cell>
   </ng-container>
   <!-- List<T> type -->
   <ng-container matColumnDef="list">
-    <mat-header-cell *matHeaderCellDef>list</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Is Array</mat-header-cell>
     <mat-cell *matCellDef="let element;let i= index">
       <mat-checkbox (change)="changeList(i,$event)" [checked]="element.list"></mat-checkbox>
     </mat-cell>
   </ng-container>
   <!-- @NotNull annotation -->
   <ng-container matColumnDef="notNull">
-    <mat-header-cell *matHeaderCellDef>Not Null</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Is Required</mat-header-cell>
     <mat-cell *matCellDef="let element;let i= index">
       <mat-checkbox (change)="changeNotNull(i,$event)"  [checked]="element.notNull"></mat-checkbox>
     </mat-cell>
