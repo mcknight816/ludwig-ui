@@ -3,6 +3,7 @@ import {Schema} from "../json-schema-model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FlowConfig} from "../../../config/flow-config.model";
 import {FlowConfigService} from "../../../config/flow-config.service";
+import {AceEditorComponent} from "ng2-ace-editor";
 
 @Component({
   selector: 'schema-form',
@@ -44,5 +45,27 @@ export class SchemaFormComponent implements OnChanges,OnInit{
       return <FormGroup>this.form.get(key);
     }
     return this.form;
+  }
+
+  removeCrLfTab(text:string){
+    return text.replace(/[\n\r\t]/g, "");
+  }
+
+  beautifyJson(json:string){
+    return JSON.stringify(JSON.parse(json),null,'\t');
+  }
+
+
+
+  unFormatJson(editor: AceEditorComponent) {
+    if(editor){
+      editor.value = this.removeCrLfTab(editor?.value);
+    }
+  }
+
+  formatJson(editor: AceEditorComponent) {
+    if(editor){
+      editor.value = this.beautifyJson(editor?.value);
+    }
   }
 }

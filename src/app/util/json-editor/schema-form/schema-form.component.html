@@ -43,4 +43,25 @@
     </mat-form-field>
   </div>
 
+  <div *ngIf="schema?.format && schema?.format === 'json'">
+    <div  style="width:1000px"   >
+      <mat-toolbar color="accent" >
+        <mat-toolbar-row>
+          <label>{{schema?.title}}</label>
+          <div class="flex-stretch"></div>
+          <button mat-button (click)="formatJson(editor)"  class="mat-button">Format</button>
+          <button mat-button (click)="unFormatJson(editor)"  class="mat-button">UnFormat</button>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <ace-editor #editor theme="tomorrow"
+                  formControlName="{{name}}"
+                  mode="json"
+                  style="min-height: 450px; width:100%; font-size:16px;overflow: auto;"
+                  value="{{getValue(schema)}}">
+      </ace-editor>
+    </div>
+
+
+  </div>
+
 </div>
