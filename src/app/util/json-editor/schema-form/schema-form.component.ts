@@ -26,7 +26,11 @@ export class SchemaFormComponent implements OnChanges,OnInit{
   }
   getValue(schema: Schema | undefined): any | undefined {
     if(schema){
-      return schema?.value ?  schema?.value : schema['default'];
+      let val:any = schema.value ? schema.value : schema['default'];
+      if(val && schema.format && schema.format === 'json'){
+          return JSON.stringify(val);
+      }
+      return val;
     }
     return undefined;
   }
@@ -68,4 +72,6 @@ export class SchemaFormComponent implements OnChanges,OnInit{
       editor.value = this.beautifyJson(editor?.value);
     }
   }
+
+
 }

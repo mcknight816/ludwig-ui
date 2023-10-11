@@ -1,10 +1,10 @@
-import {Component, Inject, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FlowActivity} from "../../services/app-model";
 import {ActivityService} from "../../services/activity.service";
 import {Schema} from "../../util/json-editor/json-schema-model";
 import {JsonEditorComponent} from "../../util/json-editor/json-editor.component";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import { FormBuilder, FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-flow-activity-dlg',
   templateUrl: './flow-activity-dlg.component.html',
@@ -36,6 +36,14 @@ export class FlowActivityDlgComponent implements  OnInit {
   save() {
     let flowActivity:FlowActivity = Object.assign({}, this.data,this.form.getRawValue());
     flowActivity.input = Object.assign({}, flowActivity.input,this.jsonEditor?.form?.getRawValue());
+    if( flowActivity.input['payload']){
+      try{
+        flowActivity.input['payload'] = JSON.parse( flowActivity.input['payload']);
+      }catch(e){
+        console.log(e);
+      }
+
+    }
     this.dialog.close( flowActivity);
   }
 }

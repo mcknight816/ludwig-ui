@@ -1,8 +1,8 @@
 
-<div class="input-row" [formGroup]="form" >
-  <div *ngIf="schema?.type ==='object'" style="margin-left: 5px" >
+<div  [formGroup]="form" >
+  <div *ngIf="schema?.type ==='object'" style="padding: 5px" >
      <!-- <h2>{{schema?.title}}</h2> -->
-      <div *ngIf="schema?.properties" fxLayout="row wrap"  fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+      <div *ngIf="schema?.properties" fxLayout="column" fxLayout.lt-sm="column" fxLayoutGap="5px" fxLayoutGap.lt-sm="5px">
         <div *ngFor="let prop of schema?.properties | keyvalue; let i = index;" >
           <schema-form [form]="getFormGroup(name)" [schema]="prop.value" [name]="prop.key"></schema-form>
         </div>
@@ -10,14 +10,14 @@
   </div>
 
   <div *ngIf="schema?.type ==='string' && !schema?.enum && !schema?.format">
-    <mat-form-field color="warn"  fxFlex="0 1 calc(100%)" appearance="outline">
+    <mat-form-field color="warn"  fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <input matInput name="{{name}}" formControlName="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
     </mat-form-field>
   </div>
 
   <div *ngIf="schema?.type ==='string' && schema?.enum && !schema?.format">
-    <mat-form-field color="warn" fxFlex="0 1 calc(100%)" appearance="outline">
+    <mat-form-field color="warn" fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <mat-select formControlName="{{name}}">
         <mat-option *ngFor="let val of schema?.enum" [value]="val">{{val}}</mat-option>
@@ -26,7 +26,7 @@
   </div>
 
   <div *ngIf="schema?.format && schema?.format === 'configChooser'">
-    <mat-form-field color="warn" fxFlex="0 1 calc(100%)" appearance="outline">
+    <mat-form-field color="warn" fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <mat-select formControlName="{{name}}">
         <mat-option *ngFor="let val of getConfigs()" [value]="val.name" >{{val.name}}</mat-option>
@@ -35,7 +35,7 @@
   </div>
 
   <div *ngIf="schema?.format && schema?.format === 'roleChooser'">
-    <mat-form-field color="warn" fxFlex="0 1 calc(100%)" appearance="outline">
+    <mat-form-field color="warn" fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <mat-select formControlName="{{name}}">
         <mat-option *ngFor="let role of roles" value="{{role}}" >{{role}}</mat-option>
@@ -44,7 +44,7 @@
   </div>
 
   <div *ngIf="schema?.format && schema?.format === 'json'">
-    <div  style="width:1000px"   >
+    <div  fxFlex="grow" >
       <mat-toolbar color="accent" >
         <mat-toolbar-row>
           <label>{{schema?.title}}</label>
@@ -55,13 +55,12 @@
       </mat-toolbar>
       <ace-editor #editor theme="tomorrow"
                   formControlName="{{name}}"
+                  text ="object"
                   mode="json"
                   style="min-height: 450px; width:100%; font-size:16px;overflow: auto;"
                   value="{{getValue(schema)}}">
       </ace-editor>
     </div>
-
-
   </div>
 
 </div>
