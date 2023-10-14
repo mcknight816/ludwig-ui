@@ -15,7 +15,7 @@
 </mat-toolbar>
 
 <div id="json-mapper" class="mapper-container">
-  <connection-mapper [connections]="data.connections" container-id="json-mapper" source-selector=".src-node" target-selector=".tgt-node"></connection-mapper>
+  <connection-mapper [connections]="data.connections" [container-height]="getContainerHeight()" container-id="json-mapper" source-selector=".src-node" target-selector=".tgt-node"></connection-mapper>
   <div  fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0px">
       <json-tree class="left" root-name="Source" node-class="src-node"  start-expanded="recursive" (jsonTreeEventEmitter)="handelEvent($event)" [json-object]="data.src" [key-labels]="data.labels" ></json-tree>
       <mat-divider [vertical]="true"></mat-divider>

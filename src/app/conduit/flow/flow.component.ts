@@ -119,7 +119,7 @@ export class FlowComponent implements  AfterViewInit {
         const dialogRef = this.dialog.open(ConnectionDlgComponent, {
           panelClass: 'custom-dialog-container',
           data: {src:this.getSourceActivities($event.connection),tgt:tgtActivity,labels:this.getActivityKeyLabels(),connection:$event.connection,connections:connections},
-          height: '70%',
+          height: '80%',
           width: '60%'
         });
 

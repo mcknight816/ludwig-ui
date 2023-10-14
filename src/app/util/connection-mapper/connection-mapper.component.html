@@ -1,6 +1,5 @@
-<svg id="connections">
+<svg id="connections" [style]="{height:containerHeight}">
   <path  *ngFor="let connection of connections" [id]=getConnectionId(connection) [attr.d]='renderConnection(connection)' (click)="editConnection($event,connection)" class="connection"/>
   <path d='' [id]="this.getContainerPathId()" class="connection-path"/>
-
 </svg>
 <mat-icon [id]="this.getContainerHandleId()" class="drag-handle">radio_button_checked</mat-icon>

@@ -9,7 +9,7 @@ import {
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
 import {JsonTreeEvent} from "../../util/json-tree/event.model";
 import {Connection} from "../../util/connection-mapper/connection.model";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-connection-dlg',
@@ -20,7 +20,7 @@ export class ConnectionDlgComponent implements AfterViewInit{
   @ViewChild(ConnectionMapperComponent) connectionMapper:ConnectionMapperComponent | null = null;
   eventDelete = new EventEmitter(true);
   eventSave = new EventEmitter<Array<Connection>>(true);
-  constructor(@Inject(MAT_DIALOG_DATA) public data:{src:any,tgt:any,labels:any,connection:Connection,connections:Array<Connection>}) {
+  constructor(private dialog:MatDialogRef<ConnectionDlgComponent>,@Inject(MAT_DIALOG_DATA) public data:{src:any,tgt:any,labels:any,connection:Connection,connections:Array<Connection>}) {
 
   }
   ngAfterViewInit(): void {
@@ -47,5 +47,11 @@ export class ConnectionDlgComponent implements AfterViewInit{
   }
 
 
-
+  getContainerHeight() {
+    let container:DOMRect | undefined = document.getElementById(this.dialog.id)?.getBoundingClientRect();
+    if(container){
+      return container.height - 50 + "px";
+    }
+    return "100%";
+  }
 }

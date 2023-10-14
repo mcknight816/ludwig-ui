@@ -9,6 +9,7 @@ import {gsap} from "gsap";
   styleUrls: ['./connection-mapper.component.scss']
 })
 export class ConnectionMapperComponent implements OnInit {
+  @Input('container-height') containerHeight: string = '100%';
   @Input('source-selector') srcSelector: string = '';
   @Input('target-selector') tgtSelector: string = '';
   @Input('container-id') containerId: string = '';
@@ -190,4 +191,6 @@ export class ConnectionMapperComponent implements OnInit {
   editConnection($event: MouseEvent, connection: Connection) {
     this.connectionEvent.emit({event:$event,connection:connection});
   }
+
+
 }
