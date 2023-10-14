@@ -74,6 +74,7 @@ export class FieldListComponent implements OnInit {
     $event.stopPropagation()
   }
   addField(event:any){
+
     let name:string = event.target.value ? event.target.value : 'Untitled' ;
     name = name.replace(/\s/g, "");
     this.dataSource.push({name:name,type:"String",list:false,notNull:false,ignore:false,primary:false,length:null})

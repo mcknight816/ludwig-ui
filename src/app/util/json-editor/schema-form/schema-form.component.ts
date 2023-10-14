@@ -27,7 +27,7 @@ export class SchemaFormComponent implements OnChanges,OnInit{
   getValue(schema: Schema | undefined): any | undefined {
     if(schema){
       let val:any = schema.value ? schema.value : schema['default'];
-      if(val && schema.format && schema.format === 'json'){
+      if(val && schema.format && schema.format === 'json' && val instanceof Object){
           return JSON.stringify(val);
       }
       return val;
@@ -59,8 +59,6 @@ export class SchemaFormComponent implements OnChanges,OnInit{
     return JSON.stringify(JSON.parse(json),null,'\t');
   }
 
-
-
   unFormatJson(editor: AceEditorComponent) {
     if(editor){
       editor.value = this.removeCrLfTab(editor?.value);
@@ -72,6 +70,4 @@ export class SchemaFormComponent implements OnChanges,OnInit{
       editor.value = this.beautifyJson(editor?.value);
     }
   }
-
-
 }

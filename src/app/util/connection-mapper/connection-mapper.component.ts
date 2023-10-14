@@ -36,6 +36,7 @@ export class ConnectionMapperComponent implements OnInit {
   refresh():string {
     this.renderConnections();
     this.registerNodeEndpoints();
+
     return "";
   }
   registerNodeEndpoints(){
@@ -139,12 +140,13 @@ export class ConnectionMapperComponent implements OnInit {
     }
     return rect;
   }
+
   calculatePath(src:Element,tgt:Element,srcPosition:string = 'right-center',tgtPosition:string = 'left-center' ): string {
     const offset:Point = this.calculateOffset();
     if(src && tgt) {
       let srcRect: DOMRect = this.adjustPosition(srcPosition,src.getBoundingClientRect());
       let tgtRect: DOMRect = this.adjustPosition(tgtPosition,tgt.getBoundingClientRect());
-      return this.getSvgPath(srcRect.x + offset.x ,srcRect.y + offset.y ,tgtRect.x + offset.x  ,tgtRect.y + offset.y );
+      return this.getSvgPath(srcRect.x + offset.x,srcRect.y + offset.y ,tgtRect.x + offset.x  ,tgtRect.y + offset.y );
     } else {
       console.log("Missing path src or tgt");
     }
@@ -176,8 +178,8 @@ export class ConnectionMapperComponent implements OnInit {
     let _x = 0;
     let _y = 0;
     while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-      _x += el.offsetLeft - el.scrollLeft + el.clientLeft;
-      _y += el.offsetTop - el.scrollTop + el.clientTop;
+      _x += el.offsetLeft + el.clientLeft;
+      _y += el.offsetTop + el.clientTop;
       el = (<HTMLElement>el.offsetParent);
     }
     return { y: -Math.abs(_y), x: -Math.abs(_x) };

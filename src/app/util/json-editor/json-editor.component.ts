@@ -18,14 +18,19 @@ export class JsonEditorComponent implements OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.schema){
-      this.handleSchema(this.schema,this.form,null);
-      let formData:any = Object.assign({},this.form.getRawValue());
-      Object.keys(formData).forEach(key=> {
-        if(key === 'payload' && this.data[key] && this.data[key] instanceof Object){
-          formData[key]=JSON.stringify(this.data[key]);
-        } else{
-          formData[key]=this.data[key];
+     if(changes.schema){
+       this.refreshForm();
+     }
+  }
+  refreshForm(){
+    if(this.schema) {
+      this.handleSchema(this.schema, this.form, null);
+      let formData: any = Object.assign({}, this.form.getRawValue());
+      Object.keys(formData).forEach(key => {
+        if (key === 'payload' && this.data[key] && this.data[key] instanceof Object) {
+          formData[key] = JSON.stringify(this.data[key]);
+        } else {
+          formData[key] = this.data[key];
         }
       });
       this.form.setValue(formData);
@@ -59,12 +64,11 @@ export class JsonEditorComponent implements OnChanges{
   }
   private handleString(schema:Schema,form:FormGroup,key:string | null) {
     if(key && form) {
-      if(schema.format && schema.format === 'json'){
+      if(schema.format && schema.format === 'json' && schema.value instanceof Object ){
         form.addControl(key, new FormControl(JSON.parse(schema.value)));
       } else {
         form.addControl(key, new FormControl(schema.value));
       }
-
     }
   }
 

@@ -145,8 +145,8 @@ export class FlowComponent implements  AfterViewInit {
     }
   }
 
-  onScroll($event: Event) {
-    this.connectionMapper?.renderConnections();
+  onScroll($event: any) {
+  //  this.connectionMapper?.renderConnections();
   }
 
   dragEnd(event: CdkDragEnd) {

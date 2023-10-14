@@ -1,8 +1,8 @@
 <mat-toolbar color="accent" >
   <mat-toolbar-row>
     <mat-form-field style="margin-top: 20px " appearance="outline">
-      <input matInput placeholder="Field Name" autofocus (keydown.enter)="addField($event)">
-      <button  style="height: 54px" (click)="addField($event)" mat-stroked-button mat-button matSuffix>Add</button>
+      <input matInput placeholder="Field Name" autofocus (keydown.enter)="addField($event)" #fieldValue>
+      <button  style="height: 54px" (click)="addField({target:fieldValue})" mat-stroked-button mat-button matSuffix>Add</button>
     </mat-form-field>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="flex-stretch"></div>
@@ -21,7 +21,7 @@
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Field Name</mat-header-cell>
     <mat-cell *matCellDef="let element;let i= index" (click)="editField(i,$event)">
-      <mat-form-field floatLabel="auto" *ngIf="selectedField==i"  (keydown.enter)="selectedField=null" (click)="$event.stopPropagation()">
+      <mat-form-field style="margin-top: 20px " floatLabel="auto" *ngIf="selectedField==i"  (keydown.enter)="selectedField=null" (click)="$event.stopPropagation()">
         <input matInput autofocus placeholder="Name" [value]="element.name" [(ngModel)]="element.name" maxlength="128"/>
       </mat-form-field>
       <div *ngIf="selectedField!=i">
@@ -31,10 +31,10 @@
   </ng-container>
   <!-- Type Column -->
   <ng-container matColumnDef="type">
-    <mat-header-cell *matHeaderCellDef>Field Type</mat-header-cell>
+    <mat-header-cell  *matHeaderCellDef>Field Type</mat-header-cell>
     <mat-cell *matCellDef="let element;let i= index" (click)="editField(i,$event)">
-      <mat-form-field floatLabel="auto" *ngIf="selectedField==i" (change)="selectedField=null" (click)="$event.stopPropagation()">
-        <mat-select [(value)]="element.type" placeholder="Type">
+      <mat-form-field style="margin-top: 20px;min-width: 200px" floatLabel="auto" *ngIf="selectedField==i" (change)="selectedField=null" (click)="$event.stopPropagation()">
+        <mat-select  style="min-width: 200px"  [(value)]="element.type" placeholder="Type">
            <mat-option *ngFor="let type of this.types" [value]="type">{{type}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -89,6 +89,6 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="getDisplayedColumns()"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: getDisplayedColumns()" (click)="selectedField=null" cdkDrag></mat-row>
+  <mat-row style="max-height: 60px" *matRowDef="let row; columns: getDisplayedColumns()" (click)="selectedField=null" cdkDrag></mat-row>
 </mat-table>
 
