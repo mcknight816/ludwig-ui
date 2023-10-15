@@ -16,6 +16,12 @@
   </div>
   <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
     <mat-form-field color="accent"  appearance="outline" cdkFocusInitial>
+      <mat-label>Security (jwkUri)</mat-label>
+      <input matInput name="jwkUri" formControlName="jwkUri" placeholder="Jwk Uri"/>
+    </mat-form-field>
+  </div>
+  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+    <mat-form-field color="accent"  appearance="outline" cdkFocusInitial>
       <mat-label>Description</mat-label>
       <input matInput type='text' name="description" formControlName="description" placeholder="Description"/>
     </mat-form-field>

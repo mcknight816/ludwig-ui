@@ -23,6 +23,7 @@ export class ApplicationService {
   }
 
   save(model: Application):Observable<Application>{
+    console.log(model);
     return this.http.post<Application>(this.config.api + "/core/application", model);
   }
 

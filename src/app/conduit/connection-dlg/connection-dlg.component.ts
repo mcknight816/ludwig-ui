@@ -45,8 +45,6 @@ export class ConnectionDlgComponent implements AfterViewInit{
     console.log('scrolling');
     this.connectionMapper?.refresh();
   }
-
-
   getContainerHeight() {
     let container:DOMRect | undefined = document.getElementById(this.dialog.id)?.getBoundingClientRect();
     if(container){

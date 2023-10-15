@@ -3,6 +3,7 @@ export interface Application {
   name:string;
   description:string,
   path:string,
+  jwkUri:string,
   flows:Array<Flow>;
 }
 

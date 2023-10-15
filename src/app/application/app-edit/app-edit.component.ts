@@ -20,6 +20,7 @@ export class AppEditComponent implements OnInit {
     return this.fb.group({
       "name": [this.data?.name],
       "path": [this.data?.path],
+      "jwkUri": [this.data?.jwkUri],
       "description": [this.data?.description],
     });
   }

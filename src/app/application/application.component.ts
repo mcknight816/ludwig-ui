@@ -26,7 +26,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   add() {
-    this.openAppDialog({id:null,name:'',description:'',path:'',flows:[]});
+    this.openAppDialog({id:null,name:'',description:'',path:'',flows:[],jwkUri:''});
   }
 
   editFlows(app: Application) {
@@ -36,7 +36,7 @@ export class ApplicationComponent implements OnInit {
 
   openAppDialog(app:Application){
    this.dialog.open(AppEditComponent, {
-      data: app, height: '40%', width: '40%'
+      data: app, height: '60%', width: '40%'
     }).afterClosed().subscribe(d=>{
       this.service.save(d).subscribe(a=>{
         this.refreshApps();
