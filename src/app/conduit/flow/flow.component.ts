@@ -8,12 +8,12 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {Connection, ConnectionMap, ConnectionPath, Flow, FlowActivity} from "../../services/app-model";
+import {Connection, ConnectionMap, Flow, FlowActivity} from "../../services/app-model";
 
 import {ConnectionDlgComponent} from "../connection-dlg/connection-dlg.component";
 import {FlowActivityDlgComponent} from "../flow-activity-dlg/flow-activity-dlg.component";
 import {ConnectionMapperComponent} from "../../util/connection-mapper/connection-mapper.component";
-import {CdkDragEnd, Point} from "@angular/cdk/drag-drop";
+import {CdkDragEnd, CdkDragStart, Point} from "@angular/cdk/drag-drop";
 import {FlowIcons} from "../flow-icons";
 import {SelectContainerComponent} from "ngx-drag-to-select";
 import {MatDialog} from "@angular/material/dialog";
@@ -32,7 +32,8 @@ export class FlowComponent implements  AfterViewInit {
 
   protected readonly FlowIcons = FlowIcons;
   selectedFlowActivities:Array<FlowActivity> = [];
-  disableDrag:boolean = true;
+  disableDrag: boolean = true;
+  selectOnClick: boolean = true;
   constructor(public dialog: MatDialog) {
 
   }
@@ -145,10 +146,6 @@ export class FlowComponent implements  AfterViewInit {
     }
   }
 
-  onScroll($event: any) {
-  //  this.connectionMapper?.renderConnections();
-  }
-
   dragEnd(event: CdkDragEnd) {
     let flowActivity:FlowActivity = event.source.data;
     let freePos:Point = event.source.getFreeDragPosition();
@@ -167,8 +164,8 @@ export class FlowComponent implements  AfterViewInit {
       }
     }
     event.source.reset();
-  }
 
+  }
   @HostListener('window:keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     if(event.key === "Delete"){
@@ -211,7 +208,6 @@ export class FlowComponent implements  AfterViewInit {
       });
     }
   }
-
   mouseDown(event: MouseEvent) {
     if(event.ctrlKey){
       this.selectContainer?.update();
@@ -222,11 +218,24 @@ export class FlowComponent implements  AfterViewInit {
     if(event.ctrlKey){
       this.selectContainer?.update();
       this.disableDrag = true;
-
-    } else {
-      this.selectContainer?.deselectItems(()=> true);
-      this.selectContainer?.clearSelection();
-      Array.from(document.getElementsByClassName('dts-range-start')).forEach(i=> i.classList.remove('dts-range-start'));
     }
+  }
+  selectActivity(flowActivity: FlowActivity) {
+    // show right sidebar ?
+  }
+  getConnections(): Array<Connection>{
+    if(this.flow && this.flow.connections){
+      return this.flow.connections;
+    }
+    return [];
+  }
+  getFlowActivities(): Array<FlowActivity> {
+    if(this.flow && this.flow.activities){
+      return this.flow.activities;
+    }
+    return [];
+  }
+  dragStart($event: CdkDragStart) {
+    this.disableDrag = true;
   }
 }

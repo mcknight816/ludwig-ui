@@ -17,9 +17,9 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-accordion *ngIf="!importMode">
+<mat-accordion *ngIf="!importMode" >
   <div  *ngFor="let entity of entities; let i=index">
-    <mat-expansion-panel (click)="selectedEntity=null">
+    <mat-expansion-panel (click)="selectedEntity=null"  >
       <mat-expansion-panel-header class="right-aligned-header"  >
 
         <mat-panel-title class="toolbar-field">

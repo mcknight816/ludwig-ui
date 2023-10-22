@@ -27,7 +27,7 @@
       </mat-list-item>
     </mat-nav-list>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content >
     <!-- / HEADER -->
     <mat-table [dataSource]="dataSource">
       <!-- Checkbox Column -->
@@ -101,7 +101,7 @@
           </mat-menu>
         </mat-cell>
       </ng-container>
-      <mat-header-row *matHeaderRowDef="getDisplayedColumns()"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="getDisplayedColumns();sticky: true"></mat-header-row>
       <mat-row (click)="rowClicked(row)" *matRowDef="let row; columns: getDisplayedColumns()"></mat-row>
     </mat-table>
   </mat-drawer-content>

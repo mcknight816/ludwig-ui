@@ -1,43 +1,43 @@
 export interface Application {
-  id:string | null;
-  name:string;
-  description:string,
-  path:string,
-  jwkUri:string,
-  flows:Array<Flow>;
+  id: string | null;
+  name: string;
+  description: string,
+  path: string,
+  jwkUri: string,
+  flows: Array<Flow>;
 }
 
 export interface Flow {
   id: string | null;
-  name:string | null;
-  locked:boolean | null;
-  activities:Array<FlowActivity> | null;
-  connections:Array<Connection> | undefined;
-  connectionMaps:Array<ConnectionMap> | null;
+  name: string | null;
+  locked: boolean | null;
+  activities: Array<FlowActivity> | null;
+  connections: Array<Connection> | undefined;
+  connectionMaps: Array<ConnectionMap> | null;
 }
 
 export interface FlowActivity extends Omit<Activity,'schema' | 'fireAndForget'> {
-  id:string | null;
-  x:number | null;
-  y:number | null;
-  description:string | null;
-  context:string | null;
-  hasError:boolean | null;
+  id: string | null;
+  x: number | null;
+  y: number | null;
+  description: string | null;
+  context: string | null;
+  hasError: boolean | null;
 }
 export interface Connection {
-  src:string | null;
-  tgt:string | null;
+  src: string | null;
+  tgt: string | null;
 }
 export interface ConnectionMap {
-  src:string | null;
-  tgt:string | null;
-  targetPath:ConnectionPath | null;
-  sourcePath:ConnectionPath | null;
+  src: string | null;
+  tgt: string | null;
+  targetPath: ConnectionPath | null;
+  sourcePath: ConnectionPath | null;
 }
 export interface ConnectionPath {
-  flowActivityId:string | null;
-  fieldType:string | null;
-  path:string | null;
+  flowActivityId: string | null;
+  fieldType: string | null;
+  path: string | null;
 }
 
 export interface Activity {
