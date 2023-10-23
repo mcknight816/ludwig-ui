@@ -203,9 +203,7 @@ export class FlowComponent implements  AfterViewInit {
 
   deleteConnectionMaps(con:Connection){
     if (this.flow?.connectionMaps){
-      this.flow.connectionMaps = this.flow?.connectionMaps?.filter(cm => {
-        !cm?.tgt?.startsWith("['" + con.tgt + "']");
-      });
+      this.flow.connectionMaps = this.flow.connectionMaps.filter(cm => !cm?.tgt?.startsWith("['" + con.tgt + "']"));
     }
   }
   mouseDown(event: MouseEvent) {
