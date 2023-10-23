@@ -199,6 +199,7 @@ export class FlowComponent implements  AfterViewInit {
       this.flow.connections = this.flow?.connections.filter(c => c.src !== con.src && c.tgt !== con.tgt);
     }
     this.connectionMapper?.refresh();
+
   }
 
   deleteConnectionMaps(con:Connection){
