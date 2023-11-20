@@ -70,4 +70,6 @@ export class SchemaFormComponent implements OnChanges,OnInit{
       editor.value = this.beautifyJson(editor?.value);
     }
   }
+
+
 }

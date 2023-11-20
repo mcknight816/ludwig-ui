@@ -9,6 +9,13 @@
       </div>
   </div>
 
+  <div *ngIf="schema?.type ==='string' && !schema?.enum && schema?.format === 'password'">
+    <mat-form-field color="warn"  fxFlex="auto" appearance="outline">
+      <mat-label>{{schema?.title}}</mat-label>
+      <input matInput name="{{name}}" formControlName="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
+    </mat-form-field>
+  </div>
+
   <div *ngIf="schema?.type ==='string' && !schema?.enum && !schema?.format">
     <mat-form-field color="warn"  fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
