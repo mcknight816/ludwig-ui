@@ -75,8 +75,8 @@ export class ConduitComponent implements OnInit,AfterViewInit {
     const dialogRef = this.dialog.open(FlowDlgComponent, {
       panelClass: 'custom-dialog-container',
       data: flow,
-      height: '40%',
-      width: '40%'
+      height: '70%',
+      width: '50%'
     });
 
     dialogRef.afterClosed().subscribe(d=>{

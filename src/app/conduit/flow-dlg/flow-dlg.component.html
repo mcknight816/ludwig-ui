@@ -6,8 +6,21 @@
       <mat-label>Name</mat-label>
       <input matInput name="name" formControlName="name" placeholder="Name"/>
     </mat-form-field>
+    <mat-form-field color="warn" appearance="outline">
+      <mat-label> Templates </mat-label>
+      <mat-select  [(value)]="flowTemplate">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let val of flowTemplates" [value]="val">{{val.type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
+
+    <json-editor [schema]="flowTemplate?.schema" [data]="flowTemplate?.context"></json-editor>
+
+
 </mat-dialog-content>
+
+
 <mat-divider [vertical]="true"></mat-divider>
 <mat-dialog-actions >
   <div class="flex-stretch"></div>

@@ -34,6 +34,7 @@ export class ConfigEditComponent implements AfterViewInit  {
     if (configType) {
       this.configType = configType;
       this.activityConfigService.getById(configType).subscribe(c =>{
+        console.log(c);
         this.schema = c.schema;
 
       });

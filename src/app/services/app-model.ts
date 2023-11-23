@@ -15,7 +15,12 @@ export interface Flow {
   connections: Array<Connection> | undefined;
   connectionMaps: Array<ConnectionMap> | null;
 }
-
+export interface FlowTemplate {
+  type: string | null;
+  name: string | null;
+  schema: any;
+  context: any;
+}
 export interface FlowActivity extends Omit<Activity,'schema' | 'fireAndForget'> {
   id: string | null;
   x: number | null;
