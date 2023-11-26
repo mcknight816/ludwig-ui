@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import SwaggerUI from 'swagger-ui';
-import {ApplicationService} from "../../services/application.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OpenApiService} from "../../services/open-api.service";
 @Component({
