@@ -15,7 +15,7 @@ import {AuthService} from "./auth.service";
                 allowedUrls: ['http://localhost:9096/api/v1/',
                   'http://localhost:9094/',
                   'https://saasy-service.bluntsoftware.com/api/v1/',
-                  'https://ludwigservice.bluntsoftware.com'],
+                  'https://ludwig-service.bluntsoftware.com'],
                 sendAccessToken: true
             }
         })
