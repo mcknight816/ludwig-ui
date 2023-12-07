@@ -50,7 +50,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <executions>
-                    <execution>
+                    <!--<execution>
                         <id>running npm install</id>
                         <phase>compile</phase>
                         <goals>
@@ -58,13 +58,13 @@
                         </goals>
                         <configuration>
                             <executable>npm</executable>
-                            <!--<workingDirectory>${basedir}/${ui-base-dir}</workingDirectory>  -->
+                            &lt;!&ndash;<workingDirectory>${basedir}/${ui-base-dir}</workingDirectory>  &ndash;&gt;
                             <arguments>
                                 <argument>install</argument>
-                              <argument>--force</argument>
+                              <argument>&#45;&#45;force</argument>
                             </arguments>
                         </configuration>
-                    </execution>
+                    </execution>-->
                     <execution>
                         <id>running ng build --production</id>
                         <phase>compile</phase>
