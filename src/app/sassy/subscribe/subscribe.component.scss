@@ -1,0 +1,46 @@
+@use '@angular/material' as mat;
+
+
+.title {
+  line-height: 32px;
+  font-size: 32px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 24px;
+  margin-top: 24px;
+  padding: 0 16px;
+}
+.features{
+  text-align:left;
+}
+.pricing-option {
+  height: 250px;
+  width: 400px;
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  background-color: rgba(64, 96, 19, 0.24);
+  float: left;
+  padding: 15px;
+  margin: 15px;
+  text-align: center;
+}
+.pricing-option:hover {
+  border: 2px solid #ad7021;
+  background-color: rgba(96, 54, 19, 0.24);
+
+}
+.price{
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.price b{
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.pricing-table {
+  padding: 10px;
+  display: table;
+  width: 100%;
+}

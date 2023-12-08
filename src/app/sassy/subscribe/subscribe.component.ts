@@ -8,6 +8,7 @@ import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-subscribe',
+  styleUrls: ['./subscribe.component.scss'],
   templateUrl: './subscribe.component.html'
 })
 export class SubscribeComponent implements OnInit {
@@ -48,6 +49,11 @@ export class SubscribeComponent implements OnInit {
 
     }
 
+    subscribe(){
+      this.service.pay(this.subscription).subscribe(()=>{
+        this.router.navigate(['/dashboards/project']).then();
+      });
+    }
     pay(nonce:Nonce) {
         this.subscription.planId = nonce.planId;
         this.subscription.nonce = nonce.nonce;
