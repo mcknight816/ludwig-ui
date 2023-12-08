@@ -20,6 +20,7 @@ export class PricingPlanComponent implements OnInit {
   }
 
   subscribe(plan:Plan) {
-      this.router.navigateByUrl('/subscribe/' + plan.planId);
+     // this.router.navigateByUrl('/subscribe/' + plan.planId).then();
+
   }
 }

@@ -1,8 +1,7 @@
 @use '@angular/material' as mat;
-//@import "../../../styles.scss";
+
 
 .title {
-
   line-height: 32px;
   font-size: 32px;
   font-weight: 300;
@@ -14,123 +13,46 @@
 .features{
   text-align:left;
 }
-// variables
-//$icon-size: 3rem;
-//$icon-color: #D8D8D8;
-//$main-color: mat.get-color-from-palette($mat-accent-palette,500);
+.pricing-option {
+  height: 250px;
+  width: 200px;
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  background-color: rgba(64, 96, 19, 0.24);
+  float: left;
+  padding: 15px;
+  margin: 15px;
+  text-align: center;
+}
+.pricing-option:hover {
+  border: 2px solid #ad7021;
+  background-color: rgba(96, 54, 19, 0.24);
 
-// Pricing table
+}
+.price{
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.price b{
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 400;
+}
 .pricing-table {
-
   padding: 10px;
-
   display: table;
   width: 100%;
-  .pricing-option {
-    width: 28%;
-
-    float: left;
-    padding: 2%;
-    text-align: center;
-    transition: all .3s ease-in-out;
-    &:nth-child(even) {
-      margin: 0 2%;
-    }
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0px 2px 30px rgba(0,0,0,0.3);
-      transform: scale(1.04);
-      i, h1, span, b {
-   //     color: $main-color;
-      }
-      .front {
-        opacity: 0;
-        visibility: hidden;
-      }
-      .back {
-        opacity: 1 !important;
-        visibility: visible !important;
-        a.button {
-          transform: translateY(0px) !important;
-        }
-      }
-    }
-    hr {
-      border:none;
-      border-bottom: 1px solid #F0F0F0;
-    }
-    i {
- //     font-size: $icon-size;
-  //    color: $icon-color;
-      transition: all .3s ease-in-out;
-    }
-    h1 {
-      margin: 10px 0;
-      transition: all .3s ease-in-out;
-    }
-    p {
-      color: #999;
-      padding: 0 10px;
-      line-height: 1.3;
-    }
-    .price {
-      position: relative;
-      .front {
-        span.price {
-          font-size: 2rem;
-          text-transform: uppercase;
-          margin-top: 20px;
-          display: block;
-          font-weight: 700;
-          position: relative;
-          b {
-            position: absolute;
-            font-size: 1rem;
-            margin-left: 2px;
-            font-weight: 600;
-          }
-        }
-      }
-      .back {
-        opacity: 0;
-        visibility: hidden;
-        transition: all .3s ease-in-out;
-        a.button {
-  //        background: $main-color;
-          padding: 15px 20px;
-          display: inline-block;
-          text-decoration: none;
-          color: white;
-          position: absolute;
-          font-size: 13px;
-          top: -5px;
-          left: 0;
-          right: 0;
-          height:32px;
-          width: 150px;
-          margin: auto;
-          text-transform: uppercase;
-          transform: translateY(20px);
-          transition: all .3s ease-in-out;
-          &:hover {
-    //        background: darken($main-color, 10%);
-          }
-        }
-      }
-    }
-  }
 }
+
+
+
 
 
 // Responsive
 @media screen and (max-width: 600px) {
-  .pricing-table {
     .pricing-option {
       padding: 5%;
-      width: 90%;
-      &:nth-child(even) {
-        margin: 30px 0 !important;
-      }
+      width: 75%;
     }
-  }
 }

@@ -4,20 +4,17 @@
   <div class="pricing-option" *ngFor="let plan of plans">
     <i class="material-icons">important_devices</i>
     <h1>{{plan.name}}</h1>
-    <hr />
+    <span>
+      <div class="price">$ {{plan.monthly}}
+       <b> /month</b>
+        </div>
+    </span>
+
     <p>{{plan.description}}</p>
+    <mat-divider [vertical]="true"></mat-divider>
     <ul class="features">
       <li *ngFor="let feature of plan.features">{{feature}}</li>
     </ul>
-    <hr />
-    <div class="price">
-      <div class="front">
-        <span class="price">$ {{plan.monthly}} <b> /month</b></span>
-      </div>
-      <div class="back">
-        <a (click)="subscribe(plan)" class="button">{{plan.buttonTitle}}</a>
-      </div>
-    </div>
   </div>
 </div>
 
