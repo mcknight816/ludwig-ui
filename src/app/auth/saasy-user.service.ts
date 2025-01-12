@@ -31,16 +31,12 @@ export class SaasyUserService {
         return this._httpClient.get<any>(environment.saasy + '/' + environment.appId + '/headers');
     }
 
-    listTenantUsers(tenantId: string | null): Observable<Array<SaasyUser>> {
-        const params = new HttpParams();
-        if(tenantId != null){
-          params.set('tenantId',tenantId);
-        }
-        return this._httpClient.get<Array<SaasyUser>>(environment.saasy + '/' + environment.appId + '/tenant-user/search',{params});
+    listTenantUsers(): Observable<Array<SaasyUser>> {
+        return this._httpClient.get<Array<SaasyUser>>(environment.saasy + '/' + environment.appId + '/' + SaasyService.getTenant().id + '/tenant-user/search');
     }
 
     saveTenantUser(saasyUser: SaasyUser): Observable<SaasyUser> {
-        return this._httpClient.post<SaasyUser>(environment.saasy + '/' + environment.appId + '/tenant-user/' + SaasyService.getTenant().id, saasyUser).pipe(switchMap((su)=>{
+        return this._httpClient.post<SaasyUser>(environment.saasy + '/' + environment.appId + '/' + SaasyService.getTenant().id + '/tenant-user/' , saasyUser).pipe(switchMap((su)=>{
             return of(su);
         }));
     }

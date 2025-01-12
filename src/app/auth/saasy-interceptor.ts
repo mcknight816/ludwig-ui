@@ -15,9 +15,11 @@ export class SaasyInterceptor implements HttpInterceptor {
     private isValidUrl(url: string): boolean {
         return !!this.moduleConfig?.resourceServer?.allowedUrls?.find(u => url.startsWith(u));
     }
-    private isPublicPath(url: string): boolean {
-      return url.indexOf('/meta/') > -1 ;// || url.indexOf('/core/') > -1
+
+    private sendTenantId(url: string): boolean {
+      return  !(url.indexOf('/meta/') > -1 || url.indexOf('/saasy/') > -1);
     }
+
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const tenant: IdName = SaasyService.getTenant();
 
@@ -34,13 +36,16 @@ export class SaasyInterceptor implements HttpInterceptor {
         if (sendAccessToken) {
             let token = this.authStorage.getItem('access_token');
             let headers = null;
+
             if(token){
                 let header = 'Bearer ' + token;
                 headers = req.headers.set('Authorization', header);
             }
-            if(TENANT_KEY && !this.isPublicPath(url)){
+
+            if(TENANT_KEY && this.sendTenantId(url)){
                 headers = req.headers.set("tenant-id",TENANT_KEY);
             }
+
             if(headers){
                 req = req.clone({ headers });
             }

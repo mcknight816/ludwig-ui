@@ -45,7 +45,7 @@ export class SettingsTeamComponent implements OnInit {
     }
 
     listTenantUsers(): void{
-        this.saasyUserService.listTenantUsers(SaasyService.getTenant().id).subscribe((users)=>{
+        this.saasyUserService.listTenantUsers().subscribe((users)=>{
             this.members = users;
         });
     }

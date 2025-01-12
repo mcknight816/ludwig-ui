@@ -24,6 +24,37 @@ export class ConnectionMapperComponent implements OnInit {
   constructor() {
   }
 
+  public findClosestConnection(hit: Point): String | null {
+    //alert(hit.x + " , " + hit.y);
+    const tolerance = 20;
+    const svg= document.getElementsByTagName("svg")[0];
+    if(svg){
+      let point = svg.createSVGPoint();
+      const ctm = svg.getScreenCTM();
+      point.x = hit.x - tolerance;
+      point.y = hit.y;
+      if(ctm){
+       point=point.matrixTransform(ctm.inverse());
+        let pathElements =  document.getElementsByTagName("path");
+        //loop through all the path element in svg
+        for (let i = 0; i < pathElements.length; i++) {
+          const pathElement = pathElements[i];
+          if(pathElement){
+             for(let t = 0 - tolerance;t < tolerance ;t++){
+               point.x = point.x + 1;
+              // alert(point.x + " , " + point.y);
+               if(pathElement.isPointInFill( point )){
+                 alert(pathElement.id);
+                 return  pathElement.id;
+               }
+             }
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   getContainerHandleId(): string {
     return this.containerId + '-handle';
   }

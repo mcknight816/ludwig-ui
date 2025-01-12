@@ -60,6 +60,9 @@ export class ConduitComponent implements OnInit,AfterViewInit {
     //this.flowComponentView.onScroll($event);
   }
   addActivity(event: { activity: Activity; location: Point }) {
+
+    const point:Point = {x:event.location.x -350,y:event.location.y -150};
+    let connectionId = this.flowComponentView?.connectionMapper?.findClosestConnection(point);
     let flowActivity:FlowActivity = {...event.activity,...{
         id:uuidv4(),
         x:event.location.x -350,//todo: get offset
