@@ -8,10 +8,10 @@ import {Config} from "./config";
 export class FlowTemplateService {
   constructor(public http: HttpClient,public config:Config ) { }
   list():Observable<Array<FlowTemplate>> {
-    return this.http.get<Array<FlowTemplate>>(this.config.api + "/meta/template");
+    return this.http.get<Array<FlowTemplate>>(this.config.api + "/core/template");
   }
   create(flowTemplate: FlowTemplate):Observable<Flow>{
      flowTemplate.schema = null;
-    return this.http.post<Flow>(this.config.api + "/meta/template", flowTemplate);
+    return this.http.post<Flow>(this.config.api + "/core/template", flowTemplate);
   }
 }

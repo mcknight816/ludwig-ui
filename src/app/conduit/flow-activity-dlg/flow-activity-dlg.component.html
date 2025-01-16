@@ -8,14 +8,16 @@
     </mat-form-field>
   </div>
   <json-editor [schema]="schema" [data]="data.input"></json-editor>
+
 </mat-dialog-content>
+
 <mat-divider [vertical]="true"></mat-divider>
 <mat-dialog-actions >
   <div class="flex-stretch"></div>
   <button mat-button mat-stroked-button class="mat-raised-button" (click)="cancel()">Close</button>
   <button mat-button mat-stroked-button class="mat-raised-button" (click)="save()" >Save</button>
 </mat-dialog-actions>
-
+<pre><code>{{schema | json}}</code></pre>
 
 <!-- <div fxLayout="row" class="dark-mode" >
     <div fxLayout="column" >

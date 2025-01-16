@@ -37,6 +37,8 @@ export class FlowDlgComponent implements OnInit {
     if(this.flowTemplate) {
       this.flowTemplate.context = this.jsonEditor?.form?.getRawValue();
       this.flowTemplateService.create(this.flowTemplate).subscribe(flow=>{
+        console.log("FLOW CREATED FORM TEMPLATE");
+        console.log(flow);
         this.dialog.close( Object.assign({},flow,this.form.getRawValue()));
       });
     } else {

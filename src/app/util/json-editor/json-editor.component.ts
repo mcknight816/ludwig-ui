@@ -66,11 +66,13 @@ export class JsonEditorComponent implements OnChanges{
     if(key && form) {
       if(schema.format && schema.format === 'json' && schema.value instanceof Object ){
         form.addControl(key, new FormControl(JSON.parse(schema.value)));
+      } else if(schema.format && schema.format === 'javascript') {
+        form.addControl(key, new FormControl(schema.value));
       } else {
         form.addControl(key, new FormControl(schema.value));
       }
     }
-  }
+  }//javascript
 
   private handleNumber(schema:Schema,form:FormGroup, key:string | null) {
     console.log('number not handled ' + key);
