@@ -12,7 +12,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   templateUrl: './config-edit.component.html',
   styleUrls: ['./config-edit.component.scss']
 })
-export class ConfigEditComponent implements AfterViewInit , OnInit {
+export class ConfigEditComponent implements OnInit {
   @ViewChild(JsonEditorComponent) jsonEditor:JsonEditorComponent | undefined;
   @Input() flowConfig: FlowConfig | undefined;
   @Input() schema: Schema | undefined;
@@ -25,31 +25,25 @@ export class ConfigEditComponent implements AfterViewInit , OnInit {
     });
   }
 
-  ngAfterViewInit(): void {
-
-  }
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('configId');
     let configType = this.route.snapshot.paramMap.get('configType');
-    this.flowConfig = {name:'',id:null,configClass:configType,config:{ }};
-
 
     if (configType) {
       this.configType = configType;
       this.activityConfigService.getById(configType).subscribe(c =>{
-       // console.log(c);
         this.schema = c.schema;
-        //console.log(this.form.getRawValue());
       });
     }
+
     if (id) {
       this.service.getById(id).subscribe(c =>{
-        console.log(c);
         this.flowConfig = c;
         this.form.get("name")?.setValue(this.flowConfig.name);
         this.jsonEditor?.form.setValue(this.flowConfig.config);
       });
     }
+    //this.flowConfig = {name:'',id:null,configClass:configType,config:{ }};
   }
 
   public save() {
