@@ -43,14 +43,14 @@ export class ConfigEditComponent implements OnInit {
         this.jsonEditor?.form.setValue(this.flowConfig.config);
       });
     }
-    //this.flowConfig = {name:'',id:null,configClass:configType,config:{ }};
   }
 
   public save() {
-    this.flowConfig = Object.assign({}, this.flowConfig,this.form.getRawValue());
+    this.flowConfig = Object.assign({}, { id:this.flowConfig?.id,configClass:this.configType },this.form.getRawValue());
     if(this.flowConfig){
       this.flowConfig.config = this.jsonEditor?.form.getRawValue();
       this.service.save(this.flowConfig).subscribe((c)=>{
+        this.flowConfig = c;
         this.back();
       });
     }
@@ -59,6 +59,4 @@ export class ConfigEditComponent implements OnInit {
   public back(){
     this.router.navigate(['/config']).then();
   }
-
-
 }
