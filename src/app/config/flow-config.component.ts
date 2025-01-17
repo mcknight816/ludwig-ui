@@ -20,7 +20,6 @@ export class FlowConfigComponent {
   dataSource:Array<FlowConfig>  = [];
 
   tableColumns = [
-
     'name',
     'configClass',
     'action'

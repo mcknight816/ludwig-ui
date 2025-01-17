@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FlowConfigService} from "../flow-config.service";
 import {Schema} from "../../util/json-editor/json-schema-model";
@@ -12,7 +12,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   templateUrl: './config-edit.component.html',
   styleUrls: ['./config-edit.component.scss']
 })
-export class ConfigEditComponent implements AfterViewInit  {
+export class ConfigEditComponent implements AfterViewInit , OnInit {
   @ViewChild(JsonEditorComponent) jsonEditor:JsonEditorComponent | undefined;
   @Input() flowConfig: FlowConfig | undefined;
   @Input() schema: Schema | undefined;
@@ -31,12 +31,15 @@ export class ConfigEditComponent implements AfterViewInit  {
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('configId');
     let configType = this.route.snapshot.paramMap.get('configType');
+    this.flowConfig = {name:'',id:null,configClass:configType,config:{ }};
+
+
     if (configType) {
       this.configType = configType;
       this.activityConfigService.getById(configType).subscribe(c =>{
-        console.log(c);
+       // console.log(c);
         this.schema = c.schema;
-
+        //console.log(this.form.getRawValue());
       });
     }
     if (id) {
@@ -46,8 +49,6 @@ export class ConfigEditComponent implements AfterViewInit  {
         this.form.get("name")?.setValue(this.flowConfig.name);
         this.jsonEditor?.form.setValue(this.flowConfig.config);
       });
-    } else {
-      this.flowConfig = {name:'',id:null,configClass:configType,config:{ }};
     }
   }
 
