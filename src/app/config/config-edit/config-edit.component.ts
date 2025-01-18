@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FlowConfigService} from "../flow-config.service";
 import {Schema} from "../../util/json-editor/json-schema-model";
 import {ActivityConfigService} from "../activity-config.service";
-import {FlowConfig} from "../flow-config.model";
+import {ConfigTestResult, FlowConfig} from "../flow-config.model";
 import {JsonEditorComponent} from "../../util/json-editor/json-editor.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
@@ -17,6 +17,7 @@ export class ConfigEditComponent implements OnInit {
   @Input() flowConfig: FlowConfig | undefined;
   @Input() schema: Schema | undefined;
 
+  configTest: ConfigTestResult = {error:false,warning:false,success:false,message:'No Message',hint:''};
   configType: string = '';
   form:FormGroup;
   constructor(private fb: FormBuilder, private service:FlowConfigService, private activityConfigService: ActivityConfigService, private router: Router, private route: ActivatedRoute) {
@@ -56,7 +57,20 @@ export class ConfigEditComponent implements OnInit {
     }
   }
 
+
+
   public back(){
     this.router.navigate(['/config']).then();
+  }
+
+  testConfig() {
+    this.flowConfig = Object.assign({}, { id:this.flowConfig?.id,configClass:this.configType },this.form.getRawValue());
+    console.log(this.form.getRawValue());
+    if(this.flowConfig){
+      this.flowConfig.config = this.jsonEditor?.form.getRawValue();
+      this.activityConfigService.test(this.flowConfig).subscribe((c)=>{
+         this.configTest = c;
+      });
+    }
   }
 }

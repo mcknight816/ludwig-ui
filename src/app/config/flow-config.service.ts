@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Config} from "../services/config";
 import {Observable} from "rxjs";
 import {Page} from "../services/page";
-import {FlowConfig} from "./flow-config.model";
+import {ConfigTestResult, FlowConfig} from "./flow-config.model";
 
 @Injectable()
 export class FlowConfigService {
@@ -33,4 +33,6 @@ export class FlowConfigService {
   removeById(id: string | null): Observable<FlowConfig>{
     return this.http.delete<FlowConfig>(this.config.api + "/core/config/" + id);
   }
+
+
 }

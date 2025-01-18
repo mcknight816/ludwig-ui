@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Config} from "../services/config";
 import {Observable} from "rxjs";
+import {ConfigTestResult, FlowConfig} from "./flow-config.model";
 
 
 @Injectable()
@@ -16,4 +17,7 @@ export class ActivityConfigService {
     return this.http.get<any>(this.config.api + "/meta/config/" + id);
   }
 
+  test(model: FlowConfig): Observable<ConfigTestResult>{
+    return this.http.post<ConfigTestResult>(this.config.api + "/meta/config/test", model);
+  }
 }
