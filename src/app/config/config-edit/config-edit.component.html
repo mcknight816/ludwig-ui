@@ -17,11 +17,11 @@
       <mat-icon *ngIf="configTest.hint" matTooltip="{{configTest.hint}}" style="cursor: pointer; color: #1976d2;" >info</mat-icon>
       <mat-error *ngIf="configTest.error">ERROR: {{configTest.message}}</mat-error>
       <mat-error *ngIf="configTest.warning">WARNING: {{configTest.message}}</mat-error>
-      <mat-label *ngIf="configTest.success">SUCCESS: {{configTest.message}}</mat-label>
+      <mat-label *ngIf="configTest.success" class="success">SUCCESS: {{configTest.message}}</mat-label>
     </div>
 
     <div fxLayout="row wrap"  fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
-      <mat-form-field color="warn"  fxFlex="0 1 calc(100%)" appearance="outline">
+      <mat-form-field color="accent"  fxFlex="0 1 calc(100%)" appearance="outline">
         <mat-label>Config Name</mat-label>
         <input matInput name="name" formControlName="name" placeholder="Config Name"/>
         <button (click)="testConfig()" style="height: 54px" mat-stroked-button mat-button matSuffix>Test</button>

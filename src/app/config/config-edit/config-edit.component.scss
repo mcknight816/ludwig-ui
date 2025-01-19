@@ -4,6 +4,10 @@ form{
 .messages {
   padding-bottom: 20px;
 }
+.messages .success {
+  color: green;
+}
+
 mat-form-field{
   width:95vw
 }

@@ -10,21 +10,21 @@
   </div>
 
   <div *ngIf="schema?.type ==='string' && !schema?.enum && schema?.format === 'password'">
-    <mat-form-field color="warn"  fxFlex="auto" appearance="outline">
+    <mat-form-field color="accent"  fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <input matInput name="{{name}}" formControlName="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
     </mat-form-field>
   </div>
 
   <div *ngIf="schema?.type ==='string' && !schema?.enum && !schema?.format">
-    <mat-form-field color="warn"  fxFlex="auto" appearance="outline">
+    <mat-form-field color="accent"  fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <input matInput name="{{name}}" formControlName="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
     </mat-form-field>
   </div>
 
   <div *ngIf="schema?.type ==='string' && schema?.enum && !schema?.format">
-    <mat-form-field color="warn" fxFlex="auto" appearance="outline">
+    <mat-form-field color="accent" fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <mat-select formControlName="{{name}}">
         <mat-option *ngFor="let val of schema?.enum" [value]="val">{{val}}</mat-option>
@@ -33,7 +33,7 @@
   </div>
 
   <div *ngIf="schema?.format && schema?.format === 'configChooser'">
-    <mat-form-field color="warn" fxFlex="auto" appearance="outline">
+    <mat-form-field color="accent" fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <mat-select formControlName="{{name}}">
         <mat-option *ngFor="let val of getConfigs()" [value]="val.name" >{{val.name}}</mat-option>
@@ -42,7 +42,7 @@
   </div>
 
   <div *ngIf="schema?.format && schema?.format === 'roleChooser'">
-    <mat-form-field color="warn" fxFlex="auto" appearance="outline">
+    <mat-form-field color="accent" fxFlex="auto" appearance="outline">
       <mat-label>{{schema?.title}}</mat-label>
       <mat-select formControlName="{{name}}">
         <mat-option *ngFor="let role of roles" value="{{role}}" >{{role}}</mat-option>
