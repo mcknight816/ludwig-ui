@@ -16,6 +16,7 @@ export class SchemaFormComponent implements OnChanges,OnInit{
   @Input() form: FormGroup;
   configs:Array<FlowConfig> = [];
   roles:Array<string> = ['Authenticated','Admin','User','Anonymous'];
+  isPasswordVisible: boolean = false;
   constructor(private fb: FormBuilder,private flowConfigService:FlowConfigService) {
     this.form = this.fb.group({});
   }
@@ -34,6 +35,13 @@ export class SchemaFormComponent implements OnChanges,OnInit{
     }
     return undefined;
   }
+
+  onToggle(schema:Schema | undefined): void {
+    if(schema && schema.value) {
+      schema['value'] = !schema.value;
+    }
+  }
+
   getConfigs():Array<FlowConfig> {
     if(this.schema?.meta['configClass']){
       return this.configs.filter(c=>{
@@ -71,5 +79,7 @@ export class SchemaFormComponent implements OnChanges,OnInit{
     }
   }
 
-
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
 }

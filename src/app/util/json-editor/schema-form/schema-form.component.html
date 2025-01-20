@@ -1,5 +1,6 @@
 
 <div  [formGroup]="form" >
+
   <div *ngIf="schema?.type ==='object'" style="padding: 5px" >
      <!-- <h2>{{schema?.title}}</h2> -->
       <div *ngIf="schema?.properties" fxLayout="column" fxLayout.lt-sm="column" fxLayoutGap="5px" fxLayoutGap.lt-sm="5px">
@@ -9,12 +10,31 @@
       </div>
   </div>
 
-  <div *ngIf="schema?.type ==='string' && !schema?.enum && schema?.format === 'password'">
-    <mat-form-field color="accent"  fxFlex="auto" appearance="outline">
-      <mat-label>{{schema?.title}}</mat-label>
-      <input matInput name="{{name}}" formControlName="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
+  <div *ngIf="schema?.type === 'string' && !schema?.enum && schema?.format === 'password'">
+    <mat-form-field fxFlex="auto" appearance="outline">
+      <mat-label>{{ schema?.title }}</mat-label>
+      <input matInput [type]="isPasswordVisible ? 'text' : 'password'" name="{{name}}" formControlName="{{name}}" [value]="getValue(schema)" placeholder="{{schema?.title}}"/>
+      <button mat-icon-button matSuffix matTooltip="{{schema?.description}}" (click)="togglePasswordVisibility()" tabindex="-1" type="button">
+        <mat-icon>{{ isPasswordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
     </mat-form-field>
   </div>
+
+  <!--<div *ngIf="schema?.type ==='boolean' && !schema?.enum && !schema?.format"  fxLayout="column" fxLayoutGap="10px">
+    <mat-form-field color="accent"  fxFlex="auto" appearance="outline">
+      <mat-label>{{schema?.title}}</mat-label>
+      <mat-slide-toggle formControlName="{{name}}" color="primary" [checked]="getValue(schema)" (change)="onToggle(schema)">
+        {{ schema?.title }}
+      </mat-slide-toggle>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="schema?.type ==='number' && !schema?.enum && !schema?.format"  fxLayout="column" fxLayoutGap="10px">
+    <mat-form-field color="accent"  fxFlex="auto" appearance="outline">
+      <mat-label>{{schema?.title}}</mat-label>
+      <input matInput type="number" formControlName = "{{name}}" placeholder="{{ schema?.title }}"/>
+    </mat-form-field>
+  </div>-->
 
   <div *ngIf="schema?.type ==='string' && !schema?.enum && !schema?.format">
     <mat-form-field color="accent"  fxFlex="auto" appearance="outline">

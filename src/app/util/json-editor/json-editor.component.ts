@@ -22,10 +22,14 @@ export class JsonEditorComponent implements OnChanges{
        this.refreshForm();
      }
   }
+
   refreshForm(){
     if(this.schema) {
       this.handleSchema(this.schema, this.form, null);
       let formData: any = Object.assign({}, this.form.getRawValue());
+      console.log(formData);
+      console.log(this.data);
+
       Object.keys(formData).forEach(key => {
         if (key === 'payload' && this.data[key] && this.data[key] instanceof Object) {
           formData[key] = JSON.stringify(this.data[key]);
@@ -41,10 +45,10 @@ export class JsonEditorComponent implements OnChanges{
     switch(schema?.type){
       case 'object': this.handleObject(schema,form,key); break;
       case 'string': this.handleString(schema,form,key); break;
-      case 'number': this.handleNumber(schema,form,key); break;
+  //    case 'number': this.handleNumber(schema,form,key); break;
       case 'integer': this.handleInteger(schema,form,key); break;
       case 'array': this.handleArray(schema,form,key); break;
-      case 'boolean': this.handleBoolean(schema,form,key); break;
+   //   case 'boolean': this.handleBoolean(schema,form,key); break;
       case 'null': this.handleNull(schema,form,key); break;
     }
   }
@@ -72,10 +76,18 @@ export class JsonEditorComponent implements OnChanges{
         form.addControl(key, new FormControl(schema.value));
       }
     }
-  }//javascript
+  }
+
+  private handleBoolean(schema:Schema,form:FormGroup, key:string | null) {
+    if(key && form) {
+      form.addControl(key, new FormControl(schema.value));
+    }
+  }
 
   private handleNumber(schema:Schema,form:FormGroup, key:string | null) {
-    console.log('number not handled ' + key);
+    if(key && form) {
+      form.addControl(key, new FormControl(schema.value));
+    }
   }
 
   private handleInteger(schema:Schema,form:FormGroup, key:string | null) {
@@ -85,9 +97,7 @@ export class JsonEditorComponent implements OnChanges{
   private handleArray(schema:Schema,form:FormGroup, key:string | null) {
     console.log('array not handled ' + key);
   }
-  private handleBoolean(schema:Schema,form:FormGroup, key:string | null) {
-    console.log('boolean not handled ' + key);
-  }
+
   private handleNull(schema:Schema,form:FormGroup, key:string | null) {
     console.log('null not handled ' + key);
   }

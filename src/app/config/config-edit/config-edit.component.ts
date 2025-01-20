@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FlowConfigService} from "../flow-config.service";
 import {Schema} from "../../util/json-editor/json-schema-model";
@@ -21,6 +21,7 @@ export class ConfigEditComponent implements OnInit {
   configType: string = '';
   form:FormGroup;
   constructor(private fb: FormBuilder, private service:FlowConfigService, private activityConfigService: ActivityConfigService, private router: Router, private route: ActivatedRoute) {
+
     this.form = fb.group({
       name:[]
     });
@@ -57,8 +58,6 @@ export class ConfigEditComponent implements OnInit {
     }
   }
 
-
-
   public back(){
     this.router.navigate(['/config']).then();
   }
@@ -69,7 +68,8 @@ export class ConfigEditComponent implements OnInit {
     if(this.flowConfig){
       this.flowConfig.config = this.jsonEditor?.form.getRawValue();
       this.activityConfigService.test(this.flowConfig).subscribe((c)=>{
-         this.configTest = c;
+        console.log(c);
+        this.configTest = c;
       });
     }
   }
