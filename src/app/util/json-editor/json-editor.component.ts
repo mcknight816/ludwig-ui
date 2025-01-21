@@ -27,10 +27,6 @@ export class JsonEditorComponent implements OnChanges{
     if(this.schema) {
       this.handleSchema(this.schema, this.form, null);
       let formData: any = Object.assign({}, this.form.getRawValue());
-      console.log(formData);
-
-      console.log(this.data);
-
       Object.keys(formData).forEach(key => {
         if (key === 'payload' && this.data[key] && this.data[key] instanceof Object) {
           formData[key] = JSON.stringify(this.data[key]);
