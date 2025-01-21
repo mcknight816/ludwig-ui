@@ -47,7 +47,8 @@
 
   <div *ngIf="schema?.type ==='boolean' && !schema?.enum && !schema?.format" >
     <mat-form-field color="accent"  fxFlex="auto" appearance="outline">
-      <mat-slide-toggle matPrefix formControlName="{{name}}" color="primary" [checked]="getValue(schema)" (change)="onToggle(schema)">
+      <mat-label>{{schema?.title}}</mat-label>
+      <mat-slide-toggle matTextSuffix formControlName="{{name}}" color="primary" [checked]="getValue(schema)" (change)="onToggle(schema)">
         {{schema?.title}}
       </mat-slide-toggle>
       <input matInput disabled/>

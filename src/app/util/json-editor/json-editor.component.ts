@@ -34,8 +34,8 @@ export class JsonEditorComponent implements OnChanges{
       Object.keys(formData).forEach(key => {
         if (key === 'payload' && this.data[key] && this.data[key] instanceof Object) {
           formData[key] = JSON.stringify(this.data[key]);
-        } else if(key){
-         // formData[key] = this.data && this.data[key] ? this.data[key] : null;
+        } else if(key && this.data && this.data[key]){
+          formData[key] =  this.data[key];
         }
       });
       this.form.setValue(formData);
