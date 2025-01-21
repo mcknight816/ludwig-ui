@@ -28,13 +28,14 @@ export class JsonEditorComponent implements OnChanges{
       this.handleSchema(this.schema, this.form, null);
       let formData: any = Object.assign({}, this.form.getRawValue());
       console.log(formData);
+
       console.log(this.data);
 
       Object.keys(formData).forEach(key => {
         if (key === 'payload' && this.data[key] && this.data[key] instanceof Object) {
           formData[key] = JSON.stringify(this.data[key]);
-        } else {
-          formData[key] = this.data[key] ? this.data[key] : "";
+        } else if(key){
+         // formData[key] = this.data && this.data[key] ? this.data[key] : null;
         }
       });
       this.form.setValue(formData);
@@ -45,10 +46,10 @@ export class JsonEditorComponent implements OnChanges{
     switch(schema?.type){
       case 'object': this.handleObject(schema,form,key); break;
       case 'string': this.handleString(schema,form,key); break;
-  //    case 'number': this.handleNumber(schema,form,key); break;
+      case 'number': this.handleNumber(schema,form,key); break;
       case 'integer': this.handleInteger(schema,form,key); break;
       case 'array': this.handleArray(schema,form,key); break;
-   //   case 'boolean': this.handleBoolean(schema,form,key); break;
+      case 'boolean': this.handleBoolean(schema,form,key); break;
       case 'null': this.handleNull(schema,form,key); break;
     }
   }
@@ -69,24 +70,25 @@ export class JsonEditorComponent implements OnChanges{
   private handleString(schema:Schema,form:FormGroup,key:string | null) {
     if(key && form) {
       if(schema.format && schema.format === 'json' && schema.value instanceof Object ){
-        form.addControl(key, new FormControl(JSON.parse(schema.value)));
+        form.addControl(key, new FormControl<Object>(JSON.parse(schema.value)));
       } else if(schema.format && schema.format === 'javascript') {
-        form.addControl(key, new FormControl(schema.value));
+        form.addControl(key, new FormControl<string>(schema.value));
       } else {
-        form.addControl(key, new FormControl(schema.value));
+        form.addControl(key, new FormControl<string>(schema.value));
       }
     }
   }
 
   private handleBoolean(schema:Schema,form:FormGroup, key:string | null) {
     if(key && form) {
-      form.addControl(key, new FormControl(schema.value));
+      //schema.value
+      form.addControl(key, new FormControl ());
     }
   }
 
   private handleNumber(schema:Schema,form:FormGroup, key:string | null) {
     if(key && form) {
-      form.addControl(key, new FormControl(schema.value));
+      form.addControl(key, new FormControl<number>(schema.value));
     }
   }
 

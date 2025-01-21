@@ -37,9 +37,9 @@ export class SchemaFormComponent implements OnChanges,OnInit{
   }
 
   onToggle(schema:Schema | undefined): void {
-    if(schema && schema.value) {
+   /* if(schema && schema.value) {
       schema['value'] = !schema.value;
-    }
+    }*/
   }
 
   getConfigs():Array<FlowConfig> {
