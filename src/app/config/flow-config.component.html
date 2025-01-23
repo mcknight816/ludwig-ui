@@ -11,6 +11,7 @@
       / SEARCH -->
     <div class="flex-stretch"></div>
     <mat-divider [vertical]="true"></mat-divider>
+    <button *ngIf="selectedItem" mat-raised-button color="primary" (click)="rowClicked($event,selectedItem)" >Edit</button>
     <button [matMenuTriggerFor]="config_menu" mat-button mat-stroked-button>New</button>
     <mat-menu xPosition="before"  #config_menu="matMenu">
       <button  *ngFor="let configType of configTypes" class="action-menu" (click)="add(configType)" mat-menu-item>
@@ -20,41 +21,68 @@
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-table [dataSource]="dataSource">
-  <ng-container  matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
-  </ng-container>
-  <ng-container  matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
-  </ng-container>
-  <ng-container  matColumnDef="configClass">
-    <mat-header-cell *matHeaderCellDef>Config Class</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.configClass.split(".").pop()}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="action">
-    <mat-header-cell id="action" mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-    <mat-cell  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
-      <button  mat-icon-button [matMenuTriggerFor]="action_menu" aria-label="Action menu selection">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu xPosition="before"  #action_menu="matMenu">
-        <button  class="action-menu" (click)="rowClicked($event,element)" mat-menu-item>
-          <mat-icon color="accent">edit</mat-icon>
-          Edit
+
+<div *ngIf="!isLargeScreen" class="small-screen-table">
+  <mat-table [dataSource]="dataSource">
+    <ng-container  matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name | uppercase}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="configClass">
+      <mat-header-cell *matHeaderCellDef>Config Class</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.configClass.split(".").pop()}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell id="action" mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
+        <button  mat-icon-button [matMenuTriggerFor]="action_menu" aria-label="Action menu selection">
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button (click)="clone(element)"  mat-menu-item>
-          <mat-icon color="accent">redo</mat-icon>
-          Clone
-        </button>
-        <button (click)="delete(element)" mat-menu-item>
-          <mat-icon color="accent">delete</mat-icon>
-          Delete
-        </button>
-      </mat-menu>
-    </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-  <mat-row (click)="rowClicked($event,row)" *matRowDef="let row; columns: tableColumns"></mat-row>
-</mat-table>
+        <mat-menu xPosition="before"  #action_menu="matMenu">
+          <button  class="action-menu" (click)="rowClicked($event,element)" mat-menu-item>
+            <mat-icon color="accent">edit</mat-icon>
+            Edit
+          </button>
+          <button (click)="clone(element)"  mat-menu-item>
+            <mat-icon color="accent">redo</mat-icon>
+            Clone
+          </button>
+          <button (click)="delete(element)" mat-menu-item>
+            <mat-icon color="accent">delete</mat-icon>
+            Delete
+          </button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+    <mat-row (click)="rowClicked($event,row)" *matRowDef="let row; columns: tableColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div *ngIf="isLargeScreen" class="large-screen-layout">
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let item of dataSource" (click)="onRowClick(item)">
+          {{ item.name | uppercase}}
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div *ngIf="selectedItem; else noSelection">
+        <h2>{{ selectedItem.name }}</h2>
+
+        <json-editor  [schema]="schema" [data]="selectedItem?.config"></json-editor>
+
+      </div>
+      <ng-template #noSelection>
+        <p>Select an item to view details</p>
+      </ng-template>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -44,3 +44,25 @@ span {
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   border-bottom-width: 0;
 }
+.small-screen-table {
+  mat-row {
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+.large-screen-layout {
+  mat-sidenav-container {
+    height: 100vh;
+  }
+
+  mat-sidenav {
+    width: 250px;
+  }
+
+  mat-sidenav-content {
+    padding: 16px;
+  }
+}
