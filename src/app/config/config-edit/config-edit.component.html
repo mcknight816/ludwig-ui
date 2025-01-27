@@ -20,14 +20,14 @@
       <mat-label *ngIf="configTest.success" class="success">SUCCESS: {{configTest.message}}</mat-label>
     </div>
 
-    <div fxLayout="row wrap"  fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+    <div fxLayout="column" fxLayout.lt-sm="column" fxLayoutGap="5px" fxLayoutGap.lt-sm="5px">
       <mat-form-field color="accent"  fxFlex="0 1 calc(100%)" appearance="outline">
         <mat-label>Config Name</mat-label>
         <input matInput name="name" formControlName="name" placeholder="Config Name"/>
-        <button (click)="testConfig()" style=" height: 54px" mat-stroked-button mat-button matSuffix>Test</button>
+      <button (click)="testConfig()" style=" height: 54px" mat-stroked-button mat-button matSuffix>Test</button>
       </mat-form-field>
     </div>
-    <json-editor  [schema]="schema" [data]="flowConfig?.config"></json-editor>
+    <json-editor [schema]="schema" [data]="flowConfig?.config"></json-editor>
   </form>
 </div>
 
