@@ -17,3 +17,13 @@ mat-toolbar {
   margin-right: 8px;
   font-size: 1rem;
 }
+.two-line-title {
+  display: -webkit-box; /* Use for multi-line truncation */
+  -webkit-line-clamp: 2; /* Limit content to 2 lines */
+  -webkit-box-orient: vertical; /* Specify vertical box orientation */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflowing text */
+  line-height: 1.2; /* Adjust line height as needed */
+  max-height: calc(1.2em * 2); /* Ensure max height corresponds to 2 lines */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+}

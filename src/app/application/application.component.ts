@@ -70,4 +70,12 @@ export class ApplicationComponent implements OnInit {
       this.refreshApps();
     });
   }
+
+  export(app: Application) {
+
+  }
+
+  import() {
+
+  }
 }
