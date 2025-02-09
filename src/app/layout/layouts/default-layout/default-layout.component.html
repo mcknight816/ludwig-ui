@@ -56,6 +56,14 @@
           </mat-list-item>
           <mat-divider></mat-divider>-->
           <mat-list-item>
+            <mat-icon >lightbulb</mat-icon>
+            <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/knowledge'">Knowledge Base</div>
+            <span fxFlex>
+
+              </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
             <mat-icon >display_settings</mat-icon>
             <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/apps'">Applications</div>
             <span fxFlex>

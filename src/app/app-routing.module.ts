@@ -18,6 +18,7 @@ const routes: Routes = [
             {path : 'conduit',     loadChildren: () => import('./conduit/conduit.module').then(m => m.ConduitModule),canActivate: [AuthGuard] },
             {path : 'apps',        loadChildren: () => import('./application/application.module').then(m => m.ApplicationModule),canActivate: [AuthGuard] },
             {path : 'config',      loadChildren: () => import('./config/flow-config.module').then(m => m.FlowConfigModule), canActivate: [AuthGuard] },
+            {path : 'knowledge',   loadChildren: () => import('./knowledge/knowledge-base.module').then(m => m.KnowledgeBaseModule), canActivate: [AuthGuard] },
             {path : 'models',      loadChildren: () => import('./model/model.module').then(m => m.ModelModule),canActivate: [AuthGuard] },
     ]},
     {path : '',                component: LayoutComponent,

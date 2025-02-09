@@ -1,0 +1,63 @@
+<mat-toolbar color="accent" >
+  <mat-toolbar-row>
+    <mat-icon fxHide.xs>info</mat-icon>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-label fxHide.xs>{{knowledgeBase?.name}} Knowledge Base</mat-label>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="flex-stretch"></div>
+    <!-- SEARCH -->
+    <!-- <app-search-input placeholder="Search" (setValue)="filterList($event)"></app-search-input> -->
+    <!-- / SEARCH -->
+    <div class="flex-stretch"></div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="add()" mat-button mat-stroked-button>New</button>
+    <!--<button (click)="import()" mat-button mat-stroked-button>Import</button>-->
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-table [dataSource]="dataSource">
+  <ng-container  matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="baseId">
+    <mat-header-cell *matHeaderCellDef>Base Id</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.baseId}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="text">
+    <mat-header-cell *matHeaderCellDef>Text</mat-header-cell>
+    <mat-cell *matCellDef="let element"><p>{{element.text}}</p></mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell *matCellDef="let element" >{{element.description}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="processed">
+    <mat-header-cell *matHeaderCellDef>Processed</mat-header-cell>
+    <mat-cell *matCellDef="let element" >{{element.processed}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell id="action" mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
+      <button  mat-icon-button [matMenuTriggerFor]="action_menu" aria-label="Action menu selection">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu xPosition="before"  #action_menu="matMenu">
+        <button  class="action-menu" (click)="rowClicked(element)" mat-menu-item>
+          <mat-icon color="accent">edit</mat-icon>
+          Edit
+        </button>
+        <button (click)="clone(element)"  mat-menu-item>
+          <mat-icon color="accent">redo</mat-icon>
+          Clone
+        </button>
+        <button (click)="delete(element)" mat-menu-item>
+          <mat-icon color="accent">delete</mat-icon>
+          Delete
+        </button>
+      </mat-menu>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="getDisplayedColumns();sticky: true"></mat-header-row>
+  <mat-row (click)="rowClicked(row)" *matRowDef="let row; columns: getDisplayedColumns()"></mat-row>
+</mat-table>

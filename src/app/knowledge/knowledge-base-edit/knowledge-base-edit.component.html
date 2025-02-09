@@ -1,0 +1,31 @@
+<div class="container">
+  <h2 mat-dialog-title>Knowledge Base</h2>
+  <mat-dialog-content style="padding: 5px; height: calc(100% - 155px);" fxLayout="column" [formGroup]="form">
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field color="accent"  appearance="outline" cdkFocusInitial>
+        <mat-label>Name</mat-label>
+        <input matInput name="name" formControlName="name" placeholder="Name"/>
+      </mat-form-field>
+      <mat-form-field color="accent"  appearance="outline" cdkFocusInitial>
+        <mat-label>Open Ai Config</mat-label>
+        <mat-hint>Embeds knowledge into the open ai</mat-hint>
+        <mat-select class="openai-config" formControlName="openAiConfig" [(value)]="data.openAiConfig">
+          <mat-option  *ngFor="let config of openAiConfigs" [value]="config">{{config}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field color="accent"  appearance="outline" cdkFocusInitial>
+        <mat-label>Description</mat-label>
+        <input matInput type='text' name="description" formControlName="description" placeholder="Description"/>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-divider [vertical]="true"></mat-divider>
+  <mat-dialog-actions >
+    <div class="flex-stretch"></div>
+    <button mat-button class="mat-raised-button" (click)="cancel()">Close</button>
+    <button mat-button class="mat-raised-button" (click)="save()" >Save</button>
+  </mat-dialog-actions>
+</div>
+

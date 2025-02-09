@@ -1,0 +1,96 @@
+<mat-toolbar color="primary" >
+  <mat-toolbar-row>
+    <mat-icon fxHide.xs>lightbulb</mat-icon>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-label fxHide.xs> Knowledge Base</mat-label>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="flex-stretch"></div>
+    <!-- SEARCH
+    <app-search-input placeholder="Search" (setValue)="filterList($event)"></app-search-input>
+    <mat-paginator class="paginator" pageSize="20" [pageSizeOptions]="[5, 10, 20]" [length]="_dataLength" (page)="handlePage($event)"></mat-paginator>
+      / SEARCH -->
+    <div class="flex-stretch"></div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button  mat-raised-button color="primary" (click)="add($event)" >New</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div *ngIf="!isLargeScreen" class="small-screen-table">
+
+  <mat-table [dataSource]="dataSource">
+    <ng-container  matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name | uppercase}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="configClass">
+      <mat-header-cell *matHeaderCellDef>Config Class</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.configClass.split(".").pop()}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell id="action" mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell  (click)="$event.stopPropagation()" mat-cell *matCellDef="let element">
+        <button  mat-icon-button [matMenuTriggerFor]="action_menu" aria-label="Action menu selection">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu xPosition="before"  #action_menu="matMenu">
+          <button  class="action-menu" (click)="rowClicked($event,element)" mat-menu-item>
+            <mat-icon color="accent">edit</mat-icon>
+            Edit
+          </button>
+          <button (click)="clone(element)"  mat-menu-item>
+            <mat-icon color="accent">redo</mat-icon>
+            Clone
+          </button>
+          <button (click)="delete(element)" mat-menu-item>
+            <mat-icon color="accent">delete</mat-icon>
+            Delete
+          </button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+    <mat-row (click)="rowClicked($event,row)" *matRowDef="let row; columns: tableColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div *ngIf="isLargeScreen" class="large-screen-layout">
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let item of dataSource" (click)="onRowClick(item)">
+
+          {{ item.name | uppercase}}
+          <span fxFlex>
+              <mat-icon [matMenuTriggerFor]="action_menu" >more_vert</mat-icon>
+              <mat-menu xPosition="before"  #action_menu="matMenu">
+                <button  class="action-menu" (click)="editKnowledgeBase(item)" mat-menu-item>
+                  <mat-icon color="accent">edit</mat-icon>
+                  Edit
+                </button>
+                <button (click)="delete(item)" mat-menu-item>
+                  <mat-icon color="accent">delete</mat-icon>
+                  Delete
+                </button>
+              </mat-menu>
+            </span>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div *ngIf="selectedItem; else noSelection">
+
+        <app-knowledge-list [knowledgeBase]="selectedItem"></app-knowledge-list>
+      </div>
+      <ng-template #noSelection>
+        <p>Select an knowledge base to view details</p>
+      </ng-template>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
