@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {FlowConfig} from "../../../config/flow-config.model";
 import {FlowConfigService} from "../../../config/flow-config.service";
 import {AceEditorComponent} from "ng2-ace-editor";
+import {KnowledgeBase} from "../../../knowledge/knowledge.model";
+import {KnowledgeBaseService} from "../../../knowledge/knowledge-base.service";
 
 @Component({
   selector: 'schema-form',
@@ -15,15 +17,21 @@ export class SchemaFormComponent implements OnChanges,OnInit{
   @Input() name: string | undefined;
   @Input() form: FormGroup;
   configs:Array<FlowConfig> = [];
+  knowledgeBases:Array<KnowledgeBase> = [];
   roles:Array<string> = ['Authenticated','Admin','User','Anonymous'];
   isPasswordVisible: boolean = false;
-  constructor(private fb: FormBuilder,private flowConfigService:FlowConfigService) {
+  constructor(private fb: FormBuilder,
+              private knowledgeBaseService:KnowledgeBaseService,
+              private flowConfigService:FlowConfigService) {
     this.form = this.fb.group({});
   }
   ngOnInit(): void {
     this.flowConfigService.list().subscribe(fc=>{
       this.configs = fc;
     })
+    this.knowledgeBaseService.list().subscribe(k=>{
+      this.knowledgeBases = k;
+    });
   }
   getValue(schema: Schema | undefined): any | undefined {
     if(schema){
@@ -82,4 +90,6 @@ export class SchemaFormComponent implements OnChanges,OnInit{
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
+
+
 }

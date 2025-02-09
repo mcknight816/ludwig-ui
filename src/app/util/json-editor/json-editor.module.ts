@@ -9,6 +9,7 @@ import {MaterialModule} from "../../material-module";
 import { SchemaFormComponent } from './schema-form/schema-form.component';
 import {FlowConfigService} from "../../config/flow-config.service";
 import {AceEditorModule} from "ng2-ace-editor";
+import {KnowledgeBaseService} from "../../knowledge/knowledge-base.service";
 
 
 @NgModule({
@@ -29,6 +30,6 @@ import {AceEditorModule} from "ng2-ace-editor";
         MaterialModule,
         AceEditorModule
     ],
-  providers: [FlowConfigService]
+  providers: [FlowConfigService,KnowledgeBaseService]
 })
 export class JsonEditorModule { }
