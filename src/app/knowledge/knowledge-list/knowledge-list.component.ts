@@ -19,6 +19,7 @@ export class KnowledgeListComponent implements OnChanges {
   dataSource: Knowledge[]  = [];
 
   tableColumns = [
+    { def: 'userId', showMobile: true,showUser:true },
     { def: 'description', showMobile: true,showUser:true  },
     { def: 'text', showMobile: true,showUser:true  },
     { def: 'processed', showMobile: true,showUser:true  },
@@ -48,7 +49,7 @@ export class KnowledgeListComponent implements OnChanges {
   }
 
   add() {
-    this.openKnowledgeDialog({id:undefined,baseId:this.knowledgeBase?.id,text:'',processed:false,description:''});
+    this.openKnowledgeDialog({id:undefined,baseId:this.knowledgeBase?.id,text:'',processed:false,description:'',userId:undefined});
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -23,6 +23,10 @@
     <mat-header-cell *matHeaderCellDef>Base Id</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.baseId}}</mat-cell>
   </ng-container>
+  <ng-container  matColumnDef="userId">
+    <mat-header-cell *matHeaderCellDef>User Id</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.userId}}</mat-cell>
+  </ng-container>
   <ng-container  matColumnDef="text">
     <mat-header-cell *matHeaderCellDef>Text</mat-header-cell>
     <mat-cell *matCellDef="let element"><p>{{element.text}}</p></mat-cell>
