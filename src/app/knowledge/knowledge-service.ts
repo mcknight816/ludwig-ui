@@ -26,7 +26,7 @@ export class KnowledgeService {
     return this.http.get<Knowledge>(this.config.api + "/core/knowledge/" + id);
   }
 
-  removeById(id: string | null): Observable<any>{
+  removeById(id: string | undefined): Observable<any>{
     return this.http.delete<Knowledge>(this.config.api + "/core/knowledge/" + id);
   }
 }

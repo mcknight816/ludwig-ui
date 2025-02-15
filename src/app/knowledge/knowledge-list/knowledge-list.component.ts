@@ -1,12 +1,10 @@
-import {Component, HostListener, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Knowledge, KnowledgeBase} from "../knowledge.model";
 
 import {MatDialog} from "@angular/material/dialog";
 import {KnowledgeBaseService} from "../knowledge-base.service";
 import {KnowledgeEditComponent} from "../knowledge-edit/knowledge-edit.component";
 import {KnowledgeService} from "../knowledge-service";
-import {FlowConfigService} from "../../config/flow-config.service";
-
 
 @Component({
   selector: 'app-knowledge-list',
@@ -83,11 +81,15 @@ export class KnowledgeListComponent implements OnChanges {
   }
 
   clone(knowledge: Knowledge) {
-
+    knowledge.id = undefined;
+    this.knowledgeService.save(knowledge).subscribe(a=>{
+      this.search();
+    });
   }
+
   delete(knowledge: Knowledge) {
-
+    this.knowledgeService.removeById(knowledge.id).subscribe( () =>{
+      this.search();
+    });
   }
-
-
 }

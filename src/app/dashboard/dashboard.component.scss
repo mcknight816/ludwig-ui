@@ -23,7 +23,7 @@
 }
 
 .widgetTable {
-  width: 100%;
+  width: 70%;
   td {
     padding: 10px;
     border-bottom: 1px solid darkgray;
@@ -62,4 +62,21 @@ div {
   margin-right: 10px;
   text-align: center;
   padding-top: 10px;
+}
+.container {
+  display: flex;
+  justify-content: space-between; /* Ensures equal spacing */
+  gap: 20px; /* Adds space between components */
+  padding: 20px;
+  background-color: transparent;
+}
+
+app-ai-chat, app-another-component {
+  flex: 1; /* Makes both components take equal space */
+  border: 1px solid rgba(204, 204, 204, 0.73);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: transparent;
+  height: 500px; /* Set a consistent height */
+  overflow: hidden;
 }

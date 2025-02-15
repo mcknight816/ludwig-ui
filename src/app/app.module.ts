@@ -22,6 +22,7 @@ import {MatCarouselModule} from "./carousel/carousel.module";
 import {LayoutModule} from "./layout/layout.module";
 import {AuthModule} from "./auth/auth.module";
 import {CallbackComponent} from "./callback/callback.component";
+import {AiChatComponent} from "./components/ai-chat/ai-chat.component";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {CallbackComponent} from "./callback/callback.component";
         AppComponent,
         DashboardComponent,
         CallbackComponent,
-        HomeComponent
+        HomeComponent,
+        AiChatComponent
     ],
     imports: [
         HttpClientModule,

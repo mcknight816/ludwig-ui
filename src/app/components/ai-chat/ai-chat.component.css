@@ -1,0 +1,113 @@
+:root {
+  --text-color-light: #000;
+  --text-color-dark: #fff;
+  --bubble-color-light: #e0e0e0;
+  --bubble-color-dark: #333;
+  --user-bubble-light: #007bff;
+  --user-bubble-dark: #1e90ff;
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+/* Chat Messages */
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.message-user {
+  align-self: flex-end;
+}
+
+.message-ai {
+  align-self: flex-start;
+}
+
+.chat-bubble {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  max-width: 75%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Light Mode (Default) */
+.message-user .chat-bubble {
+  background: var(--user-bubble-light);
+  color: white;
+  border-top-right-radius: 0;
+}
+
+.message-ai .chat-bubble {
+  background: var(--bubble-color-light);
+  color: black;
+  border-top-left-radius: 0;
+}
+
+/* Dark Mode (Automatic via prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+  .message-user .chat-bubble {
+    background: var(--user-bubble-dark);
+  }
+
+  .message-ai .chat-bubble {
+    background: var(--bubble-color-dark);
+    color: var(--text-color-dark);
+  }
+
+  .chat-container {
+    background: var(--bubble-color-dark);
+    color: white;
+  }
+
+  .input-container input {
+    background: #222;
+    color: white;
+    border: 1px solid white;
+  }
+}
+
+/* Input Styling */
+.input-container {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.input-container input {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  border: 1px solid #ccc;
+}
+
+.input-container button {
+  margin-left: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input-container button:hover {
+  background: #0056b3;
+}

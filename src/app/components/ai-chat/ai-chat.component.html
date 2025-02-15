@@ -1,0 +1,18 @@
+<div class="chat-container" [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+
+  <div class="chat-messages" #chatContainer>
+    <div *ngFor="let message of messages" [ngClass]="{'message-user': message.role === 'user', 'message-ai': message.role === 'ai'}">
+      <span class="chat-bubble">{{ message.content }}</span>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <input
+      [(ngModel)]="userInput"
+      (keyup.enter)="sendMessage()"
+      placeholder="Type a message..."
+      [disabled]="isLoading"
+    />
+    <button (click)="sendMessage()" [disabled]="isLoading">Send</button>
+  </div>
+</div>
