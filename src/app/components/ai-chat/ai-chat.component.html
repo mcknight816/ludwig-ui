@@ -5,7 +5,9 @@
       <span class="chat-bubble">{{ message.content }}</span>
     </div>
   </div>
-
+  <div class="overlay" *ngIf="isLoading">
+    <mat-spinner ></mat-spinner>
+  </div>
   <div class="input-container">
     <input
       [(ngModel)]="userInput"
@@ -14,5 +16,10 @@
       [disabled]="isLoading"
     />
     <button (click)="sendMessage()" [disabled]="isLoading">Send</button>
+    <button (mousedown)="start()" (mouseup)="stop()">🎙️ Speak</button>
+    <select [(ngModel)]="voice" (change)="changeVoice($event)" >
+      <option *ngFor="let voice of voices" [value]="voice.name">{{ voice.name }}</option>
+    </select>
+    <button (click)="simulateConversation()" >Simulate Conversation</button>
   </div>
 </div>

@@ -111,3 +111,15 @@
 .input-container button:hover {
   background: #0056b3;
 }
+.overlay {
+  position: fixed; /* Ensures the overlay is positioned over the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+ /* background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center; /* Horizontally center the spinner */
+  align-items: center; /* Vertically center the spinner */
+  z-index: 1000; /* Ensure it's above other elements */
+}
