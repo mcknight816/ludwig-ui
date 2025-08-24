@@ -4,10 +4,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PageEvent} from "@angular/material/paginator";
 import {FlowConfigService} from "./flow-config.service";
 import {ActivityConfigService} from "./activity-config.service";
-import {FlowConfig} from "./flow-config.model";
+import {ActivityConfig, FlowConfig} from "./flow-config.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Schema} from "../util/json-editor/json-schema-model";
 import {JsonEditorComponent} from "../util/json-editor/json-editor.component";
+import {FlowIcons} from "../conduit/flow-icons";
+
 
 @Component({
   selector: 'app-config',
@@ -22,15 +24,15 @@ export class FlowConfigComponent implements OnInit {
   public _dataLength: number = 0;
   isLargeScreen = false;
   schema: Schema | undefined;
-  dataSource:Array<FlowConfig>  = [];
+  flowConfigs:Array<FlowConfig>  = [];
   selectedItem: FlowConfig | undefined;
   tableColumns = [
     'name',
     'action'
   ];
-  configTypes: Array<any> = [];
+  configTypes: Array<ActivityConfig> = [];
 //  'configClass',
-  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private service:FlowConfigService, private activityConfigService: ActivityConfigService, protected router: Router, private route: ActivatedRoute) {
+  constructor(private breakpointObserver: BreakpointObserver, private fb: FormBuilder, private flowConfigService:FlowConfigService, private activityConfigService: ActivityConfigService, protected router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -52,8 +54,8 @@ export class FlowConfigComponent implements OnInit {
   }
 
   search() {
-    this.service.list().subscribe(a=>{
-      this.dataSource = a;
+    this.flowConfigService.list().subscribe(a=>{
+      this.flowConfigs = a;
       this._dataLength = a.length;
     })
   }
@@ -69,15 +71,15 @@ export class FlowConfigComponent implements OnInit {
   }
 
   delete(element:any) {
-    this.service.removeById(element.id).subscribe((t)=>{
+    this.flowConfigService.removeById(element.id).subscribe((t)=>{
       this.search();
     });
   }
 
   clone(element:any){
-    this.service.getById(element.id).subscribe((t)=>{
+    this.flowConfigService.getById(element.id).subscribe((t)=>{
       t.id = null;
-      this.service.save(t).subscribe(t=>{
+      this.flowConfigService.save(t).subscribe(t=>{
         this.search();
       })
     });
@@ -103,9 +105,17 @@ export class FlowConfigComponent implements OnInit {
   save(item: FlowConfig){
     if(item){
       item.config = this.jsonEditor?.form.getRawValue();
-      this.service.save(item).subscribe((c)=>{
+      this.flowConfigService.save(item).subscribe((c)=>{
         item = c;
       });
     }
+  }
+
+  protected readonly FlowIcons = FlowIcons;
+
+
+
+  getFlowConfigs(configType: ActivityConfig) {
+    return this.flowConfigs.filter(flowConfig => flowConfig.configClass === configType.configClass);
   }
 }

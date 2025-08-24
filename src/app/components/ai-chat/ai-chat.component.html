@@ -2,7 +2,7 @@
 
   <div class="chat-messages" #chatContainer>
     <div *ngFor="let message of messages" [ngClass]="{'message-user': message.role === 'user', 'message-ai': message.role === 'ai'}">
-      <span class="chat-bubble">{{ message.content }}</span>
+      <span class="chat-bubble"  [innerHTML]="message.content | marked"></span>
     </div>
   </div>
   <div class="overlay" *ngIf="isLoading">

@@ -61,7 +61,7 @@ export class AiChatComponent implements OnInit {
           this.scrollToBottom();
           this.zone.run(() => {
             if(speakResponse){
-              this.speak(v.response);
+              this.speak(this.markdownToPlainText(v.response));
             }
             this.userInput = ''; // Clear input field
 
@@ -76,6 +76,37 @@ export class AiChatComponent implements OnInit {
 
     this.scrollToBottom();
   }
+
+
+  markdownToPlainText(markdown: string) {
+    // Remove code blocks
+    let plainText = markdown.replace(/```[\s\S]*?```/g, '');
+
+    // Remove inline code
+    plainText = plainText.replace(/`[^`]*`/g, '');
+
+    // Remove headings
+    plainText = plainText.replace(/^#+\s+/gm, '');
+
+    // Remove links [text](url) and ![alt](url)
+    plainText = plainText.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+    plainText = plainText.replace(/!\[([^\]]+)\]\([^)]+\)/g, '$1');
+
+    // Remove emphasis (* or _ or ** or __ or ~~)
+    plainText = plainText.replace(/[*_~]+/g, '');
+
+    // Remove unordered list markers (-, *, +)
+    plainText = plainText.replace(/^[-*+]\s+/gm, '');
+
+    // Remove ordered list numbers (e.g., 1. Text)
+    plainText = plainText.replace(/^\d+\.\s+/gm, '');
+
+    // Remove extra spaces and trim
+    plainText = plainText.replace(/\s+/g, ' ').trim();
+
+    return plainText;
+  }
+
 
   private scrollToBottom(): void {
     setTimeout(() => {

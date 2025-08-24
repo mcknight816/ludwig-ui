@@ -21,9 +21,9 @@
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
-
+<!--
 <div *ngIf="!isLargeScreen" class="small-screen-table">
-  <mat-table [dataSource]="dataSource">
+  <mat-table [dataSource]="flowConfigs">
     <ng-container  matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
@@ -62,15 +62,55 @@
     <mat-row (click)="rowClicked($event,row)" *matRowDef="let row; columns: tableColumns"></mat-row>
   </mat-table>
 </div>
-
-<div *ngIf="isLargeScreen" class="large-screen-layout">
+-->
+<div class="large-screen-layout">
   <mat-sidenav-container>
     <mat-sidenav mode="side" opened>
+
+      <mat-accordion>
+        <h4 style="text-align: center;padding-top: 10px">Active Settings</h4>
+        <mat-divider></mat-divider>
+        <mat-expansion-panel *ngFor="let configType of configTypes">
+          <mat-expansion-panel-header *ngIf="getFlowConfigs(configType).length > 0">
+            <mat-panel-title>
+              <div class="item-name">{{configType?.name | uppercase}} </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+            <mat-list-item *ngFor="let item of getFlowConfigs(configType)" (click)="onRowClick(item)">
+              <div class="row">
+                <div class="col name">{{ item.name }}</div>
+                <span class="flex-stretch"></span>
+                <button  mat-icon-button [matMenuTriggerFor]="action_menu" aria-label="Action menu selection">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu xPosition="before"  #action_menu="matMenu">
+                  <button  class="action-menu" (click)="rowClicked($event,item)" mat-menu-item>
+                    <mat-icon color="accent">edit</mat-icon>
+                    Edit
+                  </button>
+                  <button (click)="clone(item)"  mat-menu-item>
+                    <mat-icon color="accent">redo</mat-icon>
+                    Clone
+                  </button>
+                  <button (click)="delete(item)" mat-menu-item>
+                    <mat-icon color="accent">delete</mat-icon>
+                    Delete
+                  </button>
+                </mat-menu>
+              </div>
+
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+<!--
       <mat-nav-list>
-        <mat-list-item *ngFor="let item of dataSource" (click)="onRowClick(item)">
+        <mat-list-item *ngFor="let item of flowConfigs" (click)="onRowClick(item)">
           {{ item.name | uppercase}}
         </mat-list-item>
-      </mat-nav-list>
+      </mat-nav-list> -->
     </mat-sidenav>
 
     <mat-sidenav-content>
@@ -85,4 +125,6 @@
       </ng-template>
     </mat-sidenav-content>
   </mat-sidenav-container>
-</div>
+ </div>
+
+

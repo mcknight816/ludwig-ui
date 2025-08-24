@@ -23,6 +23,7 @@ import {LayoutModule} from "./layout/layout.module";
 import {AuthModule} from "./auth/auth.module";
 import {CallbackComponent} from "./callback/callback.component";
 import {AiChatComponent} from "./components/ai-chat/ai-chat.component";
+import {DocsModule} from "./docs/docs.module";
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import {AiChatComponent} from "./components/ai-chat/ai-chat.component";
         LayoutModule,
         AuthModule,
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        DocsModule,
     ],
     providers: [
         {provide: Config, useValue: ServiceModule.forRoot(environment)}

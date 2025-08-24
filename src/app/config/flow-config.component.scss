@@ -32,12 +32,9 @@ mat-table{
 .flex-stretch {
   flex: 1 0 auto;
 }
+.spacer { flex: 1 1 auto; }
 
-span {
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-}
+
 .mat-column-action {
   flex: 0 0 15%;
 }
@@ -59,10 +56,27 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   }
 
   mat-sidenav {
-    width: 250px;
+    width: 300px;
   }
 
   mat-sidenav-content {
-    padding: 16px;
+    padding: 8px;
   }
+}
+.mat-list-item {
+  align-items: stretch; /* vertically center if needed */
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-width: 0; /* allow flex children to shrink */
+}
+
+.col {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }

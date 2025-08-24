@@ -55,7 +55,4 @@ export interface Activity {
   fireAndForget:boolean | null;
   schema: any;
 }
-export interface ActivityConfig {
 
-
-}
