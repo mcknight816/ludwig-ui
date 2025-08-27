@@ -115,7 +115,28 @@
 
     <mat-sidenav-content>
       <div *ngIf="selectedItem; else noSelection">
-        <h2>{{ selectedItem.name }}</h2>
+        <div class="messages" >
+          <mat-error *ngIf="configTest.error">
+            <div fxLayout="row" fxLayout.lt-sm="row" fxLayoutGap="5px" fxLayoutGap.lt-sm="5px">
+              <mat-icon *ngIf="configTest.hint" matTooltip="{{configTest.hint}}" style="cursor: pointer; color: #1976d2;" >info</mat-icon>
+              <div class="error">Error:</div>
+              {{configTest.message}}
+            </div>
+          </mat-error>
+          <mat-error *ngIf="configTest.warning">WARNING: {{configTest.message}}</mat-error>
+          <mat-label *ngIf="configTest.success" >
+            <div fxLayout="row" fxLayout.lt-sm="row" fxLayoutGap="5px" fxLayoutGap.lt-sm="5px">
+              <div class="success">SUCCESS:</div>
+              {{configTest.message}}
+            </div>
+          </mat-label>
+        </div>
+
+        <div fxLayout="row" fxLayout.lt-sm="row" fxLayoutGap="5px" fxLayoutGap.lt-sm="5px">
+          <h2>{{selectedItem.name }}</h2>
+          <span style="flex:1 1 auto;"></span>
+          <button (click)="testConfig()" style=" height: 54px;" mat-stroked-button mat-button matSuffix>Test</button>
+        </div>
 
         <json-editor  [schema]="schema" [data]="selectedItem?.config"></json-editor>
 

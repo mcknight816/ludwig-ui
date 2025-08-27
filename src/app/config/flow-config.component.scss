@@ -24,7 +24,13 @@ mat-form-field{
   height: 50px !important;
   padding-left: 15px;
 }
-
+.messages {
+  padding-bottom: 20px;
+}
+.messages .success {
+  color: green;
+  margin-right: 10px;
+}
 mat-table{
   padding-bottom: 75px;
 }

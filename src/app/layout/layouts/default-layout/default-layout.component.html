@@ -23,6 +23,14 @@
     <mat-sidenav #sidenav >
         <mat-toolbar-row ><h1>Ludwig</h1></mat-toolbar-row>
         <mat-nav-list>
+          <mat-list-item>
+            <mat-icon >display_settings</mat-icon>
+            <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/apps'">MCP Servers</div>
+            <span fxFlex>
+
+              </span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
             <mat-list-item   (click)="sidenav.toggle()" [routerLink]="'/dashboard'">
                 <mat-icon >dashboard</mat-icon>
                 <div class="item-name">Dashboard</div>
@@ -63,14 +71,7 @@
               </span>
           </mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item>
-            <mat-icon >display_settings</mat-icon>
-            <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/apps'">Applications</div>
-            <span fxFlex>
 
-              </span>
-          </mat-list-item>
-          <mat-divider></mat-divider>
           <mat-list-item>
             <mat-icon >settings_applications</mat-icon>
             <div class="item-name" (click)="sidenav.toggle()" [routerLink]="'/config'">Config</div>

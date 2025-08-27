@@ -6,9 +6,10 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CallbackComponent} from "./callback/callback.component";
 import {AuthGuard} from "./auth/guards/auth.guard";
 import {LayoutComponent} from "./layout/layout.component";
+import {DefaultRouteGuard} from "./auth/guards/default-route.guard";
 
 const routes: Routes = [
-    {path : '',                pathMatch : 'full', redirectTo: 'home'},
+    {path : '',                pathMatch : 'full', canActivate: [DefaultRouteGuard], component: LayoutComponent},
     {path : '',                component: LayoutComponent,
         children:[
             {path : 'home',        component: HomeComponent},

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PageEvent} from "@angular/material/paginator";
 import {FlowConfigService} from "./flow-config.service";
 import {ActivityConfigService} from "./activity-config.service";
-import {ActivityConfig, FlowConfig} from "./flow-config.model";
+import {ActivityConfig, ConfigTestResult, FlowConfig} from "./flow-config.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Schema} from "../util/json-editor/json-schema-model";
 import {JsonEditorComponent} from "../util/json-editor/json-editor.component";
@@ -24,6 +24,7 @@ export class FlowConfigComponent implements OnInit {
   public _dataLength: number = 0;
   isLargeScreen = false;
   schema: Schema | undefined;
+  configTest: ConfigTestResult = {error:false,warning:false,success:false,message:'No Message',hint:''};
   flowConfigs:Array<FlowConfig>  = [];
   selectedItem: FlowConfig | undefined;
   tableColumns = [
@@ -94,6 +95,7 @@ export class FlowConfigComponent implements OnInit {
   onRowClick(item: FlowConfig) {
     if (this.isLargeScreen && item.configClass) {
       this.selectedItem = item;
+      this.configTest = {error:false,warning:false,success:false,message:'No Message',hint:''};
       this.activityConfigService.getById(item?.configClass).subscribe(c =>{
         this.schema = c.schema;
       });
@@ -113,7 +115,16 @@ export class FlowConfigComponent implements OnInit {
 
   protected readonly FlowIcons = FlowIcons;
 
+  testConfig() {
 
+    if(this.selectedItem){
+
+      this.activityConfigService.test(this.selectedItem).subscribe((c)=>{
+        console.log(c);
+        this.configTest = c;
+      });
+    }
+  }
 
   getFlowConfigs(configType: ActivityConfig) {
     return this.flowConfigs.filter(flowConfig => flowConfig.configClass === configType.configClass);
