@@ -20,6 +20,8 @@
     <select [(ngModel)]="voice" (change)="changeVoice($event)" >
       <option *ngFor="let voice of voices" [value]="voice.name">{{ voice.name }}</option>
     </select>
-    <button (click)="simulateConversation()" >Simulate Conversation</button>
+    <button *ngIf="isSpeaking() && !speakingPaused" (mousedown)="stopSpeaking()">Stop Speaking</button>
+    <button *ngIf="isSpeaking() && !speakingPaused" (mousedown)="pauseSpeaking()">Pause Speaking</button>
+    <button *ngIf="speakingPaused" (mousedown)="continueSpeaking()">Continue Speaking</button>
   </div>
 </div>

@@ -7,7 +7,6 @@ interface ChatMessage {
   role: 'user' | 'ai';
   content: string;
 }
-
 @Component({
   selector: 'app-ai-chat',
   templateUrl: './ai-chat.component.html',
@@ -20,41 +19,92 @@ export class AiChatComponent implements OnInit {
   isDarkMode: boolean = false;
   voices : SpeechSynthesisVoice[] = [];
   voice : string | null = null;
+  // Buffers to manage interim vs final text
+  private committedInput = '';
+  private interimInput = '';
+
   @ViewChild('chatContainer') chatContainer!: ElementRef;
 
   constructor(public zone: NgZone,private chatService: ChatService,private speechService: SpeechRecognitionService, private speechSynthesisService:SpeechSynthesisService) {
-    this.messages.push({ role: 'ai', content: 'Hello! How can I assist you today?' });
-    this.speechService.speechOutput.subscribe({
-      next: (v) => {
+      this.messages.push({ role: 'ai', content: 'Hello! How can I assist you today?' });
+
+      this.speechService.speechOutput.subscribe({
+        next: (v) => {
+          this.zone.run(() => {
+            // v: { text, isFinal }
+            if (v.isFinal) {
+              // Append finalized text once and clear interim
+              this.committedInput = (this.committedInput + ' ' + v.text).trim();
+              this.interimInput = '';
+            } else {
+              // Replace interim each time (don’t append)
+              this.interimInput = v.text;
+            }
+            // Show combined text to the user
+            this.userInput = [this.committedInput, this.interimInput].filter(Boolean).join(' ').trim();
+
+          });
+        }
+      });
+
+      this.speechService.isFinished.subscribe(() => {
+         this.sendMessage(true);
+      });
+
+
+      this.speechSynthesisService.isFinished.subscribe(() => {
         this.zone.run(() => {
-          this.userInput = v;
+          this.speakingPaused = false;
         });
-      }
-    });
-    this.speechService.isFinished.subscribe(v => {this.sendMessage(true)});
+      });
+
   }
 
+  clearBuffers(){
+    this.committedInput = '';
+    this.interimInput = '';
+    this.userInput = '';
+  }
   ngOnInit(): void {
     this.speechSynthesisService.getVoices().subscribe(v =>{
       this.voices = v;
-      this.setVoice()
+      this.setVoice();
     });
   }
 
   speak(text: string) {
     let theVoice : SpeechSynthesisVoice | undefined = this.voices.find(voice => voice.name === this.voice);
     this.speechSynthesisService.speak(text, theVoice ? theVoice : this.voices[0]);
+
   }
 
-  start() { this.speechService.startListening();}
-  stop() { this.speechService.stopListening();}
-  sendMessage(speakResponse: boolean = false): void {
-    if (!this.userInput.trim()) return;
+  start() {
+    this.zone.run(() => {
+      this.speechService.startListening();
+    });
+  }
 
-    const userMessage: ChatMessage = { role: 'user', content: this.userInput };
-    this.messages.push(userMessage);
+  stop() {
+    setTimeout(() => this.speechService.stopListening(), 100);
+  }
+
+  sendMessage(speakResponse: boolean = false) {
+    this.callChat(this.userInput,speakResponse);
+  }
+
+  callChat(message: string = '',speakResponse: boolean = false){
+    if (!message.trim()) return;
+    this.messages.push({ role: 'user', content: message});
+    this.clearBuffers();
     this.isLoading = true;
-    this.chatService.sendMessage(this.userInput,"a-unique-session-id").subscribe({
+    this.scrollToBottom();
+    this.zone.run(() => {
+      this.callChatService(message, speakResponse);
+    });
+  }
+
+  callChatService(userMessage: string,speakResponse: boolean = false): void {
+    this.chatService.sendMessage(userMessage,"a-unique-session-id").subscribe({
       next: (v) => {
           this.messages.push({ role: 'ai', content: v.response });
           this.isLoading = false;
@@ -63,18 +113,17 @@ export class AiChatComponent implements OnInit {
             if(speakResponse){
               this.speak(this.markdownToPlainText(v.response));
             }
-            this.userInput = ''; // Clear input field
-
           });
         },
       error: () => {
-        this.messages.push({ role: 'ai', content: 'Error communicating with AI. Please try again.' });
+        let message = 'Error communicating with AI. You may need to configure Ai.';
+        this.messages.push({ role: 'ai', content: message });
+        if(speakResponse){this.speak(this.markdownToPlainText(message));}
+        this.scrollToBottom();
         this.isLoading = false;
       },
       complete: () => console.info('complete')
     });
-
-    this.scrollToBottom();
   }
 
 
@@ -107,6 +156,11 @@ export class AiChatComponent implements OnInit {
     return plainText;
   }
 
+  randomVoice(){
+    this.voice = this.voices[Math.floor(Math.random() * this.voices.length)].name;
+    localStorage.setItem('ai-voice',this.voice);
+    this.setVoice();
+  }
 
   private scrollToBottom(): void {
     setTimeout(() => {
@@ -127,46 +181,22 @@ export class AiChatComponent implements OnInit {
       this.setVoice();
     }
   }
-
-  conversationInitialized: boolean = false;
-  isUserInput: boolean = true;
-  simulateConversation(){
-    this.isUserInput = true;
-    if(!this.conversationInitialized){
-      this.speechSynthesisService.isFinished.subscribe(()=> {
-        if(!this.isUserInput){this.simulateConversation();}
-      });
-      this.conversationInitialized = true;
-    }
-    const userMessage: ChatMessage = { role: 'user', content: this.userInput };
-    this.randomVoice();
-    this.speak(this.userInput);
-    this.messages.push(userMessage);
-    this.chatService.sendMessage( this.userInput,"a-unique-session-id").subscribe({
-      next: (v) => {
-        this.messages.push({ role: 'ai', content: v.response });
-        this.userInput = '';
-        this.randomVoice();
-        this.scrollToBottom();
-        this.speak(v.response);
-        this.isUserInput = false;
-        this.createAQuestionBasedOnTheResponse(v.response);
-      }
-    });
+  speakingPaused: boolean = false;
+  isSpeaking() {
+    return this.speechSynthesisService.isSpeaking();
   }
 
-  createAQuestionBasedOnTheResponse(response: string){
-    this.chatService.sendMessage( 'create a question based on this response data :' + response,"a-unique-session-id").subscribe({
-      next: (v) => {
-        this.userInput = v.response;
-      }
-    });
+  stopSpeaking() {
+     this.speechSynthesisService.stopSpeaking();
   }
 
-  randomVoice(){
-    this.voice = this.voices[Math.floor(Math.random() * this.voices.length)].name;
-    localStorage.setItem('ai-voice',this.voice);
-    this.setVoice();
+  pauseSpeaking() {
+    this.speechSynthesisService.pauseSpeaking();
+    this.speakingPaused = true;
   }
 
+  continueSpeaking() {
+    this.speakingPaused = false;
+    this.speechSynthesisService.resumeSpeaking();
+  }
 }

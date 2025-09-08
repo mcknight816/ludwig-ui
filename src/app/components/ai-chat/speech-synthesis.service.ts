@@ -39,4 +39,19 @@ export class SpeechSynthesisService {
     return this.voicesSubject.asObservable();
   }
 
+  stopSpeaking(){
+    this.synth.cancel();
+  }
+  pauseSpeaking(){
+    this.synth.pause();
+  }
+  resumeSpeaking(){
+    this.synth.resume();
+  }
+  isSpeaking(){
+    return this.synth.speaking;
+  }
+  isPaused(){
+    return this.synth.paused;
+  }
 }

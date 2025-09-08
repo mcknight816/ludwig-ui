@@ -21,6 +21,6 @@ export class KnowledgeBaseService {
   }
 
   removeById(id: string | null): Observable<any>{
-    return this.http.delete<KnowledgeBase>(this.config.api + "/core/knowledge-base/" + id);
+    return this.http.delete<void>(this.config.api + "/core/knowledge-base/" + id);
   }
 }
