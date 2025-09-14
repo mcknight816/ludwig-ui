@@ -12,7 +12,7 @@
     <input
       [(ngModel)]="userInput"
       (keyup.enter)="sendMessage()"
-      placeholder="Type a message..."
+      placeholder="Type a message...Or click on the mic to speak"
       [disabled]="isLoading"
     />
     <button (click)="sendMessage()" [disabled]="isLoading">Send</button>
