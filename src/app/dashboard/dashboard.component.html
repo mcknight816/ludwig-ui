@@ -1,137 +1,32 @@
 <mat-toolbar color="primary" >
-  <mat-toolbar-row>
+  <mat-toolbar-row class="dashboard-toolbar-row">
     <mat-icon>dashboard</mat-icon>
     <mat-divider [vertical]="true"></mat-divider>
-    <mat-label> Dashboard</mat-label>
+    <mat-label> Ai Chat</mat-label>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="flex-stretch"></div>
-    <button (click)="example()" mat-button mat-stroked-button color="accent">
-      Do Something
-    </button>
+    <div class="toolbar-controls">
+      <mat-form-field appearance="outline" class="toolbar-field apps">
+        <mat-label>Applications</mat-label>
+        <mat-select multiple [value]="selectedApplications" (selectionChange)="onApplicationsChange($event.value)">
+          <mat-option *ngFor="let app of applications" [value]="app">
+            {{ app.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="toolbar-field kbs">
+      <mat-label>Knowledge Bases</mat-label>
+        <mat-select multiple [value]="selectedKnowledgeBases" (selectionChange)="onKnowledgeBasesChange($event.value)">
+          <mat-option *ngFor="let kb of knowledgeBases" [value]="kb">
+            {{ kb.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="container">
 
-
-
-<!--
-
-<table class="widgetTable" >
-  <tr>
-    <td class="widgetLabel">
-      Checkbox
-    </td>
-    <td>
-      <div class="inline-block margin-right-40">
-        <mat-checkbox>Unchecked</mat-checkbox>
-      </div>
-      <div class="inline-block margin-right-40">
-        <mat-checkbox [checked]="true">Checked</mat-checkbox>
-      </div>
-      <div class="inline-block margin-right-40">
-        <mat-checkbox [indeterminate]="true">Indeterminate</mat-checkbox>
-      </div>
-      <div class="inline-block margin-right-40">
-        <mat-checkbox disabled="true">Disabled</mat-checkbox>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td class="widgetLabel">
-      Radio button
-    </td>
-    <td>
-      <mat-radio-group>
-        <div class="inline-block margin-right-40">
-          <mat-radio-button value="primary" [checked]="true" color="primary">Primary</mat-radio-button>
-        </div>
-        <div class="inline-block margin-right-40">
-          <mat-radio-button value="accent" color="accent">Accent</mat-radio-button>
-        </div>
-        <div class="inline-block margin-right-40">
-          <mat-radio-button value="warn" color="warn">Warn</mat-radio-button>
-        </div>
-        <div class="inline-block margin-right-40">
-          <mat-radio-button value="option3" disabled="true">Disabled</mat-radio-button>
-        </div>
-      </mat-radio-group>
-    </td>
-  </tr>
-  <tr>
-    <td class="widgetLabel">Chips</td>
-    <td>
-
-        <mat-chip class="margin-right-40">One chip</mat-chip>
-        <mat-chip class="margin-right-40" color="primary" selected>Primary chip</mat-chip>
-        <mat-chip class="margin-right-40" color="accent" selected>Accent chip</mat-chip>
-        <mat-chip class="margin-right-40" color="warn" selected>Warn chip</mat-chip>
-
-    </td>
-  </tr>
-  <tr>
-    <td class="widgetLabel">Icon</td>
-    <td>
-
-        <mat-icon class="margin-right-40">home</mat-icon>
-        <mat-icon class="margin-right-40" color="primary">account_circle</mat-icon>
-        <mat-icon class="margin-right-40" color="accent">alarm</mat-icon>
-        <mat-icon class="margin-right-40" color="warn">power_settings_new</mat-icon>
-
-    </td>
-  </tr>
-  <tr>
-    <td class="widgetLabel">Palette Colors</td>
-    <td>
-      <div fxLayout="row">
-        <div fxLayout="column">
-          <div class="color-primary-dark div-height">color-primary-dark</div>
-          <div class="color-primary div-height" >color-primary</div>
-          <div class="color-primary-light div-height">color-primary-light</div>
-        </div>
-        <div fxLayout="column">
-          <div class="color-accent-dark div-height">color-accent-dark</div>
-          <div class="color-accent div-height" >color-accent</div>
-          <div class="color-accent-light div-height">color-accent-light</div>
-        </div>
-        <div fxLayout="column">
-          <div class="color-warn-dark div-height">color-warn-dark</div>
-          <div class="color-warn div-height" >color-warn</div>
-          <div class="color-warn-light div-height">color-warn-light</div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td class="widgetLabel">Slide toggle</td>
-    <td>
-      <mat-slide-toggle class="margin-right-40 margin-bottom-20" checked="true">Default slide toggle</mat-slide-toggle>
-      <mat-slide-toggle class="margin-right-40 margin-bottom-20" checked="true" color="primary">Primary slide toggle</mat-slide-toggle>
-      <mat-slide-toggle class="margin-right-40 margin-bottom-20" checked="true" color="accent">Accent slide toggle</mat-slide-toggle>
-      <mat-slide-toggle class="margin-right-40 margin-bottom-20" checked="true" color="warn">Warn slide toggle</mat-slide-toggle>
-      <mat-slide-toggle class="margin-right-40 margin-bottom-20" disabled="true">Disabled slide toggle</mat-slide-toggle>
-    </td>
-  </tr>
-  <tr>
-    <td class="widgetLabel">Badge</td>
-    <td>
-      <span matBadge="4" matBadgeOverlap="false" class="margin-right-40">Default</span>
-      <span matBadge="9" matBadgeOverlap="false" class="margin-right-40" matBadgeColor="primary">Primary</span>
-      <span matBadge="3" matBadgeOverlap="false" class="margin-right-40" matBadgeColor="accent">Accent</span>
-      <span matBadge="5" matBadgeOverlap="false" class="margin-right-40" matBadgeColor="warn">Warn</span>
-    </td>
-  </tr>
-  <tr>
-    <td class="widgetLabel">Button</td>
-    <td>
-      <button class="margin-right-40" mat-raised-button>Basic</button>
-      <button class="margin-right-40" mat-raised-button color="primary">Primary</button>
-      <button class="margin-right-40" mat-raised-button color="accent">Accent</button>
-      <button class="margin-right-40" mat-raised-button color="warn">Warn</button>
-      <button class="margin-right-40" mat-raised-button disabled>Disabled</button>
-    </td>
-  </tr>
-</table>-->
 <app-ai-chat></app-ai-chat>
 </div>
 

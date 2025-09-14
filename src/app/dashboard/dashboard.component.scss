@@ -80,3 +80,41 @@ app-ai-chat, app-another-component {
   height: 500px; /* Set a consistent height */
   overflow: hidden;
 }
+
+.dashboard-toolbar-row {
+  display: flex;
+  align-items: center; /* ensure row centers its children vertically */
+}
+
+.toolbar-controls {
+  display: flex;
+  align-items: center; /* center children (form-fields) vertically */
+  height: 100%;
+}
+
+.toolbar-field {
+  min-width: 220px;
+  margin-right: 12px;
+}
+
+/* Tweak MDC form-field internal wrapper to center its content vertically */
+.toolbar-controls .mat-mdc-text-field-wrapper {
+  align-items: center;
+}
+
+/* Remove any stray vertical offsets/margins around form fields */
+.toolbar-controls .mat-mdc-form-field {
+  margin: 0;
+  vertical-align: middle;
+}
+
+/* Example: wider width for KBs field, optional */
+.toolbar-field.kbs {
+  min-width: 260px;
+}
+
+/* Optional: remove right margin on last field */
+.toolbar-controls .toolbar-field:last-child {
+  margin-right: 0;
+}
+

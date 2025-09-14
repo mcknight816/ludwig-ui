@@ -4,7 +4,10 @@ import {Config} from "../services/config";
 import {Observable} from "rxjs";
 import {KnowledgeBase} from "./knowledge.model";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root' // make the service available app-wide (fixes NullInjectorError)
+  }
+)
 export class KnowledgeBaseService {
   constructor(public http: HttpClient, public config: Config) {
   }

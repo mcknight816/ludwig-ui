@@ -5,7 +5,10 @@ import {Observable} from "rxjs";
 import {Page} from "./page";
 import {Application} from "./app-model";
 
-@Injectable()
+@Injectable( {
+    providedIn: 'root' // make the service available app-wide (fixes NullInjectorError)
+  }
+)
 export class ApplicationService {
   constructor(public http: HttpClient,public config:Config ) { }
 
