@@ -7,7 +7,7 @@
     <div class="flex-stretch"></div>
     <div class="toolbar-controls">
       <mat-form-field appearance="outline" class="toolbar-field apps">
-        <mat-label>Applications</mat-label>
+        <mat-label>MCP Services</mat-label>
         <mat-select multiple [value]="selectedApplications" (selectionChange)="onApplicationsChange($event.value)">
           <mat-option *ngFor="let app of applications" [value]="app">
             {{ app.name }}
@@ -27,7 +27,9 @@
 </mat-toolbar>
 <div class="container">
 
-<app-ai-chat></app-ai-chat>
+<app-ai-chat [selectedApplications]="selectedApplications" [selectedKnowledgeBases]="selectedKnowledgeBases">
+
+</app-ai-chat>
 </div>
 
 

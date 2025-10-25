@@ -87,13 +87,14 @@ app-ai-chat, app-another-component {
 }
 
 .toolbar-controls {
+  margin-top: 25px;
   display: flex;
   align-items: center; /* center children (form-fields) vertically */
   height: 100%;
 }
 
 .toolbar-field {
-  min-width: 220px;
+  min-width: 185px;
   margin-right: 12px;
 }
 

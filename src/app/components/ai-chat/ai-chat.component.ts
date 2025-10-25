@@ -1,7 +1,9 @@
-import {Component, OnInit, ElementRef, ViewChild, NgZone} from '@angular/core';
+import {Component, OnInit, ElementRef, ViewChild, NgZone, Input} from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import {SpeechRecognitionService} from "./speech-recognition.service";
 import {SpeechSynthesisService} from "./speech-synthesis.service";
+import {Application} from "../../services/app-model";
+import {KnowledgeBase} from "../../knowledge/knowledge.model";
 
 interface ChatMessage {
   role: 'user' | 'ai';
@@ -14,6 +16,8 @@ interface ChatMessage {
 })
 export class AiChatComponent implements OnInit {
   messages: ChatMessage[] = [];
+  @Input() selectedApplications: Array<Application> = [];
+  @Input() selectedKnowledgeBases: Array<KnowledgeBase> = [];
   userInput: string = '';
   isLoading: boolean = false;
   isDarkMode: boolean = false;
@@ -104,7 +108,7 @@ export class AiChatComponent implements OnInit {
   }
 
   callChatService(userMessage: string,speakResponse: boolean = false): void {
-    this.chatService.sendMessage(userMessage,"a-unique-session-id").subscribe({
+    this.chatService.sendMessage(userMessage,"a-unique-session-id",this.selectedApplications).subscribe({
       next: (v) => {
           this.messages.push({ role: 'ai', content: v.response });
           this.isLoading = false;
